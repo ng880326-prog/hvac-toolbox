@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e7490">
+  <meta name="description" content="HVAC Toolbox Pro — 由 Excel 升級的跨平台暖通空調工程計算工具">
+  <title>HVAC Toolbox Pro</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="navToggle" aria-label="Menu">☰</button>
+    <div class="brand">
+      <img src="icons/icon.svg" alt="" width="30" height="30">
+      <div class="brand-text">
+        <strong>HVAC Toolbox <em>Pro</em></strong>
+        <span id="brandSub">暖通空調工程計算 · 跨平台版</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="installBtn" hidden aria-label="Install" title="安裝 App">⬇️</button>
+      <button class="icon-btn" id="themeToggle" aria-label="Theme">🌙</button>
+      <button class="icon-btn lang" id="langToggle" aria-label="Language">EN</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar">
+      <div class="nav-search">
+        <input id="navSearch" type="search" placeholder="🔍 搜尋計算工具…" aria-label="搜尋計算工具">
+      </div>
+      <div class="nav-groups" id="navGroups"></div>
+      <div class="sidebar-foot">
+        <div class="verdict">公式已逐條檢驗 · <a href="#about" data-nav>檢驗報告</a></div>
+      </div>
+    </nav>
+    <div class="scrim" id="scrim"></div>
+
+    <main class="content" id="content">
+      <section class="home-screen" id="homeScreen">
+        <div class="hero">
+          <h1 id="heroTitle">HVAC Toolbox Pro</h1>
+          <p id="heroSub">跨平台暖通空調工程計算套件 — 20 個模組覆蓋全部工作表，公式對照現行標準檢驗。</p>
+          <div class="hero-badges">
+            <span class="badge">📱 PWA 可安裝</span>
+            <span class="badge">🧮 20 模組＝全套工作表</span>
+            <span class="badge">✅ 69/69 引擎測試通過</span>
+            <span class="badge">📈 濕空氣圖表繪製</span>
+            <span class="badge">🌐 雙語 繁中/EN</span>
+            <span class="badge">🌙 深色模式</span>
+          </div>
+        </div>
+        <div class="tiles" id="tiles"></div>
+        <section class="card about-card" id="about">
+          <h2 id="aboutTitle">公式檢驗與出處</h2>
+          <p id="aboutText">核心公式來源：ASHRAE Handbook—Fundamentals（Psychrometrics 第 6/1 章、Duct Design 第 21 章、Pipe Sizing 第 22 章）、CIBSE Guide B3/C、Haaland (1983)、Hyland & Wexler (1983)、ISO 12241 / GB 50264（保溫）、GB 50045-95/GB 51251-2017（梯間加壓）。詳細逐條檢驗見 docs/verification/ 目錄。</p>
+          <p class="warn" id="disclaimer">⚠️ 本工具僅供工程參考，實際設計須由註冊專業工程師按適用規範覆核。</p>
+          <p class="note" id="verLine"></p>
+          <p class="note" id="netWarn"></p>
+        </section>
+      </section>
+      <div class="module-screen" id="moduleScreen" hidden>
+        <div class="module-actions">
+          <button class="back-btn" id="backBtn">← <span id="backLabel">主頁</span></button>
+          <button class="back-btn" id="resetBtn">↺ <span id="resetLabel">重置</span></button>
+          <button class="back-btn" id="copyBtn">📋 <span id="copyLabel">複製結果</span></button>
+          <button class="back-btn" id="csvBtn" data-csv>📊 <span data-csv>匯出 CSV</span></button>
+          <button class="back-btn" id="exportBtn">🖨️ <span id="exportLabel">匯出計算摘要</span></button>
+        </div>
+        <div id="moduleHead"></div>
+        <div id="moduleBody"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="flash" aria-live="polite"></div>
+  <div id="printSheet"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

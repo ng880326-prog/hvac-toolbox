@@ -1,0 +1,392 @@
+﻿SHEET: Chiller
+
+B2    | t=s          | F:  | V: Cooling Load & Chillers
+G2    | t=s          | F:  | V: Cooling Load Density
+L2    | t=s          | F:  | V: 國內空調冷負荷設計指標的統計值
+P2    | t=s          | F:  | V: Plant Capacity References
+AA2   | t=s          | F:  | V: Efficiency or Coefficient of Performance
+AG2   | t=s          | F:  | V: Heat Dissipation From Electrical Equipment
+B3    | t=           | F:  | V: 1
+AA3   | t=s          | F:  | V: COP = 3.516/ ikW/RT
+G4    | t=s          | F:  | V: Density
+I4    | t=s          | F:  | V: ft2/RT
+L4    | t=s          | F:  | V: 建築類型及房間名稱
+N4    | t=s          | F:  | V: 指標(W/m2)
+P4    | t=s          | F:  | V: Project
+Q4    | t=s          | F:  | V: GFA
+(m2)
+R4    | t=s          | F:  | V: No of 
+Key
+S4    | t=s          | F:  | V: AC area
+(m2)
+T4    | t=s          | F:  | V: Total
+RT
+U4    | t=s          | F:  | V: Chiller
+V4    | t=s          | F:  | V: Cooling Load Density (W/m2)
+AG4   | t=s          | F:  | V: Transformers
+G5    | t=s          | F:  | V: =
+H5    | t=str        | F: IF($H$4=0,"-",SUM(AO43:AO46)) | V: -
+I5    | t=s          | F:  | V: ft2/RT
+L5    | t=           | F:  | V: 1
+M5    | t=s          | F:  | V: 旅遊旅館: 客房(標準層)
+N5    | t=s          | F:  | V: 80~110
+V5    | t=s          | F:  | V: Podium
+W5    | t=s          | F:  | V: Tower
+X5    | t=s          | F:  | V: B/F
+Y5    | t=s          | F:  | V: Overall
+AA5   | t=s          | F:  | V: Efficiency
+AC5   | t=str        | F: VLOOKUP(AA5,$AO$26:$AQ$27,2,FALSE) | V: ikW / RT
+AD5   | t=str        | F: VLOOKUP(AA5,$AO$26:$AQ$27,3,FALSE) | V: (Input power/ Cooling Capacity)
+AG5   | t=s          | F:  | V: ·        150 kVA and smaller : 50 Watts/kVA
+G6    | t=s          | F:  | V: =
+H6    | t=str        | F: IF($H$4=0,"-",SUM(AQ43:AQ46)) | V: -
+I6    | t=s          | F:  | V: W/m2
+L6    | t=           | F:  | V: 2
+M6    | t=s          | F:  | V: 酒吧、咖啡
+N6    | t=s          | F:  | V: 100~180
+P6    | t=s          | F:  | V: 南京萬豪
+Q6    | t=           | F:  | V: 79000
+R6    | t=           | F:  | V: 357
+S6    | t=           | F:  | V: 39500
+T6    | t=           | F:  | V: 2180
+U6    | t=s          | F:  | V: 3 X 850RT
+V6    | t=           | F:  | V: 323
+W6    | t=           | F:  | V: 88.4
+X6    | t=           | F:  | V: 177.7
+Y6    | t=           | F:  | V: 194
+AA6   | t=str        | F: IF(AA5=AO26,AO27,AO26) | V: COP
+AB6   | t=str        | F: IF(AB5=0,"-",IF(AA5=AO26,1/(AB5/3.516),3.516/AB5)) | V: -
+AC6   | t=str        | F: VLOOKUP(AA6,$AO$26:$AQ$27,2,FALSE) | V: kW / ikW
+AD6   | t=str        | F: VLOOKUP(AA6,$AO$26:$AQ$27,3,FALSE) | V: (Cooling Capacity / input power)
+AG6   | t=s          | F:  | V: ·        150 - 500 kVA : 30 Watts/kVA
+G7    | t=s          | F:  | V: =
+H7    | t=str        | F: IF($H$4=0,"-",SUM(AP43:AP46)) | V: -
+I7    | t=s          | F:  | V: m2/kW
+L7    | t=           | F:  | V: 3
+M7    | t=s          | F:  | V:          西餐廳
+N7    | t=s          | F:  | V: 160~200
+P7    | t=s          | F:  | V: SLGL
+Q7    | t=           | F:  | V: 77100
+R7    | t=           | F:  | V: 480
+S7    | t=s          | F:  | V: -
+T7    | t=           | F:  | V: 2217
+U7    | t=s          | F:  | V: 3 X 700 RT
+V7    | t=s          | F:  | V: -
+W7    | t=s          | F:  | V: -
+X7    | t=s          | F:  | V: -
+Y7    | t=s          | F:  | V: -
+AG7   | t=s          | F:  | V: ·        500 - 1000 kVA : 25 Watts/kVA
+B8    | t=s          | F:  | V: Unit Conversion
+G8    | t=s          | F:  | V: =
+H8    | t=str        | F: IF($H$4=0,"-",SUM(AR43:AR46)) | V: -
+I8    | t=s          | F:  | V: ft2/HP
+L8    | t=           | F:  | V: 4
+M8    | t=s          | F:  | V:          中餐廳、宴會廳
+N8    | t=s          | F:  | V: 180~350
+P8    | t=s          | F:  | V: SLYZ
+Q8    | t=           | F:  | V: 66901
+R8    | t=           | F:  | V: 352
+S8    | t=           | F:  | V: 32130
+T8    | t=           | F:  | V: 2344
+U8    | t=s          | F:  | V: 3 X 800RT
+V8    | t=s          | F:  | V: -
+W8    | t=s          | F:  | V: -
+X8    | t=s          | F:  | V: -
+Y8    | t=           | F:  | V: 256.60000000000002
+AA8   | t=s          | F:  | V: IPLV or NPLV
+AG8   | t=s          | F:  | V: ·        1000 - 2500 kVA : 20 Watts/kVA
+L9    | t=           | F:  | V: 5
+M9    | t=s          | F:  | V:          商店、小賣部
+N9    | t=s          | F:  | V: 100~160
+P9    | t=s          | F:  | V: SLJI
+Q9    | t=           | F:  | V: 81260
+R9    | t=           | F:  | V: 420
+S9    | t=           | F:  | V: 41000
+T9    | t=           | F:  | V: 2050
+U9    | t=s          | F:  | V: 3 X 850RT
+V9    | t=           | F:  | V: 333
+W9    | t=           | F:  | V: 98.6
+X9    | t=           | F:  | V: 155.6
+Y9    | t=           | F:  | V: 175.5
+AA9   | t=s          | F:  | V: IPLV = Integrated Part-load Valve
+AG9   | t=s          | F:  | V: ·        larger than 2500 kVA : 15 Watts/kVA
+B10   | t=s          | F:  | V: Capacity
+D10   | t=s          | F:  | V: kW
+G10   | t=s          | F:  | V: Area
+I10   | t=s          | F:  | V: m2
+L10   | t=           | F:  | V: 6
+M10   | t=s          | F:  | V:          中庭、接待
+N10   | t=s          | F:  | V: 90~120
+P10   | t=s          | F:  | V: SLXM
+Q10   | t=           | F:  | V: 71898
+R10   | t=           | F:  | V: 486
+S10   | t=           | F:  | V: 42800
+T10   | t=           | F:  | V: 1900
+U10   | t=s          | F:  | V: 3 X 700 RT
+V10   | t=           | F:  | V: 293
+W10   | t=           | F:  | V: 78
+X10   | t=           | F:  | V: 224
+Y10   | t=           | F:  | V: 156
+AA10  | t=s          | F:  | V: NPLV = Non-standard Part-load Valve
+AG10  | t=s          | F:  | V: Switchgear
+B11   | t=s          | F:  | V: =
+C11   | t=str        | F: IF($C$10=0,"-",SUM(AO36:AO40)) | V: -
+D11   | t=s          | F:  | V: RT
+G11   | t=s          | F:  | V: Cooling load
+H11   | t=str        | F: IF(H6="-","-",H6*H10/1000) | V: -
+I11   | t=s          | F:  | V: kW
+L11   | t=           | F:  | V: 7
+M11   | t=s          | F:  | V: 小會議室(允許少量吸煙)
+N11   | t=s          | F:  | V: 200~300
+P11   | t=s          | F:  | V: HT Bay
+Q11   | t=s          | F:  | V: -
+R11   | t=           | F:  | V: 472
+S11   | t=           | F:  | V: 52763
+T11   | t=           | F:  | V: 2100
+U11   | t=s          | F:  | V: 3 X 800RT
+V11   | t=           | F:  | V: 233.35336210192821
+W11   | t=           | F:  | V: 90.39326657959657
+X11   | t=s          | F:  | V: -
+Y11   | t=           | F:  | V: 139.97877300380949
+AG11  | t=s          | F:  | V: ·        Low voltage breaker 0-40 Amps : 10 Watts
+B12   | t=s          | F:  | V: =
+C12   | t=str        | F: IF($C$10=0,"-",SUM(AP36:AP40)) | V: -
+D12   | t=s          | F:  | V: kW
+G12   | t=s          | F:  | V: =
+H12   | t=str        | F: IF(H6="-","-",H11/3.516) | V: -
+I12   | t=s          | F:  | V: RT
+L12   | t=           | F:  | V: 8
+M12   | t=s          | F:  | V: 大會議室（不許吸煙）
+N12   | t=s          | F:  | V: 180~280
+P12   | t=s          | F:  | V: 大連朗豪
+Q12   | t=s          | F:  | V: -
+R12   | t=           | F:  | V: 350
+S12   | t=           | F:  | V: 32969
+T12   | t=           | F:  | V: 1244
+U12   | t=s          | F:  | V: 3 X 500RT
+V12   | t=           | F:  | V: 171.63608562691132
+W12   | t=           | F:  | V: 83.992903930131007
+X12   | t=s          | F:  | V: -
+Y12   | t=           | F:  | V: 132.70490460735843
+AA12  | t=s          | F:  | V: Loading
+AB12  | t=s          | F:  | V: Operating
+Hour
+AC12  | t=s          | F:  | V: ikW/RT
+AD12  | t=s          | F:  | V: Sub-
+total
+AE12  | t=s          | F:  | V: Condensing water
+temperature for IPLV*
+AG12  | t=s          | F:  | V: ·        Low voltage breaker 50-100 Amps : 20 Watts
+B13   | t=s          | F:  | V: =
+C13   | t=str        | F: IF($C$10=0,"-",SUM(AQ36:AQ40)) | V: -
+D13   | t=s          | F:  | V: HP
+G13   | t=s          | F:  | V: =
+H13   | t=str        | F: IF(H6="-","-",H11/2.6) | V: -
+I13   | t=s          | F:  | V: HP
+L13   | t=           | F:  | V: 9
+M13   | t=s          | F:  | V:          理髮、美容
+N13   | t=s          | F:  | V: 120~180
+P13   | t=s          | F:  | V: 靜安嘉里
+Q13   | t=s          | F:  | V: -
+R13   | t=s          | F:  | V: -
+S13   | t=s          | F:  | V: -
+T13   | t=s          | F:  | V: -
+U13   | t=s          | F:  | V: -
+V13   | t=           | F:  | V: 312
+W13   | t=           | F:  | V: 92
+X13   | t=s          | F:  | V: -
+Y13   | t=s          | F:  | V: -
+AG13  | t=s          | F:  | V: ·        Low voltage breaker 225 Amps : 60 Watts
+B14   | t=s          | F:  | V: =
+C14   | t=str        | F: IF($C$10=0,"-",SUM(AR36:AR40)) | V: -
+D14   | t=s          | F:  | V: Btu/h
+G14   | t=s          | F:  | V: =
+H14   | t=str        | F: IF(H6="-","-",H12*12000) | V: -
+I14   | t=s          | F:  | V: Btu/h
+L14   | t=           | F:  | V: 10
+M14   | t=s          | F:  | V:          健身房、保齡球
+N14   | t=s          | F:  | V: 100~200
+AA14  | t=           | F:  | V: 1
+AB14  | t=           | F:  | V: 0.01
+AD14  | t=           | F: AB14*AC14 | V: 0
+AE14  | t=s          | F:  | V: 29.4 oC
+AG14  | t=s          | F:  | V: ·        Low voltage breaker 400 Amps : 100 Watts
+B15   | t=s          | F:  | V: =
+C15   | t=str        | F: IF($C$10=0,"-",SUM(AS36:AS40)) | V: -
+D15   | t=s          | F:  | V: kcal/h
+G15   | t=s          | F:  | V: =
+H15   | t=str        | F: IF(H6="-","-",H11*860) | V: -
+I15   | t=s          | F:  | V: kcal/h
+L15   | t=           | F:  | V: 11
+M15   | t=s          | F:  | V:          彈子房
+N15   | t=s          | F:  | V: 90~120
+AA15  | t=           | F:  | V: 0.75
+AB15  | t=           | F:  | V: 0.42
+AD15  | t=           | F: AB15*AC15 | V: 0
+AE15  | t=s          | F:  | V: 23.9 oC
+AG15  | t=s          | F:  | V: ·        Low voltage breaker 600 Amps : 130 Watts
+L16   | t=           | F:  | V: 12
+M16   | t=s          | F:  | V:          室內游泳池
+N16   | t=s          | F:  | V: 200~350
+AA16  | t=           | F:  | V: 0.5
+AB16  | t=           | F:  | V: 0.45
+AD16  | t=           | F: AB16*AC16 | V: 0
+AE16  | t=s          | F:  | V: 18.3 oC
+AG16  | t=s          | F:  | V: ·        Low voltage breaker 800 Amps : 170 Watts
+G17   | t=s          | F:  | V: Unit Conversion
+L17   | t=           | F:  | V: 13
+M17   | t=s          | F:  | V:          舞廳(交誼舞)
+N17   | t=s          | F:  | V: 200~250
+AA17  | t=           | F:  | V: 0.25
+AB17  | t=           | F:  | V: 0.12
+AD17  | t=           | F: AB17*AC17 | V: 0
+AE17  | t=s          | F:  | V: 18.3 oC
+AG17  | t=s          | F:  | V: ·        Low voltage breaker 1600 Amps : 460 Watts
+L18   | t=           | F:  | V: 14
+M18   | t=s          | F:  | V:          舞廳(迪斯可)
+N18   | t=s          | F:  | V: 250~350
+AG18  | t=s          | F:  | V: ·        Low voltage breaker 2000 Amps : 600 Watts
+G19   | t=s          | F:  | V: Area
+I19   | t=s          | F:  | V: ft2
+L19   | t=           | F:  | V: 15
+M19   | t=s          | F:  | V:          辦公
+N19   | t=s          | F:  | V: 90~120
+AA19  | t=s          | F:  | V: IPLV or NPLV
+AC19  | t=           | F: SUM(AD14:AD17) | V: 0
+AE19  | t=s          | F:  | V: ikW/RT
+AG19  | t=s          | F:  | V: ·        Low voltage breaker 3000 Amps : 1100 Watts
+G20   | t=s          | F:  | V: =
+H20   | t=str        | F: IF(H19=0,"-",IF(I19="ft2",H19/10.76391,H19*10.76391)) | V: -
+I20   | t=str        | F: IF(I19="ft2","m2","ft2") | V: m2
+L20   | t=           | F:  | V: 16
+M20   | t=s          | F:  | V: 醫院:高級病房
+N20   | t=s          | F:  | V: 80~110
+AA20  | t=s          | F:  | V: *Reference: ARI 550/590-1998
+AG20  | t=s          | F:  | V: ·        Low voltage breaker 4000 Amps : 1500 Watts
+L21   | t=           | F:  | V: 17
+M21   | t=s          | F:  | V:         一般手術室
+N21   | t=s          | F:  | V: 100~150
+AG21  | t=s          | F:  | V: ·        Medium voltage breaker/switch 600 Amps : 1000 Watts
+L22   | t=           | F:  | V: 18
+M22   | t=s          | F:  | V:         潔淨手術室
+N22   | t=s          | F:  | V: 300~500
+AG22  | t=s          | F:  | V: ·        Medium voltage breaker/switch 1200 Amps : 1500 Watts
+L23   | t=           | F:  | V: 19
+M23   | t=s          | F:  | V:         X光、CT、B超診斷
+N23   | t=s          | F:  | V: 120~150
+AG23  | t=s          | F:  | V: ·        Medium voltage breaker/switch 2000 Amps : 2000 Watts
+L24   | t=           | F:  | V: 20
+M24   | t=s          | F:  | V:  商場、百貨大樓:營業室
+N24   | t=s          | F:  | V: 150~250
+AG24  | t=s          | F:  | V: ·        Medium voltage breaker/switch 2500 Amps : 2500 Watts
+L25   | t=           | F:  | V: 21
+M25   | t=s          | F:  | V:  影劇院:觀眾席
+N25   | t=s          | F:  | V: 180~350
+AG25  | t=s          | F:  | V: Motor Control Centers
+L26   | t=           | F:  | V: 22
+M26   | t=s          | F:  | V:         休息廳(允許吸煙)
+N26   | t=s          | F:  | V: 300~400
+AG26  | t=s          | F:  | V: ·        Section : 500 Watts per section
+AO26  | t=s          | F:  | V: COP
+AP26  | t=s          | F:  | V: kW / ikW
+AQ26  | t=s          | F:  | V: (Cooling Capacity / input power)
+L27   | t=           | F:  | V: 23
+M27   | t=s          | F:  | V:         化粧室
+N27   | t=s          | F:  | V: 90~120
+AG27  | t=s          | F:  | V: ·        Low voltage starters size 00 : 50 Watts
+AO27  | t=s          | F:  | V: Efficiency
+AP27  | t=s          | F:  | V: ikW / RT
+AQ27  | t=s          | F:  | V: (Input power/ Cooling Capacity)
+L28   | t=           | F:  | V: 24
+M28   | t=s          | F:  | V:  體育館:比賽館
+N28   | t=s          | F:  | V: 120~250
+AG28  | t=s          | F:  | V: ·        Low voltage starters size 0 : 50 Watts
+L29   | t=           | F:  | V: 25
+M29   | t=s          | F:  | V:         觀眾休息廳(允許吸煙)
+N29   | t=s          | F:  | V: 300~400
+AG29  | t=s          | F:  | V: ·        Low voltage starters size 1 : 50 Watts
+L30   | t=           | F:  | V: 26
+M30   | t=s          | F:  | V:         貴賓室
+N30   | t=s          | F:  | V: 100~120
+AG30  | t=s          | F:  | V: ·        Low voltage starters size 2 : 100 Watts
+L31   | t=           | F:  | V: 27
+M31   | t=s          | F:  | V:         展覽廳、陳列室
+N31   | t=s          | F:  | V: 130~200
+AG31  | t=s          | F:  | V: ·        Low voltage starters size 3 : 130 Watts
+L32   | t=           | F:  | V: 28
+M32   | t=s          | F:  | V:         會堂、報告廳
+N32   | t=s          | F:  | V: 150~200
+AG32  | t=s          | F:  | V: ·        Low voltage starters size 4 : 200 Watts
+AO32  | t=s          | F:  | V: ft2
+L33   | t=           | F:  | V: 29
+M33   | t=s          | F:  | V:         圖書閱覽
+N33   | t=s          | F:  | V: 75~100
+AG33  | t=s          | F:  | V: ·        Low voltage starters size 5 : 300 Watts
+AO33  | t=s          | F:  | V: m2
+L34   | t=           | F:  | V: 30
+M34   | t=s          | F:  | V:         科研、辦公
+N34   | t=s          | F:  | V: 90~140
+AG34  | t=s          | F:  | V: ·        Low voltage starters size 6 : 650 Watts
+L35   | t=           | F:  | V: 31
+M35   | t=s          | F:  | V:         公寓、住宅
+N35   | t=s          | F:  | V: 80~90
+AG35  | t=s          | F:  | V: ·        Medium voltage starters size 200 Amp : 400 Watts
+AO35  | t=s          | F:  | V: RT
+AP35  | t=s          | F:  | V: kW
+AQ35  | t=s          | F:  | V: HP
+AR35  | t=s          | F:  | V: Btu/h
+AS35  | t=s          | F:  | V: kcal/h
+L36   | t=           | F:  | V: 32
+M36   | t=s          | F:  | V:         餐館
+N36   | t=s          | F:  | V: 200~350
+AG36  | t=s          | F:  | V: ·        Medium voltage starters size 400 Amp : 1300 Watts
+AO36  | t=           | F: IF($D$10=$D$11,$C$10,0) | V: 0
+AP36  | t=           | F: AO36*3.516 | V: 0
+AQ36  | t=           | F: AP36/2.6 | V: 0
+AR36  | t=           | F: AO36*12000 | V: 0
+AS36  | t=           | F: AP36*860 | V: 0
+AG37  | t=s          | F:  | V: ·        Medium voltage starters size 700 Amp : 1700 Watts
+AO37  | t=           | F: AP37/3.516 | V: 0
+AP37  | t=           | F: IF($D$10=$D$12,$C$10,0) | V: 0
+AQ37  | t=           | F: AP37/2.6 | V: 0
+AR37  | t=           | F: AO37*12000 | V: 0
+AS37  | t=           | F: AP37*860 | V: 0
+AG38  | t=s          | F:  | V: Variable Frequency Drive
+AO38  | t=           | F: AP38/3.516 | V: 0
+AP38  | t=           | F: AQ38*2.6 | V: 0
+AQ38  | t=           | F: IF($D$10=$D$13,$C$10,0) | V: 0
+AR38  | t=           | F: AO38*12000 | V: 0
+AS38  | t=           | F: AP38*860 | V: 0
+AG39  | t=s          | F:  | V: ·        Variable frequency drive : 2 - 6% of kVA rating
+AO39  | t=           | F: AP39/3.516 | V: 0
+AP39  | t=           | F: AR39/3412 | V: 0
+AQ39  | t=           | F: AP39/2.6 | V: 0
+AR39  | t=           | F: IF($D$10=$D$14,$C$10,0) | V: 0
+AS39  | t=           | F: AP39*860 | V: 0
+AG40  | t=s          | F:  | V: ·        Bus duct : 0.015 Watts /ft Amp
+AO40  | t=           | F: AP40/3.516 | V: 0
+AP40  | t=           | F: AR40/3412 | V: 0
+AQ40  | t=           | F: AP40/2.6 | V: 0
+AR40  | t=           | F: AS40/860*3412 | V: 0
+AS40  | t=           | F: IF($D$10=$D$15,$C$10,0) | V: 0
+AG41  | t=s          | F:  | V: ·        Capacitors : 2 Watts / KVAR
+AO42  | t=s          | F:  | V: ft2/RT
+AP42  | t=s          | F:  | V: m2/kW
+AQ42  | t=s          | F:  | V: W/m2
+AR42  | t=s          | F:  | V: ft2/HP
+AO43  | t=           | F: IF(I4=I5,H4,0) | V: 0
+AP43  | t=           | F: AO43/(10.7*3.516) | V: 0
+AQ43  | t=           | F: IF(AO43>0,1/AP43*1000,0) | V: 0
+AR43  | t=           | F: AQ43/2.798708 | V: 0
+AO44  | t=           | F: AP44*(10.7*3.516) | V: 0
+AP44  | t=           | F: IF(I4=I7,H4,0) | V: 0
+AQ44  | t=           | F: IF(AP44>0,1/AP44*1000,0) | V: 0
+AR44  | t=           | F:  | V: 0
+AO45  | t=           | F: AP45/(1/(10.7*3.516)) | V: 0
+AP45  | t=           | F: IF(AQ45>0,1000/AQ45,0) | V: 0
+AQ45  | t=           | F: IF(I4=I6,H4,0) | V: 0
+AR45  | t=           | F: AQ45/2.798708 | V: 0
+AO46  | t=           | F: AP46/(1/(10.7*3.516)) | V: 0
+AP46  | t=           | F: IF(AQ46>0,1000/AQ46,0) | V: 0
+AQ46  | t=           | F: AR46*2.798708 | V: 0
+AR46  | t=           | F: IF(I4=I8,H4,0) | V: 0

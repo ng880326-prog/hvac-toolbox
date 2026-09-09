@@ -1,0 +1,41 @@
+﻿SHEET: Website
+
+B2    | t=s          | F:  | V: Websites
+B4    | t=s          | F:  | V: Equipment
+C4    | t=s          | F:  | V: Brand
+D4    | t=s          | F:  | V: Website
+E4    | t=s          | F:  | V: Login
+F4    | t=s          | F:  | V: Pwd
+B5    | t=s          | F:  | V: Fan
+C5    | t=s          | F:  | V: Ventaxia
+D5    | t=s          | F:  | V: http://ventaxia.fanselector.co.uk/
+E5    | t=s          | F:  | V: -
+F5    | t=s          | F:  | V: -
+B6    | t=s          | F:  | V: Pump
+C6    | t=s          | F:  | V: Paco
+D6    | t=s          | F:  | V: http://net.grundfos.com/Appl/WebCAPS/InitCtrl?mode=0
+E6    | t=s          | F:  | V: -
+F6    | t=s          | F:  | V: -
+C7    | t=s          | F:  | V: Paco
+D7    | t=s          | F:  | V: http://www.pacoexpresssuite.com/
+E7    | t=s          | F:  | V: -
+F7    | t=s          | F:  | V: -
+B8    | t=s          | F:  | V: Heat Exchanger
+C8    | t=s          | F:  | V: Hisaka
+D8    | t=s          | F:  | V: http://www.hisaka.co.jp/simulator_english/
+E8    | t=s          | F:  | V: -
+F8    | t=s          | F:  | V: -
+B9    | t=s          | F:  | V: Cooling Tower
+C9    | t=s          | F:  | V: SPX
+D9    | t=s          | F:  | V: http://qtcapps.ct.spx.com
+E9    | t=s          | F:  | V: kin.li@wspgroup.com.hk
+F9    | t=s          | F:  | V: kk622731
+C10   | t=s          | F:  | V: Mesan
+D10   | t=s          | F:  | V: http://model.mesanct.com/
+C11   | t=s          | F:  | V: Ryowo
+D11   | t=s          | F:  | V: http://www.ryowo.com/Company.php
+B12   | t=s          | F:  | V: Control
+C12   | t=s          | F:  | V: Honeywell
+D12   | t=s          | F:  | V: http://www.buildingcontrolworkbench.com/BCWInfo/GrayBook/Cgray.htm
+E12   | t=s          | F:  | V: -
+F12   | t=s          | F:  | V: -

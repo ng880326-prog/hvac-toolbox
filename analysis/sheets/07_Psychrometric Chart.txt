@@ -1,0 +1,46 @@
+﻿SHEET: Psychrometric Chart
+
+B2    | t=s          | F:  | V: Psychrometric Chart
+B5    | t=s          | F:  | V: Altitude
+C5    | t=           | F:  | V: 0
+D5    | t=s          | F:  | V: m
+B6    | t=s          | F:  | V: Atmospheric Pressure
+C6    | t=           | F:  | V: 101.325
+D6    | t=s          | F:  | V: kPa
+C8    | t=s          | F:  | V: Air 1
+D8    | t=s          | F:  | V: Air 2
+B9    | t=s          | F:  | V: Dry Bulb Temperature (℃)
+C9    | t=           | F:  | V: 24.6
+D9    | t=           | F:  | V: 10
+B10   | t=s          | F:  | V: Wet Bulb Temperature (℃)
+C10   | t=           | F:  | V: 19.2
+D10   | t=           | F:  | V: 9.6
+B11   | t=s          | F:  | V: Dew Point Temperautre (℃)
+B12   | t=s          | F:  | V: Relative Humidity (%)
+D12   | t=           | F:  | V: 40
+B15   | t=s          | F:  | V: Dry Bulb Temperature (℃)
+C15   | t=           | F: IF(C9+C10+C11+C12=0,"-",IF(C9<>0,C9,IF(AND(C10<>0,C12<>0),'Supporting 4'!A10,IF(AND(C10<>0,C11<>0),'Supproting 5'!A18,IF(AND(C11<>0,C12<>0),'Supporting 6'!A10))))) | V: 24.6
+D15   | t=           | F: IF(D9+D10+D11+D12=0,"-",IF(D9<>0,D9,IF(AND(D10<>0,D12<>0),'Supporting 4'!C10,IF(AND(D10<>0,D11<>0),'Supproting 5'!C18,IF(AND(D11<>0,D12<>0),'Supporting 6'!C10))))) | V: 10
+B16   | t=s          | F:  | V: Wet Bulb Temperature (℃)
+C16   | t=           | F: IF(C9+C10+C11+C12=0,"-",IF(AND(C10<>0,C10>C9,C9<>0),"ERROR",IF(C10<>0,C10,IF(AND(C9<>0,C11<>0),'Supporting 2'!A30,IF(AND(C9<>0,C12<>0),'Supporting 3'!A28,IF(AND(C11<>0,C12<>0),'Supporting 6'!A19)))))) | V: 19.2
+D16   | t=           | F: IF(D9+D10+D11+D12=0,"-",IF(AND(D10<>0,D10>D9,D9<>0),"ERROR",IF(D10<>0,D10,IF(AND(D9<>0,D11<>0),'Supporting 2'!C30,IF(AND(D9<>0,D12<>0),'Supporting 3'!C28,IF(AND(D11<>0,D12<>0),'Supporting 6'!C19)))))) | V: 9.6
+B17   | t=s          | F:  | V: Dew Point Temperautre (℃)
+C17   | t=           | F: IF(C9+C10+C11+C12=0,"-",IF(C11<>0,C11,IF(AND(C9<>0,C10<>0),'Supporting 1'!A36,IF(AND(C9<>0,C11<>0),C11,IF(AND(C9<>0,C12<>0),'Supporting 3'!A25,IF(AND(C10<>0,C12<>0),'Supporting 4'!A25)))))) | V: 16.49737944001108
+D17   | t=           | F: IF(D9+D10+D11+D12=0,"-",IF(D11<>0,D11,IF(AND(D9<>0,D10<>0),'Supporting 1'!C36,IF(AND(D9<>0,D11<>0),D11,IF(AND(D9<>0,D12<>0),'Supporting 3'!C25,IF(AND(D10<>0,D12<>0),'Supporting 4'!C25)))))) | V: 9.3035859372805039
+B18   | t=s          | F:  | V: Relative Humidity (%)
+C18   | t=           | F: IF(C9+C10+C11+C12=0,"-",IF(C12<>0,C12,IF(AND(C9<>0,C10<>0),'Supporting 1'!A24,IF(AND(C9<>0,C11<>0),'Supporting 2'!A21,IF(AND(C10<>0,C11<>0),'Supproting 5'!A38))))) | V: 60.56609087238499
+D18   | t=           | F: IF(D9+D10+D11+D12=0,"-",IF(D12<>0,D12,IF(AND(D9<>0,D10<>0),'Supporting 1'!C24,IF(AND(D9<>0,D11<>0),'Supporting 2'!C21,IF(AND(D10<>0,D11<>0),'Supproting 5'!C38))))) | V: 40
+B19   | t=s          | F:  | V: Specific Volume (m3/kg)
+C19   | t=           | F: IF(C9+C10+C11+C12=0,"-",IF(AND(C9<>0,C10<>0),'Supporting 1'!A27,IF(AND(C9<>0,C11<>0),'Supporting 2'!A24,IF(AND(C9<>0,C12<>0),'Supporting 3'!A19,IF(AND(C10<>0,C12<>0),'Supporting 4'!A16,IF(AND(C10<>0,C11<>0),'Supproting 5'!A21,IF(AND(C11<>0,C12<>0),'Supporting 6'!A13))))))) | V: 0.85956103076727641
+D19   | t=           | F: IF(D9+D10+D11+D12=0,"-",IF(AND(D9<>0,D10<>0),'Supporting 1'!C27,IF(AND(D9<>0,D11<>0),'Supporting 2'!C24,IF(AND(D9<>0,D12<>0),'Supporting 3'!C19,IF(AND(D10<>0,D12<>0),'Supporting 4'!C16,IF(AND(D10<>0,D11<>0),'Supproting 5'!C21,IF(AND(D11<>0,D12<>0),'Supporting 6'!C13))))))) | V: 0.81166129226205841
+B20   | t=s          | F:  | V: Air Density (kg/m3)
+C20   | t=           | F: IF(C9+C10+C11+C12=0,"-",1/C19) | V: 1.1633845232692348
+D20   | t=           | F: IF(D9+D10+D11+D12=0,"-",1/D19) | V: 1.2320410120988414
+B21   | t=s          | F:  | V: Moisture Content (kg/kg)
+C21   | t=           | F: IF(C9+C10+C11+C12=0,"-",IF(AND(C9<>0,C10<>0),'Supporting 1'!A10,IF(AND(C9<>0,C11<>0),'Supporting 2'!A7,IF(AND(C9<>0,C12<>0),'Supporting 3'!A10,IF(AND(C10<>0,C12<>0),'Supporting 4'!A13,IF(AND(C10<>0,C11<>0),'Supproting 5'!A15,IF(AND(C11<>0,C12<>0),'Supporting 6'!A7))))))) | V: 1.1721348926261669E-2
+D21   | t=           | F: IF(D9+D10+D11+D12=0,"-",IF(AND(D9<>0,D10<>0),'Supporting 1'!C10,IF(AND(D9<>0,D11<>0),'Supporting 2'!C7,IF(AND(D9<>0,D12<>0),'Supporting 3'!C10,IF(AND(D10<>0,D12<>0),'Supporting 4'!C13,IF(AND(D10<>0,D11<>0),'Supproting 5'!C15,IF(AND(D11<>0,D12<>0),'Supporting 6'!C7))))))) | V: 7.2624475746325724E-3
+B22   | t=s          | F:  | V: Specific Enthalpy (kJ/kg)
+C22   | t=           | F: IF(C9+C10+C11+C12=0,"-",IF(AND(C9<>0,C10<>0),'Supporting 1'!A30,IF(AND(C9<>0,C11<>0),'Supporting 2'!A27,IF(AND(C9<>0,C12<>0),'Supporting 3'!A22,IF(AND(C10<>0,C12<>0),'Supporting 4'!A19,IF(AND(C10<>0,C11<>0),'Supproting 5'!A24,IF(AND(C11<>0,C12<>0),'Supporting 6'!A16))))))) | V: 54.583156720953227
+D22   | t=           | F: IF(D9+D10+D11+D12=0,"-",IF(AND(D9<>0,D10<>0),'Supporting 1'!C30,IF(AND(D9<>0,D11<>0),'Supporting 2'!C27,IF(AND(D9<>0,D12<>0),'Supporting 3'!C22,IF(AND(D10<>0,D12<>0),'Supporting 4'!C19,IF(AND(D10<>0,D11<>0),'Supproting 5'!C24,IF(AND(D11<>0,D12<>0),'Supporting 6'!C16))))))) | V: 28.354468562878182
+B24   | t=s          | F:  | V: Reference: 
+1997 ASHRAE Handbook Fundamentals - Chapter 6

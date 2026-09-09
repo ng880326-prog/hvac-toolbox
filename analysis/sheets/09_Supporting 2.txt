@@ -1,0 +1,50 @@
+﻿SHEET: Supporting 2
+
+A1    | t=s          | F:  | V: Pw=Pws (td) = Saturation pressure for temperature td (kPa) 
+B1    | t=           | F: 273.15+'Psychrometric Chart'!C11 | V: 273.14999999999998
+C1    | t=s          | F:  | V: Pw=Pws (td) = Saturation pressure for temperature td (kPa) 
+D1    | t=           | F: 273.15+'Psychrometric Chart'!D11 | V: 273.14999999999998
+A2    | t=           | F: -5800.2206/B1+1.3914993-0.048640239*B1 | V: -33.129143945141777
+C2    | t=           | F: -5800.2206/D1+1.3914993-0.048640239*D1 | V: -33.129143945141777
+A3    | t=           | F: 0.000041764768*POWER(B1,2)-0.000000014452093*POWER(B1,3)+6.5459673*LN(B1) | V: 39.544589235539483
+C3    | t=           | F: 0.000041764768*POWER(D1,2)-0.000000014452093*POWER(D1,3)+6.5459673*LN(D1) | V: 39.544589235539483
+A4    | t=           | F: EXP(A2+A3)/1000 | V: 0.61121286745119141
+C4    | t=           | F: EXP(C2+C3)/1000 | V: 0.61121286745119141
+A6    | t=s          | F:  | V: W = Humidity ratio
+C6    | t=s          | F:  | V: W = Humidity ratio
+A7    | t=           | F: 0.62198*(A4/('Psychrometric Chart'!$C$6-A4)) | V: 3.7746786226692361E-3
+C7    | t=           | F: 0.62198*(C4/('Psychrometric Chart'!$C$6-C4)) | V: 3.7746786226692361E-3
+A9    | t=s          | F:  | V: Pws (t) = Saturation pressure for temperature t (kPa)
+B9    | t=           | F: 273.15+'Psychrometric Chart'!C9 | V: 297.75
+C9    | t=s          | F:  | V: Pws (t) = Saturation pressure for temperature t (kPa)
+D9    | t=           | F: 273.15+'Psychrometric Chart'!D9 | V: 283.14999999999998
+A10   | t=           | F: -5800.2206/B9+1.3914993-0.048640239*B9 | V: -32.571301803475862
+C10   | t=           | F: -5800.2206/D9+1.3914993-0.048640239*D9 | V: -32.865605951518553
+A11   | t=           | F: 0.000041764768*POWER(B9,2)-0.000000014452093*POWER(B9,3)+6.5459673*LN(B9) | V: 40.608659349701526
+C11   | t=           | F: 0.000041764768*POWER(D9,2)-0.000000014452093*POWER(D9,3)+6.5459673*LN(D9) | V: 39.978744212857308
+A12   | t=           | F: EXP(A10+A11)/1000 | V: 3.0944255009523975
+C12   | t=           | F: EXP(C10+C11)/1000 | V: 1.2279952754407752
+A14   | t=s          | F:  | V: Ws = Humidity ratio at saturation pressure of water vapour 
+C14   | t=s          | F:  | V: Ws = Humidity ratio at saturation pressure of water vapour 
+A15   | t=           | F: 0.62198*(A12/('Psychrometric Chart'!$C$6-A12)) | V: 1.9593398317150561E-2
+C15   | t=           | F: 0.62198*(C12/('Psychrometric Chart'!$C$6-C12)) | V: 7.6304830850873065E-3
+A17   | t=s          | F:  | V: µ = Degree of saturation
+C17   | t=s          | F:  | V: µ = Degree of saturation
+A18   | t=           | F: A7/A15 | V: 0.1926505326727917
+C18   | t=           | F: C7/C15 | V: 0.49468409543378827
+A20   | t=s          | F:  | V: Φ = Relative humidity
+C20   | t=s          | F:  | V: Φ = Relative humidity
+A21   | t=           | F: A18/(1-(1-A18)*(A12/'Psychrometric Chart'!$C$6))*100 | V: 19.752062774271771
+C21   | t=           | F: C18/(1-(1-C18)*(C12/'Psychrometric Chart'!$C$6))*100 | V: 49.773226304295285
+A23   | t=s          | F:  | V: v = Specific volume
+C23   | t=s          | F:  | V: v = Specific volume
+A24   | t=           | F: 0.2871*('Psychrometric Chart'!C9+273.15)*(1+1.6078*A7)/'Psychrometric Chart'!$C$6 | V: 0.84878185460276523
+C24   | t=           | F: 0.2871*('Psychrometric Chart'!D9+273.15)*(1+1.6078*C7)/'Psychrometric Chart'!$C$6 | V: 0.80716232453660108
+A26   | t=s          | F:  | V: h = Enthalpy
+C26   | t=s          | F:  | V: h = Enthalpy
+A27   | t=           | F: 1.006*'Psychrometric Chart'!C9+A7*(2501+1.805*'Psychrometric Chart'!C9) | V: 34.35567829017814
+C27   | t=           | F: 1.006*'Psychrometric Chart'!D9+C7*(2501+1.805*'Psychrometric Chart'!D9) | V: 19.568604184434939
+A29   | t=s          | F:  | V: t*= Wet bulb temperature
+C29   | t=s          | F:  | V: t*= Wet bulb temperature
+A30   | t=           | F: IF('Supporting 2.1'!$H13=0,'Supporting 2.1'!$J13,IF(ABS('Supporting 2.1'!$I14-'Supporting 2.1'!$H14)<0.00005,'Supporting 2.1'!$J14,IF(ABS('Supporting 2.1'!$I15-'Supporting 2.1'!$H15)<0.00005,'Supporting 2.1'!$J15,IF(ABS('Supporting 2.1'!$I16-'Supporting 2.1'!$H16)<0.00005,'Supporting 2.1'!$J16,IF(ABS('Supporting 2.1'!$I17-'Supporting 2.1'!$H17)<0.00005,'Supporting 2.1'!$J17,IF(ABS('Supporting 2.1'!$I18-'Supporting 2.1'!$H18)<0.00005,'Supporting 2.1'!$J18,IF(ABS('Supporting 2.1'!$I19-'Supporting 2.1'!$H19)<0.00005,'Supporting 2.1'!$J19,IF('Supporting 2.1'!$I20-'Supporting 2.1'!$H20<0.000005,'Supporting 2.1'!$J20)))))))) | V: 12.17689612256105
+C30   | t=           | F: IF('Supporting 2.1'!$H30=0,'Supporting 2.1'!$J30,IF(ABS('Supporting 2.1'!$I31-'Supporting 2.1'!$H31)<0.00005,'Supporting 2.1'!$J31,IF(ABS('Supporting 2.1'!$I32-'Supporting 2.1'!$H32)<0.00005,'Supporting 2.1'!$J32,IF(ABS('Supporting 2.1'!$I33-'Supporting 2.1'!$H33)<0.00005,'Supporting 2.1'!$J33,IF(ABS('Supporting 2.1'!$I34-'Supporting 2.1'!$H34)<0.00005,'Supporting 2.1'!$J34,IF(ABS('Supporting 2.1'!$I35-'Supporting 2.1'!$H35)<0.00005,'Supporting 2.1'!$J35,IF(ABS('Supporting 2.1'!$I36-'Supporting 2.1'!$H36)<0.00005,'Supporting 2.1'!$J36,IF('Supporting 2.1'!$I37-'Supporting 2.1'!$H37<0.000005,'Supporting 2.1'!$J37)))))))) | V: 0.81300288668175058

@@ -1,0 +1,41 @@
+﻿SHEET: Supporting 4
+
+A1    | t=s          | F:  | V: Pwz(t*) = Saturation pressure for temperature t*(kPa) 
+B1    | t=           | F: 273.15+'Psychrometric Chart'!C10 | V: 292.34999999999997
+C1    | t=s          | F:  | V: Pwz(t*) = Saturation pressure for temperature t*(kPa) 
+D1    | t=           | F: 273.15+'Psychrometric Chart'!D10 | V: 282.75
+A2    | t=           | F: -5800.2206/B1+1.3914993-0.048640239*B1 | V: -32.668462941754328
+C2    | t=           | F: -5800.2206/D1+1.3914993-0.048640239*D1 | V: -32.875128984588635
+A3    | t=           | F: 0.000041764768*POWER(B1,2)-0.000000014452093*POWER(B1,3)+6.5459673*LN(B1) | V: 40.376148830308381
+C3    | t=           | F: 0.000041764768*POWER(D1,2)-0.000000014452093*POWER(D1,3)+6.5459673*LN(D1) | V: 39.961424906761906
+A4    | t=           | F: EXP(A2+A3)/1000 | V: 2.2253865026126225
+C4    | t=           | F: EXP(C2+C3)/1000 | V: 1.1954714700615636
+A6    | t=s          | F:  | V: Ws(t*) = Humidity ratio at saturation pressure of water vapour 
+C6    | t=s          | F:  | V: Ws(t*) = Humidity ratio at saturation pressure of water vapour 
+A7    | t=           | F: 0.62198*A4/('Psychrometric Chart'!$C$6-A4) | V: 1.3967217913836667E-2
+C7    | t=           | F: 0.62198*C4/('Psychrometric Chart'!$C$6-C4) | V: 7.4259746936346472E-3
+A9    | t=s          | F:  | V: t= Dry bulb temperature
+C9    | t=s          | F:  | V: t= Dry bulb temperature
+A10   | t=           | F: IF('Supporting 4.1'!$H23=0,'Supporting 4.1'!$J22,IF(ABS('Supporting 4.1'!$I26-'Supporting 4.1'!$H26)<0.00005,'Supporting 4.1'!$J26,IF(ABS('Supporting 4.1'!$I27-'Supporting 4.1'!$H27)<0.00005,'Supporting 4.1'!$J27,IF(ABS('Supporting 4.1'!$I28-'Supporting 4.1'!$H28)<0.00005,'Supporting 4.1'!$J28,IF(ABS('Supporting 4.1'!$I29-'Supporting 4.1'!$H29)<0.00005,'Supporting 4.1'!$J29,IF(ABS('Supporting 4.1'!$I30-'Supporting 4.1'!$H30)<0.00005,'Supporting 4.1'!$J30,IF(ABS('Supporting 4.1'!$I31-'Supporting 4.1'!$H31)<0.005,'Supporting 4.1'!$J31))))))) | V: 53.493497842130878
+C10   | t=           | F: IF('Supporting 4.1'!$H39=0,'Supporting 4.1'!$J38,IF(ABS('Supporting 4.1'!$I42-'Supporting 4.1'!$H42)<0.00005,'Supporting 4.1'!$J42,IF(ABS('Supporting 4.1'!$I43-'Supporting 4.1'!$H43)<0.00005,'Supporting 4.1'!$J43,IF(ABS('Supporting 4.1'!$I44-'Supporting 4.1'!$H44)<0.00005,'Supporting 4.1'!$J44,IF(ABS('Supporting 4.1'!$I45-'Supporting 4.1'!$H45)<0.00005,'Supporting 4.1'!$J45,IF(ABS('Supporting 4.1'!$I46-'Supporting 4.1'!$H46)<0.00005,'Supporting 4.1'!$J46,IF(ABS('Supporting 4.1'!$I47-'Supporting 4.1'!$H47)<0.005,'Supporting 4.1'!$J47))))))) | V: 16.463492099842103
+A12   | t=s          | F:  | V: W = Humidity ratio
+C12   | t=s          | F:  | V: W = Humidity ratio
+A13   | t=           | F: ((2501-2.381*'Psychrometric Chart'!C10)*A7-(A10-'Psychrometric Chart'!C10))/(2501+1.805*A10-4.186*'Psychrometric Chart'!C10) | V: 0
+C13   | t=           | F: ((2501-2.381*'Psychrometric Chart'!D10)*C7-(C10-'Psychrometric Chart'!D10))/(2501+1.805*C10-4.186*'Psychrometric Chart'!D10) | V: 4.6332009658857322E-3
+A15   | t=s          | F:  | V: v = Specific volume
+C15   | t=s          | F:  | V: v = Specific volume
+A16   | t=           | F: (0.2871*(A10+273.15)*(1+1.6078*A13))/'Psychrometric Chart'!$C$6 | V: 0.92553020706119693
+C16   | t=           | F: (0.2871*(C10+273.15)*(1+1.6078*C13))/'Psychrometric Chart'!$C$6 | V: 0.8267202067126137
+A18   | t=s          | F:  | V: h = Enthalpy
+C18   | t=s          | F:  | V: h = Enthalpy
+A19   | t=           | F: 1.006*A10+A13*(2501+1.805*A10) | V: 53.814458829183664
+C19   | t=           | F: 1.006*C10+C13*(2501+1.805*C10) | V: 28.287591662956778
+A21   | t=s          | F:  | V: Pw= P*W/(0.62198+W)
+C21   | t=s          | F:  | V: Pw= P*W/(0.62198+W)
+A22   | t=           | F: 'Psychrometric Chart'!$C$6*A13/(0.62198+A13) | V: 0
+C22   | t=           | F: 'Psychrometric Chart'!$C$6*C13/(0.62198+C13) | V: 0.74920076235982502
+A24   | t=s          | F:  | V: td = Dew point temperature
+C24   | t=s          | F:  | V: td = Dew point temperature
+A25   | t=e          | F: 6.54+14.526*LN(A22)+0.7389*POWER(LN(A22),2)+0.09486*POWER(LN(A22),3)+0.4569*POWER(A22,0.1984) | V: #NUM!
+C25   | t=           | F: 6.54+14.526*LN(C22)+0.7389*POWER(LN(C22),2)+0.09486*POWER(LN(C22),3)+0.4569*POWER(C22,0.1984) | V: 2.8364257255904985
+C27   | t=e          | F: IF('Supporting 4.1'!$I30-'Supporting 4.1'!$H30<0.0000000005,'Supporting 4.1'!$J30) | V: #DIV/0!

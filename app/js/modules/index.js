@@ -1,0 +1,23 @@
+// HVAC Toolbox Pro — module auto-load (one per workbook sheet/feature)
+import './psychro.js';
+import './ducts.js';
+import './pipes.js';
+import './coil.js';
+import './wheel.js';
+import './hx.js';
+import './chiller.js';
+import './boiler.js';
+import './motor.js';
+import './acoustics.js';
+import './npsh.js';
+import './insulation.js';
+import './stairwell.js';
+import './convert.js';
+import './ahu.js';
+import './fcu.js';
+import './sac.js';
+import './fan.js';
+import './pn.js';
+import './webtools.js';
+import './vrf.js';
+import './validate.js';

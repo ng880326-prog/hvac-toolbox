@@ -1,0 +1,58 @@
+﻿SHEET: Supporting 1
+
+A1    | t=s          | F:  | V: Pws (t*) = Saturation pressure for temperature t* (kPa) 
+B1    | t=           | F: 273.15+'Psychrometric Chart'!C10 | V: 292.34999999999997
+C1    | t=s          | F:  | V: Pws (t*) = Saturation pressure for temperature t* (kPa) 
+D1    | t=           | F: 273.15+'Psychrometric Chart'!D10 | V: 282.75
+A2    | t=           | F: -5800.2206/B1+1.3914993-0.048640239*B1 | V: -32.668462941754328
+C2    | t=           | F: -5800.2206/D1+1.3914993-0.048640239*D1 | V: -32.875128984588635
+A3    | t=           | F: 0.000041764768*POWER(B1,2)-0.000000014452093*POWER(B1,3)+6.5459673*LN(B1) | V: 40.376148830308381
+C3    | t=           | F: 0.000041764768*POWER(D1,2)-0.000000014452093*POWER(D1,3)+6.5459673*LN(D1) | V: 39.961424906761906
+A4    | t=           | F: EXP(A2+A3)/1000 | V: 2.2253865026126225
+C4    | t=           | F: EXP(C2+C3)/1000 | V: 1.1954714700615636
+A6    | t=s          | F:  | V: Ws = Humidty ratio at saturation for temperature t*
+C6    | t=s          | F:  | V: Ws = Humidty ratio at saturation for temperature t*
+A7    | t=           | F: 0.62198*(A4/('Psychrometric Chart'!$C$6-A4)) | V: 1.3967217913836665E-2
+C7    | t=           | F: 0.62198*(C4/('Psychrometric Chart'!$C$6-C4)) | V: 7.4259746936346481E-3
+A9    | t=s          | F:  | V: W = Humidity ratio
+C9    | t=s          | F:  | V: W = Humidity ratio
+A10   | t=           | F: ((2501-2.381*'Psychrometric Chart'!C10)*A7-('Psychrometric Chart'!C9-'Psychrometric Chart'!C10))/(2501+1.805*'Psychrometric Chart'!C9-4.186*'Psychrometric Chart'!C10) | V: 1.1721348926261669E-2
+C10   | t=           | F: ((2501-2.381*'Psychrometric Chart'!D10)*C7-('Psychrometric Chart'!D9-'Psychrometric Chart'!D10))/(2501+1.805*'Psychrometric Chart'!D9-4.186*'Psychrometric Chart'!D10) | V: 7.2624475746325724E-3
+A12   | t=s          | F:  | V: PWS (t) = Saturation pressure for temperature t
+B12   | t=           | F: 273.15+'Psychrometric Chart'!C9 | V: 297.75
+C12   | t=s          | F:  | V: PWS (t) = Saturation pressure for temperature t
+D12   | t=           | F: 273.15+'Psychrometric Chart'!D9 | V: 283.14999999999998
+A13   | t=           | F: -5800.2206/B12+1.3914993-0.048640239*B12 | V: -32.571301803475862
+C13   | t=           | F: -5800.2206/D12+1.3914993-0.048640239*D12 | V: -32.865605951518553
+A14   | t=           | F: 0.000041764768*POWER(B12,2)-0.000000014452093*POWER(B12,3)+6.5459673*LN(B12) | V: 40.608659349701526
+C14   | t=           | F: 0.000041764768*POWER(D12,2)-0.000000014452093*POWER(D12,3)+6.5459673*LN(D12) | V: 39.978744212857308
+A15   | t=           | F: EXP(A13+A14)/1000 | V: 3.0944255009523975
+C15   | t=           | F: EXP(C13+C14)/1000 | V: 1.2279952754407752
+A17   | t=s          | F:  | V: Ws = Humidty ratio at saturation for temperature t
+C17   | t=s          | F:  | V: Ws = Humidty ratio at saturation for temperature t
+A18   | t=           | F: 0.62198*(A15/('Psychrometric Chart'!$C$6-A15)) | V: 1.9593398317150561E-2
+C18   | t=           | F: 0.62198*(C15/('Psychrometric Chart'!$C$6-C15)) | V: 7.6304830850873065E-3
+A20   | t=s          | F:  | V: µ = Degree of saturation
+C20   | t=s          | F:  | V: µ = Degree of saturation
+A21   | t=           | F: A10/A18 | V: 0.59822950243407735
+C21   | t=           | F: C10/C18 | V: 0.95176773130209713
+A23   | t=s          | F:  | V: Φ = Relative humidity
+C23   | t=s          | F:  | V: Φ = Relative humidity
+A24   | t=           | F: A21/(1-(1-A21)*(A15/'Psychrometric Chart'!$C$6))*100 | V: 60.56609087238499
+C24   | t=           | F: C21/(1-(1-C21)*(C15/'Psychrometric Chart'!$C$6))*100 | V: 95.232440754695986
+A26   | t=s          | F:  | V: v = Specific volume
+C26   | t=s          | F:  | V: v = Specific volume
+A27   | t=           | F: (0.2871*('Psychrometric Chart'!C9+273.15)*(1+1.6078*A10))/'Psychrometric Chart'!$C$6 | V: 0.85956103076727641
+C27   | t=           | F: (0.2871*('Psychrometric Chart'!D9+273.15)*(1+1.6078*C10))/'Psychrometric Chart'!$C$6 | V: 0.81166129226205841
+A29   | t=s          | F:  | V: h = Enthalpy
+C29   | t=s          | F:  | V: h = Enthalpy
+A30   | t=           | F: 1.006*'Psychrometric Chart'!C9+A10*(2501+1.805*'Psychrometric Chart'!C9) | V: 54.583156720953227
+C30   | t=           | F: 1.006*'Psychrometric Chart'!D9+C10*(2501+1.805*'Psychrometric Chart'!D9) | V: 28.354468562878182
+A32   | t=s          | F:  | V: Pw = The water vapour partial pressure for the moist air
+C32   | t=s          | F:  | V: Pw = The water vapour partial pressure for the moist air
+A33   | t=           | F: 'Psychrometric Chart'!$C$6*A10/(0.62198+A10) | V: 1.8741725608850837
+C33   | t=           | F: 'Psychrometric Chart'!$C$6*C10/(0.62198+C10) | V: 1.1694498731546021
+A35   | t=s          | F:  | V: td = Dew point temperature
+C35   | t=s          | F:  | V: td = Dew point temperature
+A36   | t=           | F: 6.54+14.526*LN(A33)+0.7389*POWER(LN(A33),2)+0.09486*POWER(LN(A33),3)+0.4569*POWER(A33,0.1984) | V: 16.49737944001108
+C36   | t=           | F: 6.54+14.526*LN(C33)+0.7389*POWER(LN(C33),2)+0.09486*POWER(LN(C33),3)+0.4569*POWER(C33,0.1984) | V: 9.3035859372805039

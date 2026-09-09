@@ -1,0 +1,142 @@
+﻿SHEET: Hx
+
+B2    | t=s          | F:  | V: Heat Exchanger Sizing
+B5    | t=s          | F:  | V: Capacity
+D5    | t=s          | F:  | V: kW
+M5    | t=s          | F:  | V: kW
+C6    | t=str        | F: IF(C5=0,"-",IF(D5=M6,C5*3.516,C5/3.516)) | V: -
+D6    | t=str        | F: IF(D5=M6,M5,M6) | V: RT
+M6    | t=s          | F:  | V: RT
+O6    | t=           | F: ABS(C16-C11) | V: 0
+M7    | t=str        | F: IF(C6="-","-",IF(D5=M5,C5,C6)) | V: -
+O7    | t=           | F: ABS(C15-C12) | V: 0
+B8    | t=s          | F:  | V: Type
+O8    | t=str        | F: IF(OR(C13="-",C17="-",C6="-"),"-",IF(O6-O7=0,(C17+C13)/2,(O6-O7)/LN(O6/O7))) | V: -
+M9    | t=           | F:  | V: 1
+B10   | t=s          | F:  | V: Water Temperatures
+B11   | t=s          | F:  | V: - Hot Side In
+D11   | t=s          | F:  | V: oC
+B12   | t=s          | F:  | V: - Hot Side Out
+D12   | t=s          | F:  | V: oC
+B13   | t=s          | F:  | V: ∆T
+C13   | t=str        | F: IF(C11*C12*C5>0,ABS(C11-C12),"-") | V: -
+G13   | t=str        | F: K31&" "&K39 | V:  
+N14   | t=s          | F:  | V: m2
+O14   | t=s          | F:  | V: H
+P14   | t=s          | F:  | V: W
+Q14   | t=s          | F:  | V: L
+R14   | t=s          | F:  | V: L
+B15   | t=s          | F:  | V: - Cold Side In
+D15   | t=s          | F:  | V: oC
+L15   | t=str        | F: IF($C$27<=N15,N15,"") | V: 
+M15   | t=s          | F:  | V: SX-20
+N15   | t=           | F:  | V: 230
+O15   | t=           | F:  | V: 1870
+P15   | t=           | F:  | V: 540
+Q15   | t=           | F:  | V: 760
+R15   | t=           | F:  | V: 2460
+B16   | t=s          | F:  | V: - Cold Side Out
+D16   | t=s          | F:  | V: oC
+L16   | t=str        | F: IF($C$27<=N16,N16,"") | V: 
+M16   | t=s          | F:  | V: SX-40
+N16   | t=           | F:  | V: 550
+O16   | t=           | F:  | V: 2190
+P16   | t=           | F:  | V: 810
+Q16   | t=           | F:  | V: 760
+R16   | t=           | F:  | V: 3760
+B17   | t=s          | F:  | V: ∆T
+C17   | t=str        | F: IF(C15*C16*C5>0,ABS(C15-C16),"-") | V: -
+L17   | t=str        | F:  | V: 
+M17   | t=s          | F:  | V: SX-70
+N17   | t=           | F:  | V: 1030
+O17   | t=           | F:  | V: 2700
+P17   | t=           | F:  | V: 1090
+Q17   | t=           | F:  | V: 1510
+R17   | t=           | F:  | V: 4510
+L18   | t=str        | F:  | V: 
+M18   | t=s          | F:  | V: SX-80S
+N18   | t=           | F:  | V: 1430
+O18   | t=           | F:  | V: 2950
+P18   | t=           | F:  | V: 1390
+Q18   | t=           | F:  | V: 1770
+R18   | t=           | F:  | V: 7430
+B19   | t=s          | F:  | V: Water Flow
+C19   | t=s          | F:  | V: kg/s
+L19   | t=str        | F:  | V: 
+M19   | t=s          | F:  | V: SX-80M
+N19   | t=           | F:  | V: 2010
+O19   | t=           | F:  | V: 3550
+P19   | t=           | F:  | V: 1390
+Q19   | t=           | F:  | V: 2070
+R19   | t=           | F:  | V: 7430
+B20   | t=s          | F:  | V: - Hot Side
+C20   | t=str        | F: VLOOKUP(C19,O32:Q33,2,FALSE) | V: -
+D20   | t=str        | F: C19 | V: kg/s
+L20   | t=str        | F:  | V: 
+M20   | t=s          | F:  | V: SX-80L
+N20   | t=           | F:  | V: 2600
+O20   | t=           | F:  | V: 4150
+P20   | t=           | F:  | V: 1300
+Q20   | t=           | F:  | V: 2070
+R20   | t=           | F:  | V: 7430
+B21   | t=s          | F:  | V: - Cold Side
+C21   | t=str        | F: VLOOKUP(C19,O32:Q33,3,FALSE) | V: -
+D21   | t=str        | F: C19 | V: kg/s
+N22   | t=str        | F: IF(M7="-","-",MIN(L15:L20)) | V: -
+O22   | t=str        | F: IF(M7="-","-",VLOOKUP($N$22,$N$15:$R$20,2,FALSE)) | V: -
+P22   | t=str        | F: IF(M7="-","-",VLOOKUP($N$22,$N$15:$R$20,3,FALSE)) | V: -
+Q22   | t=str        | F: IF(M7="-","-",VLOOKUP($N$22,$N$15:$R$20,4,FALSE)) | V: -
+R22   | t=str        | F: IF(M7="-","-",VLOOKUP($N$22,$N$15:$R$20,5,FALSE)) | V: -
+B23   | t=s          | F:  | V: Heat Exchanger
+U-valve
+C23   | t=           | F:  | V: 5000
+D23   | t=s          | F:  | V: W/m2K
+R23   | t=str        | F: IF(M7="-","-",R22-900) | V: -
+B24   | t=str        | F: IF(O6-O7=0,"∆T","Log mean temperature") | V: ∆T
+C24   | t=str        | F: IF(J41="x","-",O8) | V: -
+D24   | t=s          | F:  | V: oC
+R24   | t=str        | F: IF(M7="-","-",R23/N22*C27) | V: -
+B25   | t=str        | F: IF(O6-O7=0,"A = U∆T / Q","A = U x Log mean temperature / Q") | V: A = U∆T / Q
+G25   | t=s          | F:  | V: Hot Side
+H25   | t=s          | F:  | V: →
+R25   | t=str        | F: IF(M7="-","-",MROUND(ROUNDUP(R24+25,1),50)+1000) | V: -
+G26   | t=s          | F:  | V: Cold Side
+H26   | t=str        | F: IF(M9=2,H25,"←") | V: ←
+B27   | t=s          | F:  | V: Heat Transfer Area
+C27   | t=str        | F: IF(OR(C6="-",C13="-",C17="-",J41="x"),"-",M7/C23/O8*1000) | V: -
+D27   | t=s          | F:  | V: m2
+P29   | t=s          | F:  | V: kg/s
+B30   | t=s          | F:  | V: HISAKA Plate-type Heat Exchanger
+G30   | t=s          | F:  | V: Hot
+P30   | t=s          | F:  | V: m3/h
+B31   | t=s          | F:  | V: Model
+C31   | t=str        | F: IF(OR(J41="x",M7="-"),"-",VLOOKUP(N22,L15:M20,2,FALSE)) | V: -
+G31   | t=s          | F:  | V: in
+H31   | t=           | F: C11 | V: 0
+J31   | t=str        | F: IF(C11*C12=0,"",IF(C11-C12>=0,"ok","x")) | V: 
+K31   | t=str        | F: IF(OR(J31="x",J35="x"),"Error: Inappropriate Temperatures","") | V: 
+B32   | t=s          | F:  | V: Dimensions
+LxWxH
+C32   | t=str        | F: IF(J41="ok",R25&" x "&P22&" x "&O22,"-") | V: -
+G32   | t=s          | F:  | V: out
+H32   | t=           | F: C12 | V: 0
+O32   | t=s          | F:  | V: kg/s
+P32   | t=str        | F: IF(C13="-","-",M7/4.185/C13) | V: -
+Q32   | t=str        | F: IF(C17="-","-",M7/4.185/C17) | V: -
+O33   | t=s          | F:  | V: m3/h
+P33   | t=str        | F: IF(P32="-","-",P32*3.6) | V: -
+Q33   | t=str        | F: IF(Q32="-","-",Q32*3.6) | V: -
+B34   | t=s          | F:  | V: HISAKA Online Selection:
+G34   | t=s          | F:  | V: Cold
+B35   | t=s          | F:  | V: www.hisaka.co.jp/simulator_english
+G35   | t=str        | F: IF(M9=1,"Out","In") | V: Out
+H35   | t=           | F: IF(M9=1,C16,C15) | V: 0
+J35   | t=str        | F: IF(C15*C16=0,"",IF(C15-C16<=0,"ok","x")) | V: 
+G36   | t=str        | F: IF(M9=2,"Out","In") | V: In
+H36   | t=           | F: IF(M9=2,C16,C15) | V: 0
+H38   | t=           | F: H35-H31 | V: 0
+H39   | t=           | F: H36-H32 | V: 0
+J39   | t=str        | F: IF(C11*C12*C15*C16=0,"",IF(H40<=0,"x","ok")) | V: 
+K39   | t=str        | F: IF(J39="x","Error: Temperature Cross","") | V: 
+H40   | t=           | F: H38*H39 | V: 0
+J41   | t=str        | F: IF(C5*C11*C12*C15*C16=0,"",IF(AND(J39="ok",J35="ok",J31="ok"),"ok","x")) | V: 

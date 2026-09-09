@@ -1,0 +1,64 @@
+﻿SHEET: Acoustics
+
+B2    | t=s          | F:  | V: Sound Level Calculations
+D2    | t=s          | F:  | V: Sound Pressure Level at a Distance
+J2    | t=s          | F:  | V: Sound Power Level of the Source
+P2    | t=s          | F:  | V: Combination of Sound Levels
+B3    | t=           | F:  | V: 1
+D3    | t=s          | F:  | V: SPLr = SWL - 10 log(4πr2) + 10 log (Qθ)
+J3    | t=s          | F:  | V: SWL = SPLr  + 10 log(4πr2) - 10 log (Qθ)
+P3    | t=s          | F:  | V: SLN  = 10 log( 100.1 SL1 + 100.1 SL2 + … + 100.1 SLn)
+V5    | t=s          | F:  | V: Qθ
+W5    | t=s          | F:  | V: Descriptions
+D6    | t=s          | F:  | V: Sound Power Level of the Source
+E6    | t=s          | F:  | V: SWL
+G6    | t=s          | F:  | V: dB(A)
+J6    | t=s          | F:  | V: Sound Pressure Level at Distance r
+K6    | t=s          | F:  | V: SPLr
+M6    | t=s          | F:  | V: dB(A)
+P6    | t=s          | F:  | V: Sound Level of Source 1
+Q6    | t=s          | F:  | V: SL1
+S6    | t=s          | F:  | V: dB(A)
+V6    | t=           | F:  | V: 1
+W6    | t=s          | F:  | V: Free propagation
+X6    | t=s          | F:  | V: (no rebound)
+D7    | t=s          | F:  | V: Direct distance of Receiver from the Source
+E7    | t=s          | F:  | V: r
+G7    | t=s          | F:  | V: m
+J7    | t=s          | F:  | V: Direct distance of Receiver from the Source
+K7    | t=s          | F:  | V: r
+M7    | t=s          | F:  | V: m
+P7    | t=s          | F:  | V: Sound Level of Source 2
+Q7    | t=s          | F:  | V: SL2
+S7    | t=s          | F:  | V: dB(A)
+V7    | t=           | F:  | V: 2
+W7    | t=s          | F:  | V: Rebounded by a wall or floor
+X7    | t=s          | F:  | V: (1-face rebound)
+D8    | t=s          | F:  | V: Directivity factor*
+E8    | t=s          | F:  | V: Qθ
+J8    | t=s          | F:  | V: Directivity factor*
+K8    | t=s          | F:  | V: Qθ
+P8    | t=s          | F:  | V: Sound Level of Source 3
+Q8    | t=s          | F:  | V: SL3
+S8    | t=s          | F:  | V: dB(A)
+V8    | t=           | F:  | V: 4
+W8    | t=s          | F:  | V: Rebounded by 2 walls or a wall & floor
+X8    | t=s          | F:  | V: (2-face rebound)
+P9    | t=s          | F:  | V: Sound Level of Source 4
+Q9    | t=s          | F:  | V: SL4
+S9    | t=s          | F:  | V: dB(A)
+V9    | t=           | F:  | V: 8
+W9    | t=s          | F:  | V: Rebounded by 2 walls & a floor
+X9    | t=s          | F:  | V: (3-face rebound)
+D10   | t=s          | F:  | V: Sound Pressure Level at Distance r
+E10   | t=s          | F:  | V: SPLr
+F10   | t=str        | F: IF(F6*F7*F8>0,F6-10*LOG(4*PI()*(F7)^2)+10*LOG(F8),"-") | V: -
+G10   | t=s          | F:  | V: dB(A)
+J10   | t=s          | F:  | V: Sound Power Level of the Source
+K10   | t=s          | F:  | V: SWL
+L10   | t=str        | F: IF(L6*L7*L8>0,L6+10*LOG(4*PI()*(L7)^2)-10*LOG(L8),"-") | V: -
+M10   | t=s          | F:  | V: dB(A)
+P11   | t=s          | F:  | V: Resultant Sound Level
+Q11   | t=s          | F:  | V: SLN
+R11   | t=str        | F: IF(R6>0,10*LOG(10^(0.1*R6)+10^(0.1*R7)+10^(0.1*R8)+10^(0.1*R9),10),"-") | V: -
+S11   | t=s          | F:  | V: dB(A)

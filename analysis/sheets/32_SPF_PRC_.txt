@@ -1,0 +1,78 @@
+﻿SHEET: SPF(PRC)
+
+B2    | t=s          | F:  | V: 梯間加壓送風估算
+B5    | t=s          | F:  | V: 梯間層數
+D5    | t=s          | F:  | V: 層
+H5    | t=s          | F:  | V: 梯間類型
+J5    | t=s          | F:  | V: 基本加壓送風量(m3/h)
+B6    | t=s          | F:  | V: 梯間類型
+J6    | t=s          | F:  | V: 負擔<20層
+M6    | t=s          | F:  | V: 負擔20~32 層
+B7    | t=str        | F: IF(AND(C5>0,C6>0),VLOOKUP(C6,$H$7:$I$11,2,FALSE),"-") | V: -
+H7    | t=s          | F:  | V: A
+I7    | t=s          | F:  | V: 防煙樓梯間(前室不送風)
+J7    | t=           | F:  | V: 25000
+K7    | t=s          | F:  | V: ~
+L7    | t=           | F:  | V: 30000
+M7    | t=           | F:  | V: 35000
+N7    | t=s          | F:  | V: ~
+O7    | t=           | F:  | V: 40000
+H8    | t=s          | F:  | V: B1
+I8    | t=s          | F:  | V: 防煙樓梯間及合用前室(防煙梯間)
+J8    | t=           | F:  | V: 16000
+K8    | t=s          | F:  | V: ~
+L8    | t=           | F:  | V: 20000
+M8    | t=           | F:  | V: 20000
+N8    | t=s          | F:  | V: ~
+O8    | t=           | F:  | V: 25000
+B9    | t=s          | F:  | V: 基本加壓送風量:
+C9    | t=str        | F: IF(C5>0,IF(AND(C5>0,C5<20),VLOOKUP(C6,$H$7:$L$11,3,FALSE),IF(AND(C5>=20,C5<=32),VLOOKUP(C6,$H$7:$O$11,6,FALSE))),"-") | V: -
+D9    | t=s          | F:  | V: ~
+E9    | t=str        | F: IF(C5>0,IF(AND(C5>0,C5<20),VLOOKUP(C6,$H$7:$L$11,5,FALSE),IF(AND(C5>=20,C5<=32),VLOOKUP(C6,$H$7:$O$11,8,FALSE))),"-") | V: -
+F9    | t=str        | F: IF(C9="n/a",B27,B26) | V: m3/h
+H9    | t=s          | F:  | V: B2
+I9    | t=s          | F:  | V: 防煙樓梯間及合用前室(合用前室)
+J9    | t=           | F:  | V: 12000
+K9    | t=s          | F:  | V: ~
+L9    | t=           | F:  | V: 16000
+M9    | t=           | F:  | V: 18000
+N9    | t=s          | F:  | V: ~
+O9    | t=           | F:  | V: 22000
+B10   | t=s          | F:  | V: 樓層比例調整送風量:
+C10   | t=str        | F: IF(C5>0,IF(C6="D","30",IF(AND(C5>0,C5<20),ABS(((E9-C9)*(19-C5)/(19-1))-E9),IF(AND(C5>=20,C5<=32),ABS(((E9-C9)*(32-C5)/(32-20))-E9)))),"-") | V: -
+E10   | t=str        | F: IF(C9="n/a",B27,B26) | V: m3/h
+H10   | t=s          | F:  | V: C
+I10   | t=s          | F:  | V: 消防電梯間前室
+J10   | t=           | F:  | V: 15000
+K10   | t=s          | F:  | V: ~
+L10   | t=           | F:  | V: 20000
+M10   | t=           | F:  | V: 22000
+N10   | t=s          | F:  | V: ~
+O10   | t=           | F:  | V: 27000
+H11   | t=s          | F:  | V: D
+I11   | t=s          | F:  | V: 防煙樓梯採用自然排煙
+J11   | t=s          | F:  | V: N/A
+K11   | t=s          | F:  | V: ~
+L11   | t=s          | F:  | V: N/A
+M11   | t=s          | F:  | V: N/A
+N11   | t=s          | F:  | V: ~
+O11   | t=s          | F:  | V: N/A
+B12   | t=s          | F:  | V: 單/雙扇門
+H12   | t=s          | F:  | V: 參照<高層民用建築設計防火規範> GB50045-95 2005版
+B13   | t=s          | F:  | V: 單/雙扇門修正係數:
+C13   | t=str        | F: IF(C5>0,IF(C6="D","n/a",IF(C12=B22,0.75,IF(C12=B23,1))),"-") | V: -
+B15   | t=s          | F:  | V: 出入口數量
+B16   | t=s          | F:  | V: 出入口數量修正係數:
+C16   | t=str        | F: IF(C5>0,IF(C6="D","n/a",IF(C15>1,1.5,1)),"-") | V: -
+B18   | t=s          | F:  | V: 估算風機加壓送風量
+B19   | t=str        | F: IF(C5>0,IF(C13="n/a","30","= "&B24&" x "&C13&" x "&C16),"-") | V: -
+C19   | t=str        | F: IF(C9="n/a",B27,B26) | V: m3/h
+B20   | t=str        | F: IF(C5>0,IF(C9="n/a","","= "&ROUNDUP(IF(C6="D","n/a",C10*C13*C16),0)),"-") | V: -
+C20   | t=str        | F: IF(C9="n/a","",B26) | V: m3/h
+B22   | t=s          | F:  | V: 單
+C22   | t=s          | F:  | V: √
+B23   | t=s          | F:  | V: 雙
+C23   | t=s          | F:  | V: ×
+B24   | t=e          | F: ROUNDUP(C10,0) | V: #VALUE!
+B26   | t=s          | F:  | V: m3/h
+B27   | t=s          | F:  | V: m3/h/m2

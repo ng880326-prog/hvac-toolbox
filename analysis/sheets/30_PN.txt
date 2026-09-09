@@ -1,0 +1,248 @@
+﻿SHEET: PN
+
+B2    | t=s          | F:  | V: Select Pump Arrangement
+G2    | t=s          | F:  | V: System Pressure (PN) Grade
+T2    | t=s          | F:  | V: System Pressure (PN) Grade
+AG2   | t=s          | F:  | V: Hidden
+B3    | t=           | F:  | V: 1
+M4    | t=s          | F:  | V: Terminal
+Unit 1
+Z4    | t=s          | F:  | V: Terminal
+Unit 1
+AK6   | t=           | F: K8*0.09804139432 | V: 0
+AN6   | t=e          | F: L14*0.09804139432 | V: #VALUE!
+B7    | t=s          | F:  | V: Unit Conversion
+H7    | t=str        | F: IF(Q7*N11*L11>0,MIN(AJ8:AJ13),"") | V: 
+R7    | t=s          | F:  | V: m
+U7    | t=str        | F: IF(AD7*AA11*Y11>0,MIN(AJ29:AJ34),"") | V: 
+AE7   | t=s          | F:  | V: m
+AG7   | t=s          | F:  | V: Chiller
+AJ7   | t=s          | F:  | V: Supply Riser (Upper)
+AM7   | t=s          | F:  | V: Supply Riser (lower)
+K8    | t=           | F: M8-L11 | V: 0
+L8    | t=s          | F:  | V: Chiller
+/Hx
+M8    | t=           | F: O8+N11 | V: 0
+N8    | t=s          | F:  | V: Pump
+O8    | t=           | F: Q7 | V: 0
+Q8    | t=str        | F: IF(Q7*N11*L11>0,MIN(AJ16:AJ21),"") | V: 
+X8    | t=           | F: Z8+Y11 | V: 0
+Y8    | t=s          | F:  | V: Pump
+Z8    | t=           | F: AB8-AA11 | V: 0
+AA8   | t=s          | F:  | V: Chiller
+/Hx
+AB8   | t=           | F: IF(AD7=0,AA11,AD7) | V: 0
+AD8   | t=str        | F: IF(AD7*AA11*Y11>0,MIN(AJ37:AJ42),"") | V: 
+AG8   | t=str        | F: IF($L$18<=AH8,AH8,"") | V: 
+AH8   | t=           | F:  | V: 4
+AJ8   | t=           | F: IF($AK$6<=AK8,AK8,"") | V: 4
+AK8   | t=           | F:  | V: 4
+AM8   | t=e          | F: IF($AN$6<=AN8,AN8,"") | V: #VALUE!
+AN8   | t=           | F:  | V: 4
+B9    | t=s          | F:  | V: Pressure
+D9    | t=s          | F:  | V: m
+AG9   | t=str        | F:  | V: 
+AH9   | t=           | F:  | V: 6
+AJ9   | t=           | F:  | V: 6
+AK9   | t=           | F:  | V: 6
+AM9   | t=e          | F:  | V: #VALUE!
+AN9   | t=           | F:  | V: 6
+B10   | t=s          | F:  | V: =
+C10   | t=str        | F: IF($C$9=0,"-",SUM(AH45:AH48)) | V: -
+D10   | t=s          | F:  | V: m
+AG10  | t=str        | F:  | V: 
+AH10  | t=           | F:  | V: 10
+AJ10  | t=           | F:  | V: 10
+AK10  | t=           | F:  | V: 10
+AM10  | t=e          | F:  | V: #VALUE!
+AN10  | t=           | F:  | V: 10
+B11   | t=s          | F:  | V: =
+C11   | t=str        | F: IF($C$9=0,"-",SUM(AI45:AI48)) | V: -
+D11   | t=s          | F:  | V: Bar
+I11   | t=s          | F:  | V: m
+M11   | t=s          | F:  | V: m
+O11   | t=s          | F:  | V: m
+V11   | t=s          | F:  | V: m
+Z11   | t=s          | F:  | V: m
+AB11  | t=s          | F:  | V: m
+AG11  | t=str        | F:  | V: 
+AH11  | t=           | F:  | V: 16
+AJ11  | t=           | F:  | V: 16
+AK11  | t=           | F:  | V: 16
+AM11  | t=e          | F:  | V: #VALUE!
+AN11  | t=           | F:  | V: 16
+B12   | t=s          | F:  | V: =
+C12   | t=str        | F: IF($C$9=0,"-",SUM(AJ45:AJ48)) | V: -
+D12   | t=s          | F:  | V: kPa
+AG12  | t=str        | F:  | V: 
+AH12  | t=           | F:  | V: 20
+AJ12  | t=           | F:  | V: 20
+AK12  | t=           | F:  | V: 20
+AM12  | t=e          | F:  | V: #VALUE!
+AN12  | t=           | F:  | V: 20
+B13   | t=s          | F:  | V: =
+C13   | t=str        | F: IF($C$9=0,"-",SUM(AK45:AK48)) | V: -
+D13   | t=s          | F:  | V: Mpa
+H13   | t=str        | F: IF(H11*N11*L11>0,MIN(AM8:AM13),"") | V: 
+M13   | t=s          | F:  | V: Terminal
+Unit 2
+U13   | t=str        | F: IF(U11*AA11*Y11>0,MIN(AM29:AM34),"") | V: 
+Z13   | t=s          | F:  | V: Terminal
+Unit 2
+AG13  | t=str        | F:  | V: 
+AH13  | t=           | F:  | V: 25
+AJ13  | t=           | F:  | V: 25
+AK13  | t=           | F:  | V: 25
+AM13  | t=e          | F:  | V: #VALUE!
+AN13  | t=           | F:  | V: 25
+L14   | t=str        | F: IF(H11*L11*N11>0,K8+H11,"-") | V: -
+Y14   | t=str        | F: IF(U11*Y11*AA11>0,X8+U11,"-") | V: -
+AK14  | t=           | F: Q7*0.09804139432 | V: 0
+AG15  | t=s          | F:  | V: Terminal Unit 2
+AJ15  | t=s          | F:  | V: Return Riser (Upper)
+H16   | t=s          | F:  | V: Minimum required pressure grade:
+U16   | t=s          | F:  | V: Minimum required pressure grade:
+AG16  | t=str        | F: IF($L$20<=AH16,AH16,"") | V: 
+AH16  | t=           | F:  | V: 4
+AJ16  | t=           | F: IF($AK$14<=AK16,AK16,"") | V: 4
+AK16  | t=           | F:  | V: 4
+H17   | t=s          | F:  | V: Chiller:
+L17   | t=str        | F: IF(N11*L11>0,M8,"-") | V: -
+M17   | t=s          | F:  | V: m
+N17   | t=str        | F: IF(N11*L11>0,MIN(AG8:AG13),"-") | V: -
+P17   | t=str        | F: IF(N17=0,"Pressure break required","") | V: 
+U17   | t=s          | F:  | V: Chiller:
+Y17   | t=str        | F: IF(AA11*Y11>0,AB8,"-") | V: -
+Z17   | t=s          | F:  | V: m
+AA17  | t=str        | F: IF(AA11*Y11>0,MIN(AG29:AG34),"-") | V: -
+AC17  | t=str        | F: IF(AA17=0,"Pressure break required","") | V: 
+AG17  | t=str        | F:  | V: 
+AH17  | t=           | F:  | V: 6
+AJ17  | t=           | F:  | V: 6
+AK17  | t=           | F:  | V: 6
+L18   | t=str        | F: IF(N11*L11>0,L17*0.09804139432,"-") | V: -
+M18   | t=s          | F:  | V: bar
+Y18   | t=str        | F: IF(AA11*Y11>0,Y17*0.09804139432,"-") | V: -
+Z18   | t=s          | F:  | V: bar
+AG18  | t=str        | F:  | V: 
+AH18  | t=           | F:  | V: 10
+AJ18  | t=           | F:  | V: 10
+AK18  | t=           | F:  | V: 10
+H19   | t=s          | F:  | V: Terminal unit 2:
+L19   | t=str        | F: IF(H11*L11*N11>0,L14,"-") | V: -
+M19   | t=s          | F:  | V: m
+N19   | t=str        | F: IF(H11*L11*N11>0,MIN(AG16:AG21),"-") | V: -
+P19   | t=str        | F: IF(N19=0,"Pressure break required","") | V: 
+U19   | t=s          | F:  | V: Terminal unit 2:
+Y19   | t=str        | F: IF(U11*Y11*AA11>0,Y14,"-") | V: -
+Z19   | t=s          | F:  | V: m
+AA19  | t=str        | F: IF(U11*Y11*AA11>0,MIN(AG36:AG41),"-") | V: -
+AC19  | t=str        | F: IF(AA19=0,"Pressure break required","") | V: 
+AG19  | t=str        | F:  | V: 
+AH19  | t=           | F:  | V: 16
+AJ19  | t=           | F:  | V: 16
+AK19  | t=           | F:  | V: 16
+L20   | t=str        | F: IF(H11*L11*N11>0,L19*0.09804139432,"-") | V: -
+M20   | t=s          | F:  | V: bar
+Y20   | t=str        | F: IF(U11*Y11*AA11>0,Y19*0.09804139432,"-") | V: -
+Z20   | t=s          | F:  | V: bar
+AG20  | t=str        | F:  | V: 
+AH20  | t=           | F:  | V: 20
+AJ20  | t=           | F:  | V: 20
+AK20  | t=           | F:  | V: 20
+AG21  | t=str        | F:  | V: 
+AH21  | t=           | F:  | V: 25
+AJ21  | t=           | F:  | V: 25
+AK21  | t=           | F:  | V: 25
+AK27  | t=           | F: X8*0.09804139432 | V: 0
+AN27  | t=e          | F: Y14*0.09804139432 | V: #VALUE!
+AG28  | t=s          | F:  | V: Chiller
+AJ28  | t=s          | F:  | V: Supply Riser (Upper)
+AM28  | t=s          | F:  | V: Supply Riser (lower)
+AG29  | t=str        | F: IF($Y$18<=AH29,AH29,"") | V: 
+AH29  | t=           | F:  | V: 4
+AJ29  | t=           | F: IF($AK$27<=AK29,AK29,"") | V: 4
+AK29  | t=           | F:  | V: 4
+AM29  | t=e          | F: IF($AN$27<=AN29,AN29,"") | V: #VALUE!
+AN29  | t=           | F:  | V: 4
+AG30  | t=str        | F:  | V: 
+AH30  | t=           | F:  | V: 6
+AJ30  | t=           | F:  | V: 6
+AK30  | t=           | F:  | V: 6
+AM30  | t=e          | F:  | V: #VALUE!
+AN30  | t=           | F:  | V: 6
+AG31  | t=str        | F:  | V: 
+AH31  | t=           | F:  | V: 10
+AJ31  | t=           | F:  | V: 10
+AK31  | t=           | F:  | V: 10
+AM31  | t=e          | F:  | V: #VALUE!
+AN31  | t=           | F:  | V: 10
+AG32  | t=str        | F:  | V: 
+AH32  | t=           | F:  | V: 16
+AJ32  | t=           | F:  | V: 16
+AK32  | t=           | F:  | V: 16
+AM32  | t=e          | F:  | V: #VALUE!
+AN32  | t=           | F:  | V: 16
+AG33  | t=str        | F:  | V: 
+AH33  | t=           | F:  | V: 20
+AJ33  | t=           | F:  | V: 20
+AK33  | t=           | F:  | V: 20
+AM33  | t=e          | F:  | V: #VALUE!
+AN33  | t=           | F:  | V: 20
+AG34  | t=str        | F:  | V: 
+AH34  | t=           | F:  | V: 25
+AJ34  | t=           | F:  | V: 25
+AK34  | t=           | F:  | V: 25
+AM34  | t=e          | F:  | V: #VALUE!
+AN34  | t=           | F:  | V: 25
+AG35  | t=s          | F:  | V: Terminal Unit 2
+AK35  | t=           | F: AD7*0.09804139432 | V: 0
+AG36  | t=str        | F: IF($Y$20<=AH36,AH36,"") | V: 
+AH36  | t=           | F:  | V: 4
+AJ36  | t=s          | F:  | V: Return Riser (Upper)
+AG37  | t=str        | F:  | V: 
+AH37  | t=           | F:  | V: 6
+AJ37  | t=           | F: IF($AK$35<=AK37,AK37,"") | V: 4
+AK37  | t=           | F:  | V: 4
+AG38  | t=str        | F:  | V: 
+AH38  | t=           | F:  | V: 10
+AJ38  | t=           | F:  | V: 6
+AK38  | t=           | F:  | V: 6
+AG39  | t=str        | F:  | V: 
+AH39  | t=           | F:  | V: 16
+AJ39  | t=           | F:  | V: 10
+AK39  | t=           | F:  | V: 10
+AG40  | t=str        | F:  | V: 
+AH40  | t=           | F:  | V: 20
+AJ40  | t=           | F:  | V: 16
+AK40  | t=           | F:  | V: 16
+AG41  | t=str        | F:  | V: 
+AH41  | t=           | F:  | V: 25
+AJ41  | t=           | F:  | V: 20
+AK41  | t=           | F:  | V: 20
+AJ42  | t=           | F:  | V: 25
+AK42  | t=           | F:  | V: 25
+AH44  | t=s          | F:  | V: m
+AI44  | t=s          | F:  | V: bar
+AJ44  | t=s          | F:  | V: kPa
+AK44  | t=s          | F:  | V: MPa
+AG45  | t=s          | F:  | V: m
+AH45  | t=           | F: IF($D$9=D10,$C$9,0) | V: 0
+AI45  | t=           | F: AH45*0.09804139432 | V: 0
+AJ45  | t=           | F: AH45*9.804139432 | V: 0
+AK45  | t=           | F: AJ45*0.001 | V: 0
+AG46  | t=s          | F:  | V: Bar
+AH46  | t=           | F: AI46/0.09804139432 | V: 0
+AI46  | t=           | F: IF($D$9=D11,$C$9,0) | V: 0
+AJ46  | t=           | F: AH46*9.804139432 | V: 0
+AK46  | t=           | F: AJ46*0.001 | V: 0
+AG47  | t=s          | F:  | V: kPa
+AH47  | t=           | F: AI47/0.09804139432 | V: 0
+AI47  | t=           | F: AJ47/100 | V: 0
+AJ47  | t=           | F: IF($D$9=D12,$C$9,0) | V: 0
+AK47  | t=           | F: AJ47*0.001 | V: 0
+AG48  | t=s          | F:  | V: MPa
+AH48  | t=           | F: AI48/0.09804139432 | V: 0
+AI48  | t=           | F: AJ48/100 | V: 0
+AJ48  | t=           | F: AK48*1000 | V: 0
+AK48  | t=           | F: IF($D$9=D13,$C$9,0) | V: 0

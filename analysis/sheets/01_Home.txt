@@ -1,0 +1,25 @@
+﻿SHEET: Home
+
+U2    | t=s          | F:  | V: If something is worth doing once, it's worth building a tool to do it.
+V4    | t=s          | F:  | V: General
+Z4    | t=s          | F:  | V: Equipment
+AD4   | t=s          | F:  | V: System
+AK4   | t=s          | F:  | V:  
+AD33  | t=s          | F:  | V: Developed by
+AE33  | t=s          | F:  | V: Benjamin Leung
+AE34  | t=           | F:  | V: 41764
+AE35  | t=s          | F:  | V: Revision: R5
+P54   | t=s          | F:  | V: Version R0
+T54   | t=s          | F:  | V: 2014.01.03
+P55   | t=s          | F:  | V: Version R1
+T55   | t=s          | F:  | V: 2014.01.30
+P56   | t=s          | F:  | V: Version R2
+T56   | t=s          | F:  | V: 2014.02.06
+P57   | t=s          | F:  | V: Version R2.1
+T57   | t=s          | F:  | V: 2014.02.07
+P58   | t=s          | F:  | V: Version R3
+T58   | t=s          | F:  | V: 2014.03.05
+P59   | t=s          | F:  | V: Version R4
+T59   | t=s          | F:  | V: 2014.03.25
+P60   | t=s          | F:  | V: Version R5
+T60   | t=s          | F:  | V: 2014.05.05

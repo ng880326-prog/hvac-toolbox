@@ -1,0 +1,10 @@
+node_modules/
+.npm-cache/
+android/.gradle/
+android/local.properties
+android/app/build/
+android/build/
+tools/ocr_out/
+__pycache__/
+*.pyc
+.DS_Store

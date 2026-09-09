@@ -1,0 +1,136 @@
+﻿WORKBOOK STRUCTURE
+===================
+Sheet count: 34
+  name=Home  sheetId=27  r:id=rId1  state=
+  name=Air-side  sheetId=38  r:id=rId2  state=
+  name=Coil  sheetId=20  r:id=rId3  state=
+  name=Coil Support  sheetId=112  r:id=rId4  state=hidden
+  name=Wheel  sheetId=116  r:id=rId5  state=
+  name=Wheel Support  sheetId=117  r:id=rId6  state=hidden
+  name=Psychrometric Chart  sheetId=41  r:id=rId7  state=
+  name=Supporting 1  sheetId=42  r:id=rId8  state=hidden
+  name=Supporting 2  sheetId=43  r:id=rId9  state=hidden
+  name=Supporting 2.1  sheetId=44  r:id=rId10  state=hidden
+  name=Supporting 3  sheetId=45  r:id=rId11  state=hidden
+  name=Supporting 3.1  sheetId=46  r:id=rId12  state=hidden
+  name=Supporting 4  sheetId=47  r:id=rId13  state=hidden
+  name=Supporting 4.1  sheetId=48  r:id=rId14  state=hidden
+  name=Supproting 5  sheetId=49  r:id=rId15  state=hidden
+  name=Supporting 5.1  sheetId=50  r:id=rId16  state=hidden
+  name=Supporting 6  sheetId=51  r:id=rId17  state=hidden
+  name=Supporting 6.1  sheetId=52  r:id=rId18  state=hidden
+  name=Pipe Sizing  sheetId=40  r:id=rId19  state=
+  name=Motor  sheetId=25  r:id=rId20  state=
+  name=Acoustics  sheetId=30  r:id=rId21  state=
+  name=Chiller  sheetId=57  r:id=rId22  state=
+  name=Boiler  sheetId=59  r:id=rId23  state=
+  name=Hx  sheetId=63  r:id=rId24  state=
+  name=AHU  sheetId=113  r:id=rId25  state=
+  name=Fan  sheetId=58  r:id=rId26  state=
+  name=FCU  sheetId=56  r:id=rId27  state=
+  name=SAC  sheetId=111  r:id=rId28  state=
+  name=Insulations  sheetId=22  r:id=rId29  state=
+  name=PN  sheetId=65  r:id=rId30  state=
+  name=NPSH  sheetId=61  r:id=rId31  state=
+  name=SPF(PRC)  sheetId=107  r:id=rId32  state=
+  name=Website  sheetId=62  r:id=rId33  state=
+  name=Supplier  sheetId=66  r:id=rId34  state=
+
+DEFINED NAMES: 25
+  [_xlnm._FilterDatabase] = 'Pipe Sizing'!$CI$32:$CK$68
+  [_xlnm.Print_Area] = AHU!$B$2:$AG$39
+  [_xlnm.Print_Area] = 'Air-side'!$B$2:$AG$33
+  [_xlnm.Print_Area] = Boiler!$B$2:$AC$47
+  [_xlnm.Print_Area] = Chiller!$B$2:$AG$41
+  [_xlnm.Print_Area] = Coil!$B$2:$BI$47
+  [_xlnm.Print_Area] = Fan!$B$2:$AM$45
+  [_xlnm.Print_Area] = FCU!$B$2:$CB$24
+  [_xlnm.Print_Area] = Home!$U$2:$AI$38
+  [_xlnm.Print_Area] = Hx!$B$2:$I$36
+  [_xlnm.Print_Area] = Insulations!$B$2:$T$34
+  [_xlnm.Print_Area] = Motor!$B$2:$BL$39
+  [_xlnm.Print_Area] = NPSH!$B$2:$O$36
+  [_xlnm.Print_Area] = 'Pipe Sizing'!$B$2:$CG$44
+  [_xlnm.Print_Area] = PN!$B$2:$R$21
+  [_xlnm.Print_Area] = 'Psychrometric Chart'!$B$2:$I$25
+  [_xlnm.Print_Area] = SAC!$B$2:$BG$43
+  [_xlnm.Print_Area] = 'SPF(PRC)'!$B$2:$O$27
+  [_xlnm.Print_Area] = Supplier!$B$2:$DP$95
+  [_xlnm.Print_Area] = Website!$B$2:$H$10
+  [_xlnm.Print_Area] = Wheel!$B$2:$AC$45
+  [Z_9BA1C86F_DB82_40B0_B617_94E45017AA76_.wvu.Cols] = 'SPF(PRC)'!#REF!
+  [Z_A7567D59_565D_4475_8FA3_463A711B6E2E_.wvu.Cols] = 'SPF(PRC)'!#REF!
+  [Z_AD25ABD3_9744_40D0_8611_6B3E2F863915_.wvu.Cols] = 'SPF(PRC)'!#REF!
+  [Z_C91DE923_ED14_4ADF_9988_7753330DA2E8_.wvu.Cols] = 'SPF(PRC)'!#REF!
+
+VBA PROJECT: present (266240 bytes)
+CalcChain: present
+Shared strings: 2568
+Sheet [Home]  ->  worksheets/sheet1.xml   cells: 821
+   formulas: 0
+Sheet [Air-side]  ->  worksheets/sheet2.xml   cells: 23745
+   formulas: 18369
+Sheet [Coil]  ->  worksheets/sheet3.xml   cells: 11877
+   formulas: 7504
+Sheet [Coil Support]  ->  worksheets/sheet4.xml   cells: 2640
+   formulas: 1220
+Sheet [Wheel]  ->  worksheets/sheet5.xml   cells: 10723
+   formulas: 7402
+Sheet [Wheel Support]  ->  worksheets/sheet6.xml   cells: 2220
+   formulas: 976
+Sheet [Psychrometric Chart]  ->  worksheets/sheet7.xml   cells: 331
+   formulas: 16
+Sheet [Supporting 1]  ->  worksheets/sheet8.xml   cells: 56
+   formulas: 34
+Sheet [Supporting 2]  ->  worksheets/sheet9.xml   cells: 50
+   formulas: 30
+Sheet [Supporting 2.1]  ->  worksheets/sheet10.xml   cells: 271
+   formulas: 212
+Sheet [Supporting 3]  ->  worksheets/sheet11.xml   cells: 42
+   formulas: 24
+Sheet [Supporting 3.1]  ->  worksheets/sheet12.xml   cells: 271
+   formulas: 212
+Sheet [Supporting 4]  ->  worksheets/sheet13.xml   cells: 39
+   formulas: 23
+Sheet [Supporting 4.1]  ->  worksheets/sheet14.xml   cells: 279
+   formulas: 212
+Sheet [Supproting 5]  ->  worksheets/sheet15.xml   cells: 66
+   formulas: 40
+Sheet [Supporting 5.1]  ->  worksheets/sheet16.xml   cells: 180
+   formulas: 116
+Sheet [Supporting 6]  ->  worksheets/sheet17.xml   cells: 32
+   formulas: 18
+Sheet [Supporting 6.1]  ->  worksheets/sheet18.xml   cells: 559
+   formulas: 424
+Sheet [Pipe Sizing]  ->  worksheets/sheet19.xml   cells: 21797
+   formulas: 2298
+Sheet [Motor]  ->  worksheets/sheet20.xml   cells: 1822
+   formulas: 327
+Sheet [Acoustics]  ->  worksheets/sheet21.xml   cells: 243
+   formulas: 3
+Sheet [Chiller]  ->  worksheets/sheet22.xml   cells: 815
+   formulas: 68
+Sheet [Boiler]  ->  worksheets/sheet23.xml   cells: 1171
+   formulas: 143
+Sheet [Hx]  ->  worksheets/sheet24.xml   cells: 536
+   formulas: 53
+Sheet [AHU]  ->  worksheets/sheet25.xml   cells: 5444
+   formulas: 755
+Sheet [Fan]  ->  worksheets/sheet26.xml   cells: 3757
+   formulas: 0
+Sheet [FCU]  ->  worksheets/sheet27.xml   cells: 3932
+   formulas: 2284
+Sheet [SAC]  ->  worksheets/sheet28.xml   cells: 7278
+   formulas: 2343
+Sheet [Insulations]  ->  worksheets/sheet29.xml   cells: 18054
+   formulas: 15609
+Sheet [PN]  ->  worksheets/sheet30.xml   cells: 773
+   formulas: 116
+Sheet [NPSH]  ->  worksheets/sheet31.xml   cells: 729
+   formulas: 12
+Sheet [SPF(PRC)]  ->  worksheets/sheet32.xml   cells: 376
+   formulas: 13
+Sheet [Website]  ->  worksheets/sheet33.xml   cells: 51
+   formulas: 0
+Sheet [Supplier]  ->  worksheets/sheet34.xml   cells: 10650
+   formulas: 0

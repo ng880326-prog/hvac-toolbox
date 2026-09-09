@@ -1,0 +1,714 @@
+﻿SHEET: Motor
+
+BN1   | t=           | F:  | V: 110
+BO1   | t=           | F:  | V: 200
+B2    | t=s          | F:  | V: Static Estimation
+E2    | t=s          | F:  | V: Motor Sizing
+H2    | t=s          | F:  | V: Static Estimation for Fan-duct System
+N2    | t=s          | F:  | V: Pump Head Estimation
+S2    | t=s          | F:  | V: Pump Head Estimation
+X2    | t=s          | F:  | V: Motor Rating
+AE2   | t=s          | F:  | V: Isolator 
+AG2   | t=s          | F:  | V: Fan Motor Sizing
+AL2   | t=s          | F:  | V: Pump Motor Sizing
+AQ2   | t=s          | F:  | V: Ampere Calculation
+AW2   | t=s          | F:  | V: 輸送能效比  ER
+BN2   | t=           | F:  | V: 220
+BO2   | t=           | F:  | V: 380
+B3    | t=           | F:  | V: 4
+E3    | t=           | F:  | V: 5
+AG3   | t=s          | F:  | V: [m3/s x kPa / eff.)] x S.F. = kW
+AL3   | t=s          | F:  | V: [m3/s x m x 9.8 / eff.)] x S.F. = kW
+AQ3   | t=s          | F:  | V: W / √3 x 380 x p.f. = A
+BN3   | t=           | F:  | V: 230
+BO3   | t=           | F:  | V: 400
+H4    | t=s          | F:  | V: External Static Loss
+N4    | t=s          | F:  | V: Closed-loop Water System
+S4    | t=s          | F:  | V: Open-loop Water System
+X4    | t=s          | F:  | V: Rating
+Y4    | t=s          | F:  | V: Running
+AA4   | t=s          | F:  | V: Starting
+AC4   | t=s          | F:  | V: MCB
+AE4   | t=s          | F:  | V: (A)
+BI4   | t=           | F: IF(AI6=AI7,AH6,0) | V: 0
+BJ4   | t=           | F: IF(AI6=AI8,AH6*3600,0) | V: 0
+BK4   | t=           | F: IF(AI6=AI9,AH6*3.6,0) | V: 3600
+BL4   | t=           | F: IF(AI6=AI10,BL6*3.6,0) | V: 0
+X5    | t=s          | F:  | V: kW
+Y5    | t=s          | F:  | V: Amp
+Z5    | t=s          | F:  | V: Ø
+AA5   | t=s          | F:  | V: Method
+AB5   | t=s          | F:  | V: Amp
+AC5   | t=s          | F:  | V: Rating
+AE5   | t=           | F:  | V: 16
+AW5   | t=s          | F:  | V: 管道类型
+BI5   | t=           | F: IF(AI6=AI7,AH6/3600,0) | V: 0
+BJ5   | t=           | F: IF(AI6=AI8,AH6,0) | V: 0
+BK5   | t=           | F: IF(AI6=AI9,AH6/1000,0) | V: 1
+BL5   | t=           | F: IF(AI6=AI10,BL6/1000,0) | V: 0
+BN5   | t=str        | F: IF(X6>=$AH$21,X6,"") | V: 
+BO5   | t=str        | F: IF(X6>=$AM$17,X6,"") | V: 
+H6    | t=s          | F:  | V: Components
+I6    | t=s          | F:  | V: Qty
+J6    | t=s          | F:  | V: Static
+N6    | t=s          | F:  | V: Critical path length
+S6    | t=s          | F:  | V: Critical path length
+X6    | t=           | F:  | V: 0.2
+Y6    | t=           | F: IF(OR(X6<$B$33, X6=$B$33), X6*1000/$C$18/0.85, X6*1000/(3)^0.5/$C$19/0.85) | V: 1.0695187165775402
+Z6    | t=str        | F: IF(OR(X6<$B$33, X6=$B$33),"1Ø", "3Ø") | V: 1Ø
+AA6   | t=str        | F: IF(OR(AND(X6>$B$34,X6<$B$35),X6=$B$35),"DOL",IF(OR(X6<$B$34,X6=$B$34),"fuse",IF(OR(X6=$B$36,X6>$B$36),"Auto-Tx","Υ/Δ"))) | V: fuse
+AB6   | t=           | F: IF(AA6="fuse",Y6*$C$27, VLOOKUP(AA6,$B$27:$C$30,2,FALSE)*Y6) | V: 6.4171122994652414
+AC6   | t=           | F:  | V: 20
+AE6   | t=s          | F:  | V: L/s
+AG6   | t=s          | F:  | V: Air Flow Rate
+AH6   | t=           | F:  | V: 1000
+AI6   | t=s          | F:  | V: L/s
+AL6   | t=s          | F:  | V: Water Flow Rate
+AN6   | t=s          | F:  | V: kg/s
+AR6   | t=s          | F:  | V: Electrical Load
+AT6   | t=str        | F: VLOOKUP(AR6,BI17:BJ18,2,FALSE) | V: kW
+AW6   | t=s          | F:  | V: 地区
+BC6   | t=b          | F:  | V: 0
+BI6   | t=           | F: IF(AI6=AI7,AH6/3.6,0) | V: 0
+BJ6   | t=           | F: IF(AI6=AI8,AH6*1000,0) | V: 0
+BK6   | t=           | F: IF(AI6=AI9,AH6,0) | V: 1000
+BL6   | t=           | F: IF(AI6=AI10,AH6*0.472,0) | V: 0
+BN6   | t=str        | F: IF(X7>=$AH$21,X7,"") | V: 
+BO6   | t=str        | F: IF(X7>=$AM$17,X7,"") | V: 
+I7    | t=str        | F: IF(BC7=TRUE,1,"-") | V: -
+J7    | t=str        | F: IF(BC7=TRUE,50*I7,"-") | V: -
+K7    | t=s          | F:  | V: Pa
+N7    | t=s          | F:  | V:      - Vertical Pipe
+P7    | t=s          | F:  | V: m
+S7    | t=s          | F:  | V:      - Vertical Pipe
+U7    | t=s          | F:  | V: m
+X7    | t=           | F:  | V: 0.25
+Y7    | t=           | F:  | V: 1.3368983957219254
+Z7    | t=str        | F:  | V: 1Ø
+AA7   | t=str        | F: IF(OR(AND(X7>$B$34,X7<$B$35),X7=$B$35),"DOL",IF(OR(X7<$B$34,X7=$B$34),"fuse",IF(OR(X7=$B$36,X7>$B$36),"Auto-Tx","Υ/Δ"))) | V: fuse
+AB7   | t=           | F:  | V: 8.0213903743315527
+AC7   | t=           | F:  | V: 20
+AE7   | t=           | F:  | V: 40
+AG7   | t=s          | F:  | V: =
+AH7   | t=           | F: IF($AH$6=0,"-",SUM(BI4:BL4)) | V: 3600
+AI7   | t=s          | F:  | V: m3/h
+AL7   | t=s          | F:  | V: =
+AM7   | t=str        | F: IF($AM$6=0,"-",SUM(BD25:BF25)) | V: -
+AN7   | t=s          | F:  | V: m3/h
+AR7   | t=str        | F: BI20&BI23 | V: 1Ø Current
+AS7   | t=           | F: BJ20+BJ23 | V: 0
+AT7   | t=str        | F: IF(AT6=BJ18,BJ17,BJ18) | V: A
+AW7   | t=s          | F:  | V: ER 最大值
+AX7   | t=str        | F: IF(BF39+BF40=0,"-",VLOOKUP(BI39,BI48:BJ52,2,FALSE)) | V: -
+BC7   | t=b          | F:  | V: 0
+BE7   | t=           | F:  | V: 1
+BI7   | t=           | F: IF(AI6=AI7,BI6/0.472,0) | V: 0
+BJ7   | t=           | F: IF(AI6=AI8,BJ6/0.472,0) | V: 0
+BK7   | t=           | F: IF(AI6=AI9,BK6/0.472,0) | V: 2118.6440677966102
+BL7   | t=           | F: IF(AI6=AI10,AH6,0) | V: 0
+BN7   | t=str        | F:  | V: 
+BO7   | t=str        | F:  | V: 
+I8    | t=str        | F: IF(BC8=TRUE,2,"-") | V: -
+J8    | t=str        | F: IF(BC8=TRUE,100*I8,"-") | V: -
+K8    | t=s          | F:  | V: Pa
+N8    | t=s          | F:  | V:      - Horizontal Pipe
+P8    | t=s          | F:  | V: m
+S8    | t=s          | F:  | V:      - Horizontal Pipe
+U8    | t=s          | F:  | V: m
+X8    | t=           | F:  | V: 0.37
+Y8    | t=           | F:  | V: 1.9786096256684493
+Z8    | t=str        | F:  | V: 1Ø
+AA8   | t=str        | F:  | V: fuse
+AB8   | t=           | F:  | V: 11.871657754010696
+AC8   | t=           | F:  | V: 20
+AE8   | t=           | F:  | V: 63
+AG8   | t=s          | F:  | V: =
+AH8   | t=           | F: IF($AH$6=0,"-",SUM(BI5:BL5)) | V: 1
+AI8   | t=s          | F:  | V: m3/s
+AL8   | t=s          | F:  | V: =
+AM8   | t=str        | F: IF($AM$6=0,"-",SUM(BD26:BF26)) | V: -
+AN8   | t=s          | F:  | V: m3/s
+AR8   | t=str        | F: BI21&BI24 | V: 3Ø Current
+AS8   | t=           | F: BJ21+BJ24 | V: 0
+AT8   | t=str        | F: IF(AT6=BJ18,BJ17,BJ18) | V: A
+BC8   | t=b          | F:  | V: 0
+BE8   | t=           | F:  | V: 1.1000000000000001
+BN8   | t=str        | F:  | V: 
+BO8   | t=str        | F:  | V: 
+B9    | t=s          | F:  | V: Unit Conversion
+I9    | t=str        | F: IF(BC18=TRUE,1,"-") | V: -
+J9    | t=str        | F: IF(BC18=TRUE,50*I9,"-") | V: -
+K9    | t=s          | F:  | V: Pa
+N9    | t=s          | F:  | V: Max. pressure loss per meter
+O9    | t=           | F:  | V: 300
+P9    | t=s          | F:  | V: Pa/m
+S9    | t=s          | F:  | V: Max. pressure loss per meter
+T9    | t=           | F:  | V: 300
+U9    | t=s          | F:  | V: Pa/m
+X9    | t=           | F:  | V: 0.55000000000000004
+Y9    | t=           | F:  | V: 2.9411764705882355
+Z9    | t=str        | F:  | V: 1Ø
+AA9   | t=str        | F:  | V: fuse
+AB9   | t=           | F:  | V: 17.647058823529413
+AC9   | t=           | F:  | V: 20
+AE9   | t=           | F:  | V: 80
+AG9   | t=s          | F:  | V: =
+AH9   | t=           | F: IF($AH$6=0,"-",SUM(BI6:BL6)) | V: 1000
+AI9   | t=s          | F:  | V: L/s
+AL9   | t=s          | F:  | V: =
+AM9   | t=str        | F: IF($AM$6=0,"-",SUM(BD27:BF27)) | V: -
+AN9   | t=s          | F:  | V: kg/s
+AW9   | t=s          | F:  | V: ER = 0.002342 H (∆t x Ƞ)
+BC9   | t=b          | F:  | V: 0
+BE9   | t=           | F:  | V: 1.2
+BN9   | t=str        | F:  | V: 
+BO9   | t=str        | F:  | V: 
+N10   | t=s          | F:  | V: Safety Factor
+S10   | t=s          | F:  | V: Safety Factor
+X10   | t=           | F:  | V: 0.75
+Y10   | t=           | F:  | V: 4.0106951871657754
+Z10   | t=str        | F:  | V: 1Ø
+AA10  | t=str        | F:  | V: fuse
+AB10  | t=           | F:  | V: 24.064171122994651
+AC10  | t=           | F:  | V: 20
+AE10  | t=           | F:  | V: 100
+AG10  | t=s          | F:  | V: =
+AH10  | t=           | F: IF($AH$6=0,"-",SUM(BI7:BL7)) | V: 2118.6440677966102
+AI10  | t=s          | F:  | V: cfm
+BC10  | t=b          | F:  | V: 0
+BE10  | t=           | F:  | V: 1.3
+BI10  | t=           | F: IF(AH26="fuse",C27,VLOOKUP(AH26,B27:C30,2,FALSE)) | V: 6
+BJ10  | t=e          | F: IF(AM22="fuse",C27,VLOOKUP(AM22,B27:C30,2,FALSE)) | V: #N/A
+BN10  | t=str        | F:  | V: 
+BO10  | t=str        | F:  | V: 
+B11   | t=s          | F:  | V: Pressure
+D11   | t=s          | F:  | V: kPa
+H11   | t=s          | F:  | V: Critical path length
+K11   | t=s          | F:  | V: m
+N11   | t=s          | F:  | V: Total pipe friction loss
+O11   | t=str        | F: IF(O7*O8*O9*O10>0,SUM(O7:O8)*O9*O10,"-") | V: -
+P11   | t=s          | F:  | V: Pa
+S11   | t=s          | F:  | V: Total pipe friction loss
+T11   | t=str        | F: IF(T7*T8*T9*T10>0,SUM(T7:T8)*T9*T10,"-") | V: -
+U11   | t=s          | F:  | V: Pa
+X11   | t=           | F:  | V: 1.1000000000000001
+Y11   | t=           | F:  | V: 5.882352941176471
+Z11   | t=str        | F:  | V: 1Ø
+AA11  | t=str        | F:  | V: fuse
+AB11  | t=           | F:  | V: 35.294117647058826
+AC11  | t=           | F:  | V: 20
+AE11  | t=           | F:  | V: 125
+AL11  | t=s          | F:  | V: Pressure head
+AN11  | t=s          | F:  | V: m
+AW11  | t=s          | F:  | V: 水泵设计扬程
+AX11  | t=s          | F:  | V: H
+AZ11  | t=s          | F:  | V: m
+BC11  | t=b          | F:  | V: 0
+BE11  | t=           | F:  | V: 1.4
+BI11  | t=s          | F:  | V: √
+BN11  | t=str        | F:  | V: 
+BO11  | t=str        | F:  | V: 
+B12   | t=s          | F:  | V: =
+C12   | t=str        | F: IF($C$11=0,"-",SUM(BD20:BD23)) | V: -
+D12   | t=s          | F:  | V: m
+H12   | t=s          | F:  | V: Safety Factor
+X12   | t=           | F:  | V: 1.5
+Y12   | t=           | F:  | V: 8.0213903743315509
+Z12   | t=str        | F:  | V: 1Ø
+AA12  | t=str        | F:  | V: fuse
+AB12  | t=           | F:  | V: 48.128342245989302
+AC12  | t=           | F:  | V: 20
+AE12  | t=           | F:  | V: 160
+AG12  | t=s          | F:  | V: External Static
+AH12  | t=           | F:  | V: 1000
+AI12  | t=s          | F:  | V: Pa
+AW12  | t=s          | F:  | V: 供回水温差
+AX12  | t=s          | F:  | V: ∆t
+AZ12  | t=s          | F:  | V: oC
+BC12  | t=b          | F:  | V: 0
+BE12  | t=           | F:  | V: 1.5
+BI12  | t=s          | F:  | V: ×
+BN12  | t=str        | F:  | V: 
+BO12  | t=str        | F:  | V: 
+B13   | t=s          | F:  | V: =
+C13   | t=str        | F: IF($C$11=0,"-",SUM(BE20:BE23)) | V: -
+D13   | t=s          | F:  | V: Bar
+H13   | t=s          | F:  | V: Friction loss per meter
+K13   | t=s          | F:  | V: Pa/m
+N13   | t=s          | F:  | V: Terminal Unit Coil Loss
+O13   | t=           | F:  | V: 30000
+P13   | t=s          | F:  | V: Pa
+S13   | t=s          | F:  | V: Chiller Condenser/ Hx Coil Loss
+T13   | t=           | F:  | V: 80000
+U13   | t=s          | F:  | V: Pa
+X13   | t=           | F:  | V: 2.2000000000000002
+Y13   | t=           | F:  | V: 11.764705882352942
+Z13   | t=str        | F:  | V: 1Ø
+AA13  | t=str        | F:  | V: fuse
+AB13  | t=           | F:  | V: 70.588235294117652
+AC13  | t=           | F:  | V: 30
+AE13  | t=           | F:  | V: 200
+AG13  | t=s          | F:  | V: Internal Static
+AI13  | t=s          | F:  | V: Pa
+AL13  | t=s          | F:  | V: Motor Efficiency
+AM13  | t=           | F:  | V: 0.8
+AW13  | t=s          | F:  | V: 水泵设计工作点效率
+AX13  | t=s          | F:  | V: Ƞ
+BC13  | t=b          | F:  | V: 0
+BE13  | t=           | F:  | V: 1.6
+BN13  | t=           | F:  | V: 3
+BO13  | t=str        | F:  | V: 
+B14   | t=s          | F:  | V: =
+C14   | t=str        | F: IF($C$11=0,"-",SUM(BF20:BF23)) | V: -
+D14   | t=s          | F:  | V: kPa
+H14   | t=s          | F:  | V: Total friction loss
+J14   | t=str        | F: IF(J11*J12*J13>0,J11*J13*J12,"-") | V: -
+K14   | t=s          | F:  | V: Pa
+X14   | t=           | F:  | V: 3
+Y14   | t=           | F:  | V: 5.3623864011420359
+Z14   | t=str        | F:  | V: 3Ø
+AA14  | t=str        | F:  | V: DOL
+AB14  | t=           | F:  | V: 32.174318406852215
+AC14  | t=           | F:  | V: 20
+AE14  | t=           | F:  | V: 250
+AW14  | t=s          | F:  | V: 输送能效比
+BC14  | t=b          | F:  | V: 0
+BE14  | t=           | F:  | V: 1.7
+BN14  | t=           | F:  | V: 3.7
+BO14  | t=str        | F:  | V: 
+B15   | t=s          | F:  | V: =
+C15   | t=str        | F: IF($C$11=0,"-",SUM(BG20:BG23)) | V: -
+D15   | t=s          | F:  | V: Mpa
+N15   | t=s          | F:  | V: Evapourator/ Hx Coil Loss
+O15   | t=           | F:  | V: 80000
+P15   | t=s          | F:  | V: Pa
+S15   | t=s          | F:  | V: Total friction loss
+T15   | t=str        | F: IF(T11="-","-",T11+T13) | V: -
+U15   | t=s          | F:  | V: Pa
+X15   | t=           | F:  | V: 3.7
+Y15   | t=           | F:  | V: 6.6136098947418445
+Z15   | t=str        | F:  | V: 3Ø
+AA15  | t=str        | F:  | V: Υ/Δ
+AB15  | t=           | F:  | V: 16.534024736854612
+AC15  | t=           | F:  | V: 20
+AE15  | t=           | F:  | V: 315
+AG15  | t=s          | F:  | V: Motor Efficiency
+AH15  | t=           | F: IF(AND(AH8<1,AH8>=0),$C$22,IF(AH8>2,$C$24,IF(OR(AH8>1,AH8<=2),$C$23))) | V: 0.7
+AL15  | t=s          | F:  | V: Safety Factor
+AM15  | t=           | F:  | V: 1.5
+AW15  | t=s          | F:  | V: 計算輸送能效比
+AX15  | t=s          | F:  | V: ER
+AY15  | t=str        | F: IF(AY11*AY12*AY13>0,0.002342*AY11/(AY12*AY13),"-") | V: -
+BE15  | t=           | F:  | V: 1.8
+BN15  | t=           | F:  | V: 4
+BO15  | t=str        | F:  | V: 
+H16   | t=s          | F:  | V: External Static Loss
+J16   | t=str        | F: IF(J11*J12*J13>0,SUM(J7:J9,J14),"-") | V: -
+K16   | t=s          | F:  | V: Pa
+S16   | t=s          | F:  | V: ~
+T16   | t=str        | F: IF(T15="-","-",T15/9.804139432/1000) | V: -
+U16   | t=s          | F:  | V: m
+X16   | t=           | F:  | V: 4
+Y16   | t=           | F:  | V: 7.1498485348560479
+Z16   | t=str        | F:  | V: 3Ø
+AA16  | t=str        | F:  | V: Υ/Δ
+AB16  | t=           | F:  | V: 17.87462133714012
+AC16  | t=           | F:  | V: 20
+AE16  | t=           | F:  | V: 400
+AY16  | t=str        | F: IF(AX7="-","-",IF(AND(AY11*AY12*AY13>0,AY15>=AX7),"不滿足","滿足")) | V: -
+BE16  | t=           | F:  | V: 1.9
+BN16  | t=           | F:  | V: 5.5
+BO16  | t=str        | F:  | V: 
+B17   | t=s          | F:  | V: Voltage
+N17   | t=s          | F:  | V: Total Pressure Loss 
+O17   | t=str        | F: IF(O11="-","-",O11+O13+O15) | V: -
+P17   | t=s          | F:  | V: Pa
+X17   | t=           | F:  | V: 5.5
+Y17   | t=           | F:  | V: 9.8310417354270658
+Z17   | t=str        | F:  | V: 3Ø
+AA17  | t=str        | F:  | V: Υ/Δ
+AB17  | t=           | F:  | V: 24.577604338567664
+AC17  | t=           | F:  | V: 20
+AE17  | t=           | F:  | V: 630
+AG17  | t=s          | F:  | V: Fan Efficiency
+AH17  | t=           | F:  | V: 0.7
+AL17  | t=s          | F:  | V: Pump Power
+AM17  | t=str        | F: IF(AM8="-","-",AM15*(AM8*(AM11*9.804139432))/(AM13)) | V: -
+AN17  | t=s          | F:  | V: kW
+BE17  | t=           | F:  | V: 2
+BI17  | t=s          | F:  | V: Electrical Load
+BJ17  | t=s          | F:  | V: kW
+BN17  | t=           | F:  | V: 7.5
+BO17  | t=str        | F:  | V: 
+B18   | t=s          | F:  | V: 1Ø
+C18   | t=           | F:  | V: 220
+N18   | t=s          | F:  | V: (Pump Head)
+O18   | t=str        | F: IF(O17="-","-",O17/9.804139432/1000) | V: -
+P18   | t=s          | F:  | V: m
+S18   | t=s          | F:  | V: Height Difference
+U18   | t=s          | F:  | V: m
+X18   | t=           | F:  | V: 7.5
+Y18   | t=           | F:  | V: 13.405966002855088
+Z18   | t=str        | F:  | V: 3Ø
+AA18  | t=str        | F:  | V: Υ/Δ
+AB18  | t=           | F:  | V: 33.514915007137716
+AC18  | t=           | F:  | V: 30
+AE18  | t=           | F:  | V: 800
+AL18  | t=s          | F:  | V: Motor Rating
+AM18  | t=str        | F: IF(AM17="-","-",MIN(BO5:BO38)) | V: -
+AN18  | t=s          | F:  | V: kW
+AW18  | t=s          | F:  | V: Reference:
+BC18  | t=b          | F:  | V: 0
+BI18  | t=s          | F:  | V: Electric Current
+BJ18  | t=s          | F:  | V: A
+BN18  | t=           | F:  | V: 9
+BO18  | t=str        | F:  | V: 
+B19   | t=s          | F:  | V: 3Ø
+C19   | t=           | F: VLOOKUP(C18,BN1:BO3,2,FALSE) | V: 380
+H19   | t=s          | F:  | V: Internal Static (for AHU/ PAU Only)
+X19   | t=           | F:  | V: 9
+Y19   | t=           | F:  | V: 16.087159203426104
+Z19   | t=str        | F:  | V: 3Ø
+AA19  | t=str        | F:  | V: Υ/Δ
+AB19  | t=           | F:  | V: 40.217898008565257
+AC19  | t=           | F:  | V: 40
+AE19  | t=           | F:  | V: 1000
+AG19  | t=s          | F:  | V: Safety Factor
+AH19  | t=           | F:  | V: 1.2
+AL19  | t=s          | F:  | V: Phase
+AM19  | t=str        | F: IF(AM18="-", "-",VLOOKUP(AM18,X6:Z39,3,)) | V: -
+AW19  | t=s          | F:  | V: 節能規範 GB50189-2005 - 5.3.27
+BD19  | t=s          | F:  | V: m
+BE19  | t=s          | F:  | V: bar
+BF19  | t=s          | F:  | V: kPa
+BG19  | t=s          | F:  | V: MPa
+BN19  | t=           | F:  | V: 11
+BO19  | t=str        | F:  | V: 
+S20   | t=s          | F:  | V: Total Pressure Loss 
+T20   | t=str        | F: IF(T16="-","-",T16+T18) | V: -
+U20   | t=s          | F:  | V: m
+X20   | t=           | F:  | V: 11
+Y20   | t=           | F:  | V: 19.662083470854132
+Z20   | t=str        | F:  | V: 3Ø
+AA20  | t=str        | F:  | V: Υ/Δ
+AB20  | t=           | F:  | V: 49.155208677135327
+AC20  | t=           | F:  | V: 40
+AE20  | t=           | F:  | V: 1250
+BC20  | t=s          | F:  | V: m
+BD20  | t=           | F: IF($D$11=D12,$C$11,0) | V: 0
+BE20  | t=           | F: BD20*0.09804139432 | V: 0
+BF20  | t=           | F: BD20*9.804139432 | V: 0
+BG20  | t=           | F: BF20*0.001 | V: 0
+BI20  | t=str        | F: IF(AR6=BI17,"1Ø Current","") | V: 1Ø Current
+BJ20  | t=           | F: IF(AR6=BI17,AS6*1000/$C$18/0.85,0) | V: 0
+BN20  | t=           | F:  | V: 15
+BO20  | t=str        | F:  | V: 
+B21   | t=s          | F:  | V: Motor Efficiency
+H21   | t=s          | F:  | V: Components
+I21   | t=s          | F:  | V: Qty
+J21   | t=s          | F:  | V: Static
+S21   | t=s          | F:  | V: (Pump Head)
+X21   | t=           | F:  | V: 15
+Y21   | t=           | F:  | V: 26.811932005710176
+Z21   | t=str        | F:  | V: 3Ø
+AA21  | t=str        | F:  | V: Υ/Δ
+AB21  | t=           | F:  | V: 67.029830014275433
+AC21  | t=           | F:  | V: 50
+AE21  | t=           | F:  | V: 1600
+AG21  | t=s          | F:  | V: Fan Power
+AH21  | t=           | F: IF(AH8="-","-",AH19*(AH8*(AH12+AH13))/(1000*AH15*AH17)) | V: 2.4489795918367352
+AI21  | t=s          | F:  | V: kW
+AL21  | t=s          | F:  | V: Running Current
+AM21  | t=str        | F: IF(AM18="-","-",VLOOKUP(AM18,X6:AA39,2,FALSE)) | V: -
+AN21  | t=s          | F:  | V: A
+BC21  | t=s          | F:  | V: Bar
+BD21  | t=           | F: BE21/0.09804139432 | V: 0
+BE21  | t=           | F: IF($D$11=D13,$C$11,0) | V: 0
+BF21  | t=           | F: BD21*9.804139432 | V: 0
+BG21  | t=           | F: BF21*0.001 | V: 0
+BI21  | t=str        | F: IF(AR6=BI17,"3Ø Current","") | V: 3Ø Current
+BJ21  | t=           | F: IF(AR6=BI17,AS6*1000/(3)^0.5/$C$19/0.85,0) | V: 0
+BN21  | t=           | F:  | V: 18.5
+BO21  | t=str        | F:  | V: 
+B22   | t=s          | F:  | V: <1000L/s
+C22   | t=           | F:  | V: 0.65
+I22   | t=str        | F: IF(BC9=TRUE,1,"-") | V: -
+J22   | t=str        | F: IF(BC9=TRUE,10*I22,"-") | V: -
+K22   | t=s          | F:  | V: Pa
+X22   | t=           | F:  | V: 18.5
+Y22   | t=           | F:  | V: 33.068049473709216
+Z22   | t=str        | F:  | V: 3Ø
+AA22  | t=str        | F:  | V: Υ/Δ
+AB22  | t=           | F:  | V: 82.670123684273037
+AC22  | t=           | F:  | V: 80
+AE22  | t=           | F:  | V: 2000
+AG22  | t=s          | F:  | V: Motor Rating
+AH22  | t=           | F: IF(AH21="-","-",MIN(BN5:BN38)) | V: 3
+AI22  | t=s          | F:  | V: kW
+AL22  | t=s          | F:  | V: Starting Method
+AM22  | t=str        | F: IF(AM18="-","-",IF(AM23=BI11,"VSD",VLOOKUP(AM18,X6:AA39,4,FALSE))) | V: -
+BC22  | t=s          | F:  | V: kPa
+BD22  | t=           | F: BE22/0.09804139432 | V: 0
+BE22  | t=           | F: BF22/100 | V: 0
+BF22  | t=           | F: IF($D$11=D14,$C$11,0) | V: 0
+BG22  | t=           | F: BF22*0.001 | V: 0
+BN22  | t=           | F:  | V: 22
+BO22  | t=str        | F:  | V: 
+B23   | t=s          | F:  | V: 1000~2000
+C23   | t=           | F:  | V: 0.7
+I23   | t=str        | F:  | V: -
+J23   | t=str        | F: IF(BC10=TRUE,50*I23,"-") | V: -
+K23   | t=s          | F:  | V: Pa
+X23   | t=           | F:  | V: 22
+Y23   | t=           | F:  | V: 39.324166941708263
+Z23   | t=str        | F:  | V: 3Ø
+AA23  | t=str        | F:  | V: Υ/Δ
+AB23  | t=           | F:  | V: 98.310417354270655
+AC23  | t=           | F:  | V: 80
+AE23  | t=           | F:  | V: 2500
+AG23  | t=s          | F:  | V: Phase
+AH23  | t=str        | F: IF(AH22="-", "-",VLOOKUP(AH22,X6:Z39,3,)) | V: 3Ø
+AL23  | t=s          | F:  | V: VSD? 
+BC23  | t=s          | F:  | V: MPa
+BD23  | t=           | F: BE23/0.09804139432 | V: 0
+BE23  | t=           | F: BF23/100 | V: 0
+BF23  | t=           | F: BG23*1000 | V: 0
+BG23  | t=           | F: IF($D$11=D15,$C$11,0) | V: 0
+BI23  | t=str        | F: IF(AR6=BI18,"1Ø Power","") | V: 
+BJ23  | t=           | F: IF(AR6=BI18,AS6/1000*$C$18*0.85,0) | V: 0
+BN23  | t=           | F:  | V: 25
+BO23  | t=str        | F:  | V: 
+B24   | t=s          | F:  | V: >2000L/s
+C24   | t=           | F:  | V: 0.75
+I24   | t=str        | F:  | V: -
+J24   | t=str        | F: IF(BC11=TRUE,350*I24,"-") | V: -
+K24   | t=s          | F:  | V: Pa
+X24   | t=           | F:  | V: 25
+Y24   | t=           | F:  | V: 44.686553342850303
+Z24   | t=str        | F:  | V: 3Ø
+AA24  | t=str        | F:  | V: Υ/Δ
+AB24  | t=           | F:  | V: 111.71638335712575
+AC24  | t=           | F:  | V: 100
+AE24  | t=           | F:  | V: 3150
+AL24  | t=s          | F:  | V: Starting Current
+AM24  | t=str        | F: IF(AM18="-","-",AM21*BJ10) | V: -
+AN24  | t=s          | F:  | V: A
+BI24  | t=str        | F: IF(AR6=BI18,"3Ø Power","") | V: 
+BJ24  | t=           | F: IF(AR6=BI18,AS6/1000*(3)^0.5*$C$19*0.85,0) | V: 0
+BN24  | t=           | F:  | V: 30
+BO24  | t=str        | F:  | V: 
+I25   | t=str        | F:  | V: -
+J25   | t=str        | F: IF(BC12=TRUE,150*I25,"-") | V: -
+K25   | t=s          | F:  | V: Pa
+X25   | t=           | F:  | V: 30
+Y25   | t=           | F:  | V: 53.623864011420352
+Z25   | t=str        | F:  | V: 3Ø
+AA25  | t=str        | F:  | V: Υ/Δ
+AB25  | t=           | F:  | V: 134.05966002855087
+AC25  | t=           | F:  | V: 100
+AG25  | t=s          | F:  | V: Running Current
+AH25  | t=           | F: IF(AH22="-","-",VLOOKUP(AH22,X6:AA39,2,FALSE)) | V: 5.3623864011420359
+AI25  | t=s          | F:  | V: A
+BD25  | t=           | F: IF(AN6=AN7,AM6,0) | V: 0
+BE25  | t=           | F: IF(AN6=AN8,AM6*3600,0) | V: 0
+BF25  | t=           | F: IF(AN6=AN9,AM6*3.6,0) | V: 0
+BN25  | t=           | F:  | V: 33
+BO25  | t=str        | F:  | V: 
+B26   | t=s          | F:  | V: Starting Current
+I26   | t=str        | F:  | V: -
+J26   | t=str        | F: IF(BC13=TRUE,150*I26,"-") | V: -
+K26   | t=s          | F:  | V: Pa
+X26   | t=           | F:  | V: 33
+Y26   | t=           | F:  | V: 58.986250412562384
+Z26   | t=str        | F:  | V: 3Ø
+AA26  | t=str        | F:  | V: Υ/Δ
+AB26  | t=           | F:  | V: 147.46562603140598
+AC26  | t=           | F:  | V: 150
+AG26  | t=s          | F:  | V: Starting Method
+AH26  | t=str        | F: IF(AH22="-","-",IF(AH27=BI11,"VSD",VLOOKUP(AH22,X6:AA39,4,FALSE))) | V: DOL
+AL26  | t=s          | F:  | V: MCB
+AM26  | t=str        | F: IF(AM18="-","-",VLOOKUP(AM18,X6:AC39,6,FALSE)) | V: -
+AN26  | t=s          | F:  | V: A
+BD26  | t=           | F: IF(AN6=AN7,AM6/3600,0) | V: 0
+BE26  | t=           | F: IF(AN6=AN8,AM6,0) | V: 0
+BF26  | t=           | F: IF(AN6=AN9,AM6/1000,0) | V: 0
+BN26  | t=           | F:  | V: 37
+BO26  | t=str        | F:  | V: 
+B27   | t=s          | F:  | V: DOL
+C27   | t=           | F:  | V: 6
+I27   | t=str        | F:  | V: -
+J27   | t=str        | F: IF(BC14=TRUE,150*I27,"-") | V: -
+K27   | t=s          | F:  | V: Pa
+X27   | t=           | F:  | V: 37
+Y27   | t=           | F:  | V: 66.136098947418432
+Z27   | t=str        | F:  | V: 3Ø
+AA27  | t=str        | F:  | V: Υ/Δ
+AB27  | t=           | F:  | V: 165.34024736854607
+AC27  | t=           | F:  | V: 150
+AG27  | t=s          | F:  | V: VSD? 
+BD27  | t=           | F: IF(AN6=AN7,AM6/3.6,0) | V: 0
+BE27  | t=           | F: IF(AN6=AN8,AM6*1000,0) | V: 0
+BF27  | t=           | F: IF(AN6=AN9,AM6,0) | V: 0
+BJ27  | t=           | F:  | V: 1
+BN27  | t=           | F:  | V: 45
+BO27  | t=str        | F:  | V: 
+B28   | t=s          | F:  | V: Υ/Δ
+C28   | t=           | F:  | V: 2.5
+X28   | t=           | F:  | V: 45
+Y28   | t=           | F:  | V: 80.435796017130542
+Z28   | t=str        | F:  | V: 3Ø
+AA28  | t=str        | F:  | V: Υ/Δ
+AB28  | t=           | F:  | V: 201.08949004282636
+AC28  | t=           | F:  | V: 150
+AG28  | t=s          | F:  | V: Starting Current
+AH28  | t=           | F: IF(AH22="-","-",AH25*BI10) | V: 32.174318406852215
+AI28  | t=s          | F:  | V: A
+BI28  | t=           | F:  | V: 0.1
+BJ28  | t=           | F:  | V: 1.1000000000000001
+BN28  | t=           | F:  | V: 55
+BO28  | t=str        | F:  | V: 
+B29   | t=s          | F:  | V: Auto-Tx
+C29   | t=           | F:  | V: 1.5
+H29   | t=s          | F:  | V: Internal Static Loss
+J29   | t=           | F: SUM(J22:J27) | V: 0
+K29   | t=s          | F:  | V: Pa
+X29   | t=           | F:  | V: 55
+Y29   | t=           | F:  | V: 98.310417354270655
+Z29   | t=str        | F:  | V: 3Ø
+AA29  | t=str        | F:  | V: Υ/Δ
+AB29  | t=           | F:  | V: 245.77604338567664
+AC29  | t=           | F:  | V: 200
+BI29  | t=           | F:  | V: 0.2
+BJ29  | t=           | F:  | V: 1.2
+BN29  | t=           | F:  | V: 63
+BO29  | t=str        | F:  | V: 
+B30   | t=s          | F:  | V: VSD
+C30   | t=           | F:  | V: 1.3
+X30   | t=           | F:  | V: 63
+Y30   | t=           | F:  | V: 112.61011442398274
+Z30   | t=str        | F:  | V: 3Ø
+AA30  | t=str        | F:  | V: Υ/Δ
+AB30  | t=           | F:  | V: 281.52528605995684
+AC30  | t=           | F:  | V: 200
+AG30  | t=s          | F:  | V: MCB
+AH30  | t=           | F: IF(AH22="-","-",VLOOKUP(AH22,X6:AC39,6,FALSE)) | V: 20
+AI30  | t=s          | F:  | V: A
+BI30  | t=           | F:  | V: 0.3
+BJ30  | t=           | F:  | V: 1.3
+BN30  | t=           | F:  | V: 75
+BO30  | t=str        | F:  | V: 
+X31   | t=           | F:  | V: 75
+Y31   | t=           | F:  | V: 134.05966002855087
+Z31   | t=str        | F:  | V: 3Ø
+AA31  | t=str        | F:  | V: Υ/Δ
+AB31  | t=           | F:  | V: 335.14915007137716
+AC31  | t=           | F:  | V: 250
+BI31  | t=           | F:  | V: 0.4
+BJ31  | t=           | F:  | V: 1.4
+BN31  | t=           | F:  | V: 90
+BO31  | t=str        | F:  | V: 
+B32   | t=s          | F:  | V: Assumptions
+H32   | t=s          | F:  | V: Total Static Loss 
+J32   | t=str        | F: IF(J16="-","-",J29+J16) | V: -
+K32   | t=s          | F:  | V: Pa
+X32   | t=           | F:  | V: 90
+Y32   | t=           | F:  | V: 160.87159203426108
+Z32   | t=str        | F:  | V: 3Ø
+AA32  | t=str        | F:  | V: Υ/Δ
+AB32  | t=           | F:  | V: 402.17898008565271
+AC32  | t=           | F:  | V: 250
+BI32  | t=           | F:  | V: 0.5
+BJ32  | t=           | F:  | V: 1.5
+BN32  | t=           | F:  | V: 110
+BO32  | t=str        | F:  | V: 
+B33   | t=           | F:  | V: 2.2000000000000002
+C33   | t=s          | F:  | V: kW - Max. Motor Rating for 1Ø
+X33   | t=           | F:  | V: 110
+Y33   | t=           | F:  | V: 196.62083470854131
+Z33   | t=str        | F:  | V: 3Ø
+AA33  | t=str        | F:  | V: Υ/Δ
+AB33  | t=           | F:  | V: 491.55208677135329
+AC33  | t=           | F:  | V: 400
+BI33  | t=           | F:  | V: 0.6
+BJ33  | t=           | F:  | V: 1.6
+BN33  | t=           | F:  | V: 132
+BO33  | t=str        | F:  | V: 
+B34   | t=           | F:  | V: 2.5
+C34   | t=s          | F:  | V: kW - Max. Motor Rating for using Fuse
+X34   | t=           | F:  | V: 132
+Y34   | t=           | F:  | V: 235.94500165024954
+Z34   | t=str        | F:  | V: 3Ø
+AA34  | t=str        | F:  | V: Υ/Δ
+AB34  | t=           | F:  | V: 589.8625041256239
+AC34  | t=           | F:  | V: 630
+BI34  | t=           | F:  | V: 0.7
+BJ34  | t=           | F:  | V: 1.7
+BN34  | t=           | F:  | V: 160
+BO34  | t=str        | F:  | V: 
+B35   | t=           | F:  | V: 3
+C35   | t=s          | F:  | V: kW - Max. Motor Rating for DOL starting
+X35   | t=           | F:  | V: 160
+Y35   | t=           | F:  | V: 285.99394139424186
+Z35   | t=str        | F:  | V: 3Ø
+AA35  | t=str        | F:  | V: Auto-Tx
+AB35  | t=           | F:  | V: 428.99091209136282
+AC35  | t=           | F:  | V: 630
+BI35  | t=           | F:  | V: 0.8
+BJ35  | t=           | F:  | V: 1.8
+BN35  | t=           | F:  | V: 185
+BO35  | t=str        | F:  | V: 
+B36   | t=           | F:  | V: 160
+C36   | t=s          | F:  | V: kW - Min. Motor Rating for using Auto-Tx
+X36   | t=           | F:  | V: 185
+Y36   | t=           | F:  | V: 330.6804947370922
+Z36   | t=str        | F:  | V: 3Ø
+AA36  | t=str        | F:  | V: Auto-Tx
+AB36  | t=           | F:  | V: 496.02074210563831
+AC36  | t=           | F:  | V: 630
+BI36  | t=           | F:  | V: 0.9
+BJ36  | t=           | F:  | V: 1.9
+BN36  | t=           | F:  | V: 200
+BO36  | t=str        | F:  | V: 
+X37   | t=           | F:  | V: 200
+Y37   | t=           | F:  | V: 357.49242674280242
+Z37   | t=str        | F:  | V: 3Ø
+AA37  | t=str        | F:  | V: Auto-Tx
+AB37  | t=           | F:  | V: 536.23864011420369
+AC37  | t=           | F:  | V: 630
+BI37  | t=           | F:  | V: 1
+BJ37  | t=           | F:  | V: 2
+BN37  | t=           | F:  | V: 225
+BO37  | t=str        | F:  | V: 
+X38   | t=           | F:  | V: 225
+Y38   | t=           | F:  | V: 402.17898008565265
+Z38   | t=str        | F:  | V: 3Ø
+AA38  | t=str        | F:  | V: Auto-Tx
+AB38  | t=           | F:  | V: 603.26847012847895
+AC38  | t=           | F:  | V: 630
+BN38  | t=           | F:  | V: 315
+BO38  | t=str        | F:  | V: 
+X39   | t=           | F:  | V: 315
+Y39   | t=           | F:  | V: 563.05057211991368
+Z39   | t=str        | F:  | V: 3Ø
+AA39  | t=str        | F:  | V: Auto-Tx
+AB39  | t=           | F:  | V: 844.57585817987047
+AC39  | t=           | F:  | V: 1000
+BF39  | t=           | F: IF(AX5>0,1,0) | V: 0
+BI39  | t=str        | F: AX5&"-"&AX6 | V: -
+BF40  | t=           | F: IF(AX6>0,1,0) | V: 0
+BI40  | t=str        | F: IF(AX5=BI44,"嚴寒","n/a") | V: n/a
+BI41  | t=str        | F: IF(AX5=BI44,"寒冷/夏熱冬冷","n/a") | V: n/a
+BI42  | t=str        | F: IF(AX5=BI44,"夏熱冬暖","n/a") | V: n/a
+BI44  | t=s          | F:  | V: 兩管制熱水管
+BI45  | t=s          | F:  | V: 四管制熱水管
+BI46  | t=s          | F:  | V: 空調冷水管
+BI48  | t=s          | F:  | V: 兩管制熱水管-嚴寒
+BJ48  | t=           | F:  | V: 5.77E-3
+BI49  | t=s          | F:  | V: 兩管制熱水管-寒冷/夏熱冬冷
+BJ49  | t=           | F:  | V: 4.3299999999999996E-3
+BI50  | t=s          | F:  | V: 兩管制熱水管-夏熱冬暖
+BJ50  | t=           | F:  | V: 8.6499999999999997E-3
+BI51  | t=s          | F:  | V: 四管制熱水管-n/a
+BJ51  | t=           | F:  | V: 6.7299999999999999E-3
+BI52  | t=s          | F:  | V: 空調冷水管-n/a
+BJ52  | t=           | F:  | V: 2.41E-2

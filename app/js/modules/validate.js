@@ -9,6 +9,10 @@ import { vectors } from '../data/vectors.js';
 
 const NS = { psychro, fluids, ducts, electrical };
 
+// Single source for the vector count: the same list the Node runner executes, so the page can
+// never advertise a stale number after vectors are added.
+const VECTOR_COUNT = vectors.reduce((n, g) => n + g.tests.length, 0);
+
 const SOURCES = {
   'psychrometrics': 'ASHRAE Fundamentals 2025 Ch.1 · Hyland & Wexler 1983 · Excel 快取值',
   'Hazen-Williams': 'ASHRAE F 2025 Ch.22 · CIBSE Guide C · Excel 快取值 (DN15/DN20 還原 400 Pa/m)',
@@ -48,7 +52,8 @@ function render(root, { L }) {
     if (fail > 0) for (const r of rows) body.append(h('div', { class: 'note' }, '✘ ' + r));
     body.append(h('div', { class: 'note' },
       L({ en: 'What this checks: psychrometric Hyland-Wexler/W/h/v/RH, Hazen-Williams (reproducing the workbook DN15/DN20 = 400 Pa/m), Haaland friction, Huebscher, electrical/acoustics, NPSH, insulation, GB 51251 stairwell tables. Sources are cited per test group. Run: npm test (Node) or this page (browser) — identical vectors.', zh: '檢查項目：濕空氣（Hyland-Wexler／W／h／v／RH）、Hazen-Williams（重現原檔 DN15/DN20＝400 Pa/m）、Haaland 摩阻、Huebscher、電氣/聲學、NPSH、保溫、GB 51251 梯間表。每組標明來源；Node 端 npm test 與本頁共用同一批向量。' })));
-  }, { src: 'tests/vectors.js (69 vectors) · ASHRAE 2025 · CIBSE · IAPWS · GB · Excel cached values' }));
+  }, { src: 'app/js/data/vectors.js (' + vectors.reduce((n, g) => n + g.tests.length, 0) +
+    ' vectors) · ASHRAE 2025 · CIBSE · IAPWS · GB · Excel cached values' }));
 }
 
-register({ id: 'verify', icon: '🔍', group: 'special', title: { en: 'Data Authenticity', zh: '數據真確性' }, desc: { en: 'Run the full formula audit inside the app — 69 cross-checks with cited sources.', zh: '在 App 內執行完整公式檢驗 — 69 項交叉驗證並附來源。' }, render });
+register({ id: 'verify', icon: '🔍', group: 'special', title: { en: 'Data Authenticity', zh: '數據真確性' }, desc: { en: 'Run the full formula audit inside the app — ' + VECTOR_COUNT + ' cross-checks with cited sources.', zh: '在 App 內執行完整公式檢驗 — ' + VECTOR_COUNT + ' 項交叉驗證並附來源。' }, render });

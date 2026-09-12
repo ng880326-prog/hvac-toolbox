@@ -30,6 +30,14 @@ export const vectors = [
       { name: 'state(T,Tdp) -> RH', fn: (E) => E.state({ t: 24.6, tdp: 16.4974 }).rh, expect: 60.566, tol: 0.1 },
       { name: 'pws(100) = 101.325 kPa', fn: (E) => E.pws(100), expect: 101.325, tol: 0.15 },
       { name: 'pws(0.01) ≈ 0.6117 kPa (triple pt)', fn: (E) => E.pws(0.01), expect: 0.6117, tol: 1e-3 },
+      // Ice branch (T < 0.01 °C), ASHRAE over-ice saturation table. These lock coefficient C6:
+      // a miscounted zero once made it 1e-10 instead of 1e-13, so the whole ice branch read 1000x low
+      // (pws(0) = 0.0031 kPa instead of 0.6112) with every other test still green.
+      { name: 'pws(-40) = 0.01285 kPa (ice table)', fn: (E) => E.pws(-40), expect: 0.01285, tol: 6e-6 },
+      { name: 'pws(-20) = 0.10326 kPa (ice table)', fn: (E) => E.pws(-20), expect: 0.10326, tol: 5e-5 },
+      { name: 'pws(-10) = 0.25990 kPa (ice table)', fn: (E) => E.pws(-10), expect: 0.25990, tol: 5e-5 },
+      { name: 'pws(0) = 0.61115 kPa (ice table)', fn: (E) => E.pws(0), expect: 0.61115, tol: 5e-5 },
+      { name: 'pws ice→liquid continuity across 0.01 °C', fn: (E) => E.pws(0.009) / E.pws(0.01), expect: 1, tol: 2e-3 },
       // AHU/PAU design conditions from the Coil sheet (Summer OA 35 DB / 28 WB)
       { name: 'Coil design OA summer: h (Excel 89.396)', fn: (E) => E.state({ t: 35, twb: 28 }).h, expect: 89.396, tol: 0.02 },
       { name: 'Coil design OA summer: W (Excel 0.021132)', fn: (E) => E.state({ t: 35, twb: 28 }).w, expect: 0.021131, tol: 2e-5 },

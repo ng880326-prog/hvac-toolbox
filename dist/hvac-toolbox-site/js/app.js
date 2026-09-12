@@ -51,10 +51,11 @@ function renderTiles() {
 function showHome() {
   document.getElementById('homeScreen').hidden = false;
   document.getElementById('moduleScreen').hidden = true;
+  document.title = 'HVAC Toolbox Pro — HVAC 暖通空調工程計算';
   document.getElementById('heroTitle').textContent = 'HVAC Toolbox — ' + L({ en: 'The Tool', zh: '工具箱' });
   document.getElementById('heroSub').textContent = L({
-    en: 'A cross-platform HVAC engineering toolkit rebuilt from the original workbook — 20 modules covering every worksheet, with formulas audited against current standards (ASHRAE Fundamentals 2025, CIBSE, GB 51251-2017, IEC).',
-    zh: '跨平台暖通空調工程計算工具箱，由原工作簿重建 — 20 個模組覆蓋全部工作表，全部公式對照現行標準（ASHRAE Fundamentals 2025、CIBSE、GB 51251-2017、IEC）檢驗。',
+    en: 'A cross-platform HVAC engineering toolkit rebuilt from the original workbook — 22 modules covering every worksheet, with formulas audited against current standards (ASHRAE Fundamentals 2025, CIBSE, GB 51251-2017, IEC).',
+    zh: '跨平台暖通空調工程計算工具箱，由原工作簿重建 — 22 個模組覆蓋全部工作表，全部公式對照現行標準（ASHRAE Fundamentals 2025、CIBSE、GB 51251-2017、IEC）檢驗。',
   });
   document.getElementById('aboutTitle').textContent = L({ en: 'Sheets & sources', zh: '工作表與出處' });
   document.getElementById('aboutText').textContent = L({
@@ -119,6 +120,9 @@ function showModule(id) {
     });
   }
   window.scrollTo({ top: 0 });
+  // The tab title (and the app-switcher label on phones) should say which tool is open, not just the
+  // product name — and it must follow the language toggle.
+  document.title = L(mod.title) + ' · HVAC Toolbox Pro';
 }
 
 function route() {

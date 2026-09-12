@@ -1,7 +1,7 @@
 {
   "name": "HVAC Toolbox Pro",
   "short_name": "HVAC Pro",
-  "description": "HVAC 暖通空調工程計算 — Excel 版升級的跨平台工具（14 模組，公式已檢驗）",
+  "description": "HVAC 暖通空調工程計算 — 由 Excel 工作簿升級的跨平台工具：22 個模組，全部公式對照 ASHRAE / CIBSE / GB 標準檢驗，完全離線運算",
   "lang": "zh-HK",
   "dir": "ltr",
   "start_url": "./index.html",
@@ -23,5 +23,10 @@
     { "name": "濕空氣計算 Psychrometrics", "url": "./index.html#m/psychro", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "水管管徑 Pipe Sizing", "url": "./index.html#m/pipes", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "風管計算 Ducts", "url": "./index.html#m/ducts", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ],
+  "screenshots": [
+    { "src": "screenshots/shot-phone.png", "sizes": "1080x2338", "type": "image/png", "form_factor": "narrow", "label": "主頁 — 22 個工程計算模組" },
+    { "src": "screenshots/shot-phone-psychro.png", "sizes": "1080x2338", "type": "image/png", "form_factor": "narrow", "label": "濕空氣圖 — Air 1 | Air 2 並排" },
+    { "src": "screenshots/shot-wide.png", "sizes": "1280x800", "type": "image/png", "form_factor": "wide", "label": "轉輪熱回收 — 夏｜冬並排與轉輪示意圖" }
   ]
 }

@@ -144,6 +144,13 @@ export function fold(title, ...kids) {
 export function results(parent, items) {
   parent.innerHTML = '';
   const grid = h('div', { class: 'results', 'aria-live': 'polite' });
+  if (!items.length) {
+    // A card whose inputs are incomplete used to render an empty box, which reads as broken rather
+    // than as "waiting for input". One muted line makes that state explicit and consistent everywhere.
+    parent.append(h('div', { class: 'res-empty' }, '— 請於上方輸入數值 · enter values above'));
+    parent.append(grid);
+    return;
+  }
   for (const it of items) grid.append(it);
   parent.append(grid);
 }

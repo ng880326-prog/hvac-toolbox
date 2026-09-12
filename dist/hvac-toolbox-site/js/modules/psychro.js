@@ -265,7 +265,7 @@ function render(root, { L }) {
   const quickCard = card(T('quick'), '', (body) => {
     let qForm = null;
     const pairRow = h('div', { class: 'field' }, h('label', {}, T('pair')),
-      seg(PAIRS.map((v) => ({ v, label: T(I18N.pairOpts[v]) })), pair, (v) => { pair = v; rebuild(); }));
+      seg(PAIRS.map((v) => ({ v, label: L(I18N.pairOpts[v]) })), pair, (v) => { pair = v; rebuild(); }));
     const wrap = h('div');
     body.append(pairRow, wrap, quickBox);
     function rebuild() {

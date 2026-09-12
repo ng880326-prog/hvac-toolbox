@@ -58,7 +58,7 @@ function ahuSchematicSVG(model, sel) {
     <text x="${x + base * scale / 2}" y="76" text-anchor="middle" fill="var(--ink-soft)">BASE</text></g>`;
   // airflow arrow
   s += `<path d="M 34 66 h 14 l -5 -5 m 5 5 l -5 5" stroke="var(--brand)" stroke-width="2" fill="none"/>
-        <text x="26" y="100" font-size="10" fill="var(--brand)">AIR</text>`;
+        <text x="26" y="100" font-size="11" fill="var(--brand)">AIR</text>`;
   // dimension line
   s += `<line class="dim-line" x1="30" y1="118" x2="${30 + total * scale}" y2="118"/>
         <text class="dim-text" x="${30 + total * scale / 2}" y="132" text-anchor="middle">L = ${total} mm (base 150 + Σ components)</text>`;

@@ -26,7 +26,7 @@ export function psychroChartSVG(states, lines, opts = {}) {
     s += `<line x1="${sx(X0)}" y1="${y}" x2="${sx(X1)}" y2="${y}" stroke="var(--line)" stroke-width="1"/>`;
     s += `<text x="${W_PAD - 6}" y="${y + 4}" font-size="11" fill="var(--ink-soft)" text-anchor="end">${(w * 1000).toFixed(0)}</text>`;
   }
-  s += `<text x="${W_PAD - 6}" y="${sy(Y1) - 4}" font-size="10" fill="var(--ink-soft)" text-anchor="end">W g/kg</text>`;
+  s += `<text x="${W_PAD - 6}" y="${sy(Y1) - 4}" font-size="11" fill="var(--ink-soft)" text-anchor="end">W g/kg</text>`;
 
   // saturation curve + RH curves
   const curve = (Tmin, Tmax, f) => {
@@ -80,7 +80,7 @@ export function psychroChartSVG(states, lines, opts = {}) {
     const c = ptColors[st.id] || 'var(--accent)';
     s += `<circle cx="${x}" cy="${y}" r="5" fill="${c}" stroke="var(--card)" stroke-width="2"/>`;
     s += `<text x="${x + 8}" y="${y - 6}" font-size="12" font-weight="700" fill="${c}">${st.id}</text>`;
-    if (st.show) s += `<text x="${x + 8}" y="${y + 12}" font-size="9.5" fill="var(--ink-soft)">${st.show}</text>`;
+    if (st.show) s += `<text x="${x + 8}" y="${y + 12}" font-size="11" fill="var(--ink-soft)">${st.show}</text>`;
   }
 
   // legend (top-right) using the states actually plotted
@@ -90,11 +90,11 @@ export function psychroChartSVG(states, lines, opts = {}) {
       const c = ptColors[st.id] || 'var(--accent)';
       const lx = width - 130, ly = 14 + i * 16;
       s += `<circle cx="${lx}" cy="${ly - 4}" r="4" fill="${c}"/>`;
-      s += `<text x="${lx + 8}" y="${ly}" font-size="10.5" fill="var(--ink-soft)">${st.id}${st.name ? ' · ' + st.name : ''}</text>`;
+      s += `<text x="${lx + 8}" y="${ly}" font-size="11" fill="var(--ink-soft)">${st.id}${st.name ? ' · ' + st.name : ''}</text>`;
     });
     s += `</g>`;
   }
-  s += `<text x="${W_PAD}" y="${height - 2}" font-size="10" fill="var(--ink-soft)">Dry-bulb temp °C →</text>`;
+  s += `<text x="${W_PAD}" y="${height - 2}" font-size="11" fill="var(--ink-soft)">Dry-bulb temp °C →</text>`;
   s += `</svg>`;
   return s;
 }

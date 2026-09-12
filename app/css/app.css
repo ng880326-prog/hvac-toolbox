@@ -386,3 +386,13 @@ h1, h2, h3 { text-wrap: balance; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* ---------- pipe sizing module (page rebuilt from the workbook Pipe Sizing sheet) ---------- */
+.panel-col { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px; background: var(--card); min-width: 0; }
+.panel-col-head {
+  font-weight: 700; font-size: 13.5px; color: var(--brand);
+  padding-bottom: 8px; margin-bottom: 10px; border-bottom: 1px dashed var(--line);
+}
+.pipes-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.pipes-table td.mark { text-align: center; color: var(--brand); font-weight: 700; }
+.table-scroll table.pipe-full { min-width: 940px; }

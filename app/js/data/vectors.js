@@ -68,6 +68,21 @@ export const vectors = [
       { name: 'flow DN20 @0.78955 m/s = 0.292 L/s (Excel M8)', fn: (F) => F.flowFromVelocity(0.78955082030053658, 21.7), expect: 0.292004, tol: 5e-4 },
       { name: 'kW = L/s·4.186789·ΔT (Excel R7: 0.13537 L/s ΔT8 → 4.534)', fn: (F) => F.waterHeat(0.13536561965600805, 8), expect: 4.53398, tol: 1e-3 },
       { name: 'RT = kW/3.517 (Excel S7 → 1.28916)', fn: (F) => F.waterHeat(0.13536561965600805, 8) / 3.517, expect: 1.28916, tol: 1e-3 },
+      // The workbook's pipe table (I7:N30) lists, per DN, the capacity at the binding limit — which is
+      // the 400 Pa/m drop for small bores and the 2.5 m/s velocity for large ones (DN250 and up). This
+      // reproduces that column and thereby validates the DN350…DN800 rows the rebuilt page needs.
+      { name: 'DN15 @400 Pa/m = 0.13537 L/s (Excel M7, ΔP governs)', fn: (F) => Math.min(F.flowFromVelocity(F.velocityForPd(400, 16.2, 140), 16.2), F.flowFromVelocity(2.5, 16.2)), expect: 0.135366, tol: 2e-4 },
+      { name: 'DN100 @400 Pa/m = 18.5099 L/s (Excel M15, ΔP governs)', fn: (F) => Math.min(F.flowFromVelocity(F.velocityForPd(400, 105.1, 140), 105.1), F.flowFromVelocity(2.5, 105.1)), expect: 18.50991, tol: 2e-3 },
+      { name: 'DN250 @2.5 m/s = 131.510 L/s (Excel M19, velocity governs)', fn: (F) => Math.min(F.flowFromVelocity(F.velocityForPd(400, 258.8, 140), 258.8), F.flowFromVelocity(2.5, 258.8)), expect: 131.50990, tol: 5e-3 },
+      { name: 'DN400 @2.5 m/s = 299.261 L/s (Excel M22, velocity governs)', fn: (F) => Math.min(F.flowFromVelocity(F.velocityForPd(400, 390.4, 140), 390.4), F.flowFromVelocity(2.5, 390.4)), expect: 299.26058, tol: 5e-3 },
+      { name: 'DN800 @2.5 m/s = 1234.74 L/s (Excel M30, velocity governs)', fn: (F) => Math.min(F.flowFromVelocity(F.velocityForPd(400, 793.0, 140), 793.0), F.flowFromVelocity(2.5, 793.0)), expect: 1234.74212, tol: 0.02 },
+      // Workbook design case: 4080 kW over ΔT 8 gives DN250 at 2.3166 m/s and 163 Pa/m. Note the
+      // workbook's capacity block uses cp = 4.1850 kJ/kg·K for water while its kW column uses 4.186789;
+      // the app uses the single standard value 4.186789 throughout (0.04 % apart).
+      { name: '4080 kW, ΔT 8 → 121.864 L/s (Excel E21, cp = 4.185)', fn: (F) => 4080 / (4.185 * 8), expect: 121.8638, tol: 5e-4 },
+      { name: 'DN250 @121.864 L/s → 2.3166 m/s (Excel E25)', fn: (F) => F.velocityFromFlow(121.86379928315414, 258.8), expect: 2.316628, tol: 5e-5 },
+      { name: 'DN250 @121.864 L/s → 163 Pa/m (Excel E26)', fn: (F) => F.hazenWilliams(F.velocityFromFlow(121.86379928315414, 258.8), 258.8, 140), expect: 163, tol: 0.6 },
+      { name: '4080 kW, ΔT 10 → 97.491 L/s (Excel E27, cp = 4.185)', fn: (F) => 4080 / (4.185 * 10), expect: 97.49104, tol: 5e-4 },
     ],
   },
   {

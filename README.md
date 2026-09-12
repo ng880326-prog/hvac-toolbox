@@ -33,6 +33,7 @@ app/                    PWA 應用（無建置步驟，純 ES Modules）— 唯�
   sw.js                 Service worker（離線快取）
   icons/                SVG + PNG 圖示
 dist/hvac-toolbox-site/ 由 app/ 鏡像出來的商店上架副本（勿手改，見下）
+legacy/                 最初嘅單頁原型（死碼，只供歷史參考 — 見 legacy/README.md）
 tests/                  Node 端測試（run_tests.mjs 讀 app/js/data/vectors.js、smoke.mjs）
 analysis/               Excel 擷取結果（34 工作表、公式去重、快取值）
 docs/

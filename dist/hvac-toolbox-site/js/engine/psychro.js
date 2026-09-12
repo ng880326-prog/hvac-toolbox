@@ -18,11 +18,14 @@ export const CONST = {
   P_STD: 101.325,   // kPa standard atmosphere
 };
 
-// Hyland–Wexler coefficients. Liquid water 0–200 °C (T in K):
-const C_LIQ = [-5800.2206, 1.3914993, -0.048640239, 0.000041764768, -0.000000014452093, 6.5459673];
-// Ice −100–0.01 °C (T in K):
-const C_ICE = [-5674.5359, 6.3925247, -0.009677843, 0.00000062215701, 0.0000000020747825,
-  -0.0000000009484024, 4.1635019];
+// Hyland–Wexler coefficients, ASHRAE Handbook—Fundamentals (2025) ch.1, T in K.
+// Written in scientific notation on purpose: as long decimal strings (C6 = -0.0000000000009484024)
+// a single miscounted zero shifted the whole ice branch by 1000x and produced pws(0) = 0.0031 kPa.
+// Liquid water, 0…200 °C (ASHRAE eq. 6):
+const C_LIQ = [-5.8002206e3, 1.3914993, -4.8640239e-2, 4.1764768e-5, -1.4452093e-8, 6.5459673];
+// Ice, −100…0.01 °C (ASHRAE eq. 5):
+const C_ICE = [-5.6745359e3, 6.3925247, -9.677843e-3, 6.2215701e-7, 2.0747825e-9, -9.484024e-13,
+  4.1635019];
 
 /** Saturation pressure of water vapour, kPa, for temperature T (°C). Range −100..200 °C. */
 export function pws(T) {

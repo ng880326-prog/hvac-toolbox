@@ -69,6 +69,14 @@ function showHome() {
     en: 'Version 1.0.0 · 21 calculation modules · offline-first PWA · formulas per ASHRAE 2025 / CIBSE / GB',
     zh: '版本 1.0.0 · 21 個計算模組 · 離線優先 PWA · 公式依 ASHRAE 2025／CIBSE／GB 檢驗',
   });
+  const about = document.getElementById('about');
+  if (about && !about.querySelector('.verify-link')) {
+    const a = h('a', { class: 'tile verify-link', href: '#m/verify', 'data-nav': '' },
+      h('span', { class: 'ico' }, '🔍'),
+      h('b', {}, L({ en: 'Run Data Self-Check', zh: '🔍 數據真確性自檢' })),
+      h('span', {}, L({ en: 'Re-validate all 69 formulas in-app', zh: '在 App 內重新驗證全部 69 條公式' })));
+    about.append(a);
+  }
   document.getElementById('netWarn').textContent = L({
     en: 'Privacy & security: no account, no analytics, no data collection. Preferences (language/theme) stay in your browser (localStorage). Network is only used to load the app once for installation; all calculation runs offline. HTTPS-only.',
     zh: '隱私與安全：無帳戶、無分析、不收集任何資料。偏好設定（語言/主題）僅存於瀏覽器（localStorage）。網路僅在安裝時載入一次；所有計算離線執行。僅限 HTTPS。',
@@ -98,6 +106,18 @@ function showModule(id) {
   body.innerHTML = '';
   mod.render(body, { L, h, lang: getLang() });
   document.querySelectorAll('.nav-item').forEach((n) => n.classList.toggle('active', n.getAttribute('href') === '#m/' + id));
+  // ---- mobile quick-nav (auto TOC from cards) ----
+  const toc = document.getElementById('moduleToc');
+  toc.innerHTML = '';
+  const cards = [...body.querySelectorAll('.card')];
+  if (cards.length > 1) {
+    cards.forEach((cardEl, i) => {
+      cardEl.id = 'card-' + i;
+      const t = cardEl.querySelector('h3') || cardEl.querySelector('h2');
+      const b = h('button', { class: 'toc-btn', onclick: () => { cardEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }, t ? t.textContent : ('#' + (i + 1)));
+      toc.append(b);
+    });
+  }
   window.scrollTo({ top: 0 });
 }
 

@@ -8,7 +8,10 @@
     "test": "node tests/run_tests.mjs",
     "smoke": "node tests/smoke.mjs",
     "start": "node tools/serve.js 8080",
-    "check": "node tests/run_tests.mjs && node tests/smoke.mjs"
+    "check": "node tests/run_tests.mjs && node tests/smoke.mjs && node tools/package_site.mjs --check",
+    "package:site": "node tools/package_site.mjs",
+    "check:dist": "node tools/package_site.mjs --check",
+    "sync:android": "cap sync android"
   },
   "devDependencies": {
     "@capacitor/cli": "^6.2.2"

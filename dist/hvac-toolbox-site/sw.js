@@ -1,8 +1,9 @@
 // HVAC Toolbox Pro — service worker (offline-first, app-shell cache)
-const CACHE = 'hvac-pro-v1';
+const CACHE = 'hvac-pro-v2';
 const ASSETS = [
   './',
   './index.html',
+  './privacy.html',
   './css/app.css',
   './manifest.webmanifest',
   './js/app.js',
@@ -19,6 +20,7 @@ const ASSETS = [
   './js/data/suppliers.js',
   './js/data/hk_catalogs.js',
   './js/data/vrf_data.js',
+  './js/data/vectors.js',
   './js/modules/index.js',
   './js/modules/psychro.js',
   './js/modules/ducts.js',
@@ -58,6 +60,17 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
+  if (e.request.mode === 'navigate') {
+    // network-first for pages: guarantees the app shell is always current
+    e.respondWith(
+      fetch(e.request).then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {});
+        return res;
+      }).catch(() => caches.match(e.request).then((hit) => hit || caches.match('./index.html')))
+    );
+    return;
+  }
   e.respondWith(
     caches.match(e.request).then((hit) => hit || fetch(e.request).then((res) => {
       const copy = res.clone();
@@ -66,4 +79,3 @@ self.addEventListener('fetch', (e) => {
     }).catch(() => caches.match('./index.html')))
   );
 });
-[System]

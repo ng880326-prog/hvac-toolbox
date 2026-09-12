@@ -43,7 +43,7 @@ export function field(spec, onChange) {
     }
   } else {
     input = h('input', {
-      id, type: spec.type ?? 'number',
+      id, name: 'f-' + spec.key, autocomplete: 'off', type: spec.type ?? 'number',
       inputmode: spec.type === 'text' ? 'text' : 'decimal',
       step: spec.step ?? 'any',
       min: spec.min, max: spec.max,
@@ -90,6 +90,9 @@ export function card(title, sub, buildBody, extra = {}) {
   if (buildBody) buildBody(body);
   if (extra.note) body.append(h('div', { class: 'note' }, extra.note));
   if (extra.src) body.append(h('div', { class: 'note' }, h('span', {}, '出處：'), h('code', {}, extra.src)));
+  if (extra.collapsed) {
+    return fold(typeof title === 'string' ? title : (title.zh || title.en || ''), c);
+  }
   return c;
 }
 
@@ -115,9 +118,16 @@ export function form(specs, onChange, gridClass = 'grid2') {
 }
 
 /** Rebuild results area. */
+/** Collapsible group — keeps secondary/advanced sections out of the way. */
+export function fold(title, ...kids) {
+  const body = h('div', { class: 'fold-body' });
+  for (const k of kids) if (k) body.append(k);
+  const d = h('details', { class: 'folded' }, h('summary', {}, title), body);
+  return d;
+}
 export function results(parent, items) {
   parent.innerHTML = '';
-  const grid = h('div', { class: 'results' });
+  const grid = h('div', { class: 'results', 'aria-live': 'polite' });
   for (const it of items) grid.append(it);
   parent.append(grid);
 }

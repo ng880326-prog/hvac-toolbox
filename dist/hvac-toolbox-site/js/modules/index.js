@@ -20,3 +20,4 @@ import './fan.js';
 import './pn.js';
 import './webtools.js';
 import './vrf.js';
+import './validate.js';

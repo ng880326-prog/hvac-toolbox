@@ -126,7 +126,7 @@ function render(root, { L }) {
       }
     }
     draw(f.all());
-  }, { formula: 'Tsat = pws⁻¹(p);  hfg (Watson);  V = ṁ/(ρA);  ρₛ ≈ p·M/(R·T)', src: 'IAPWS IF-97 · ideal-gas ρ approx (±5%)' }));
+  }, { formula: 'Tsat = pws⁻¹(p);  hfg (Watson);  V = ṁ/(ρA);  ρₛ ≈ p·M/(R·T)', src: 'IAPWS IF-97 · ideal-gas ρ approx (±5%)', collapsed: true }));
 
   // ---- Condensate (from the workbook tables) ----
   root.append(card(L({ en: 'Condensate Drain (workbook tables)', zh: '凝水管（原檔兩表）' }), '', (body) => {
@@ -161,7 +161,7 @@ function render(root, { L }) {
     draw(f.all());
   }, {
     formula: 'Table 1 (drain by coil load, 1:40 → 1:70) & Table 2 (by flow, from workbook Pipe Sizing sheet), condensate from coil module',
-    src: 'Pipe Sizing sheet (workbook) — condensate tables',
+    src: 'Pipe Sizing sheet (workbook) — condensate tables', collapsed: true,
   }));
 }
 

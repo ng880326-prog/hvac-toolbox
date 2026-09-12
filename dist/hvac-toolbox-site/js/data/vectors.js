@@ -38,6 +38,11 @@ export const vectors = [
       { name: 'pws(-10) = 0.25990 kPa (ice table)', fn: (E) => E.pws(-10), expect: 0.25990, tol: 5e-5 },
       { name: 'pws(0) = 0.61115 kPa (ice table)', fn: (E) => E.pws(0), expect: 0.61115, tol: 5e-5 },
       { name: 'pws ice→liquid continuity across 0.01 °C', fn: (E) => E.pws(0.009) / E.pws(0.01), expect: 1, tol: 2e-3 },
+      // WfromEnthalpyT — the inverse the Wheel sheet needs (total effectiveness fixes the off-wheel
+      // enthalpy, and the moisture content is then looked up from that (h, T) pair). Values below are
+      // the wheel page's own summer case: t2 = 26.75 °C, h2 = 60.902650 kJ/kg, w2 = 0.013334.
+      { name: 'WfromEnthalpyT(h2, t2) inverts enthalpy()', fn: (E) => E.WfromEnthalpyT(60.902650, 26.75), expect: 0.013334, tol: 1e-6 },
+      { name: 'enthalpy(26.75, 0.013334) = 60.9027 (Wheel 夏出口 h2)', fn: (E) => E.enthalpy(26.75, 0.013334), expect: 60.9027, tol: 5e-4 },
       // AHU/PAU design conditions from the Coil sheet (Summer OA 35 DB / 28 WB)
       { name: 'Coil design OA summer: h (Excel 89.396)', fn: (E) => E.state({ t: 35, twb: 28 }).h, expect: 89.396, tol: 0.02 },
       { name: 'Coil design OA summer: W (Excel 0.021132)', fn: (E) => E.state({ t: 35, twb: 28 }).w, expect: 0.021131, tol: 2e-5 },

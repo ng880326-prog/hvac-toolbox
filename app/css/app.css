@@ -185,6 +185,36 @@ body {
 .ahu-sch g.comp text { font-size: 10px; font-weight: 700; }
 .ahu-sch .dim-line { stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 4 3; }
 .ahu-sch .dim-text { font-size: 10px; fill: var(--ink-soft); }
+
+/* Wheel module (page rebuilt from the workbook Wheel sheet) */
+.wheel-sch { width: 100%; border-radius: var(--radius-sm); background: var(--bg); border: 1px solid var(--line); margin-bottom: 12px; }
+/* The schematic ships in a landscape and a portrait variant; the media query picks one so no JS
+   resize listener is needed and nothing leaks when the module is re-rendered on navigation. */
+.wheel-sch-narrow { display: none; }
+@media (max-width: 620px) {
+  .wheel-sch-wide { display: none; }
+  .wheel-sch-narrow { display: block; }
+}
+.wheel-col { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px; background: var(--card); min-width: 0; }
+.wheel-col-head {
+  font-weight: 700; font-size: 13.5px; color: var(--ink-soft);
+  padding-bottom: 8px; margin-bottom: 10px; border-bottom: 1px dashed var(--line);
+}
+.wheel-col-head.on { color: var(--brand); border-bottom-color: var(--brand-2); }
+.wheel-dc td .cell-in, .wheel-dc th { white-space: nowrap; }
+.wheel-dc input.cell-in {
+  width: 100%; min-width: 58px; padding: 5px 7px; font: inherit; font-size: 13px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.wheel-dc input.cell-in:focus { outline: 2px solid var(--brand-2); border-color: transparent; }
+.wheel-dc td.num { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+/* Let the wide design-conditions table scroll instead of squeezing its label columns into
+   one-character-per-line on phones. */
+.wheel-dc th, .wheel-dc td:first-child, .wheel-dc td:nth-child(2) { white-space: nowrap; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll table { min-width: 620px; }
+@media (max-width: 620px) { .table-scroll table { min-width: 700px; } }
 .field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .field label { font-size: 12.5px; color: var(--ink-soft); font-weight: 600; }
 .field .ctl { display: flex; align-items: center; gap: 6px; }

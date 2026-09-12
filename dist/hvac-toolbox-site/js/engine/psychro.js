@@ -70,6 +70,18 @@ export function specificVolume(T, W, p = CONST.P_STD) {
 /** Moist-air density ρ (kg/m³) — matches workbook (1+W)/v. */
 export function density(T, W, p = CONST.P_STD) { return (1 + W) / specificVolume(T, W, p); }
 
+/**
+ * Humidity ratio W (kg/kg) from specific enthalpy h (kJ/kg) and dry-bulb T (°C) — the inverse of
+ * enthalpy(). This is how the workbook's Wheel sheet resolves an off-wheel state: the total
+ * effectiveness fixes the outlet enthalpy, the sensible effectiveness fixes the outlet temperature,
+ * and the outlet moisture content is looked up from that (h, T) pair in 'Wheel Support'.
+ */
+export function WfromEnthalpyT(h, T) {
+  const den = CONST.H_FG0 + CONST.CP_VAP * T;
+  const w = (h - CONST.CP_AIR * T) / den;
+  return w > 0 ? w : 0;
+}
+
 /** Relative humidity % from dry-bulb T (°C) and vapour pressure pw (kPa). */
 export function RHfromPw(T, pw) { return pw / pws(T) * 100; }
 

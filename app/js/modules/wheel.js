@@ -108,8 +108,8 @@ const I18N = {
   minFlow: { en: 'Mass flow uses min(Vs, Ve) as in the workbook (O6/O10).', zh: '質量流量取 min(Vs, Ve)，與原檔 O6／O10 一致。' },
 };
 
-/** ISA troposphere pressure (kPa) for altitude z (m) — replaces the workbook's fixed 101.325 kPa. */
-function pressureAt(z) { return 101.325 * Math.pow(1 - 2.25577e-5 * z, 5.2559); }
+/** ISA troposphere pressure (kPa) for altitude z (m) — shared with the psychrometric page. */
+const pressureAt = (z) => P.pressureAtAltitude(z);
 
 /**
  * Resolve a design-condition row into a psychrometric state.

@@ -31,32 +31,32 @@
  ## 2. 系統完整性 - 模組數：22 - manifest/SW/圖示/隱私頁：見 deep_check.py（CLEAN）
  ## 3-4. 成效與運作（逐模組互動測試） 
 - 互動探針（輸入→輸出反應、摺疊開合）：全部通過
- ### 運作細節 - 主題切換：light → dark ✅ - 語言切換：'通用' → 'GENERAL' ✅ - 手機目錄 chips：4 ✅ - 重置按鈕：t 由 99 → 24.6 ✅ - CSV 匯出：psychro_summary.csv ✅ - 複製結果 toast：'⚠ 複製失敗 手動選取' ✅
+ ### 運作細節 - 主題切換：light → dark ✅ - 語言切換：'通用' → 'GENERAL' ✅ - 手機目錄 chips：6 ✅ - 重置按鈕：第一個輸入格 99 → 0 ✅ - CSV 匯出：psychro_summary.csv ✅ - 複製結果 toast：'⚠ 複製失敗 手動選取' ✅
 - 離線重載：✅ tiles=22
  ## 5. 效能  | 頁面 | 載入(ms) | DOM 節點 | JS heap(MB) | |---|---|---|---|
-| home | 646 | 242 | 10 |
-| convert | 4 | 354 | 10 |
+| home | 871 | 242 | 10 |
+| convert | 7 | 354 | 10 |
 | webtools | 5 | 441 | 10 |
-| psychro | 4 | 578 | 10 |
-| ducts | 4 | 573 | 10 |
-| coil | 5 | 803 | 10 |
-| wheel | 4 | 641 | 10 |
-| vrf | 4 | 308 | 10 |
-| pipes | 4 | 466 | 10 |
-| npsh | 4 | 313 | 10 |
+| psychro | 6 | 630 | 10 |
+| ducts | 5 | 573 | 10 |
+| coil | 6 | 803 | 10 |
+| wheel | 6 | 641 | 10 |
+| vrf | 6 | 308 | 10 |
+| pipes | 5 | 466 | 10 |
+| npsh | 5 | 313 | 10 |
 | insulation | 4 | 324 | 10 |
-| pn | 4 | 300 | 10 |
-| hx | 4 | 324 | 10 |
-| chiller | 4 | 485 | 10 |
-| boiler | 6 | 336 | 10 |
-| motor | 4 | 363 | 10 |
-| ahu | 4 | 516 | 10 |
-| fcu | 4 | 441 | 10 |
-| sac | 5 | 363 | 10 |
-| fan | 4 | 566 | 10 |
-| acoustics | 4 | 347 | 10 |
-| stairwell | 5 | 316 | 10 |
-| verify | 4 | 279 | 10 |
+| pn | 5 | 300 | 10 |
+| hx | 5 | 324 | 10 |
+| chiller | 5 | 485 | 10 |
+| boiler | 4 | 336 | 10 |
+| motor | 5 | 363 | 10 |
+| ahu | 6 | 516 | 10 |
+| fcu | 7 | 441 | 10 |
+| sac | 6 | 363 | 10 |
+| fan | 5 | 566 | 10 |
+| acoustics | 6 | 347 | 10 |
+| stairwell | 6 | 316 | 10 |
+| verify | 8 | 279 | 10 |
  - 最慢頁面：無（全部 <2.5s）
 - console/page 錯誤：0 - 失敗或 4xx+ 請求：0
  ## 總評 - ✅ 全維度通過

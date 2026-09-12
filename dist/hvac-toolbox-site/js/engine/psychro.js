@@ -85,6 +85,17 @@ export function WfromEnthalpyT(h, T) {
 /** Relative humidity % from dry-bulb T (°C) and vapour pressure pw (kPa). */
 export function RHfromPw(T, pw) { return pw / pws(T) * 100; }
 
+/**
+ * Standard-atmosphere pressure (kPa) at altitude z (m) — ASHRAE Handbook—Fundamentals ch.1 eq. (3),
+ * valid through the troposphere: p = 101.325·(1 − 2.25577e-5·z)^5.2559.
+ * Both the workbook's Psychrometric Chart and Wheel sheets carry an Altitude cell but pin the pressure
+ * at 101.325 kPa, so their altitude input does nothing; every page here derives it instead.
+ */
+export function pressureAtAltitude(z) {
+  const h = Math.min(Math.max(Number.isFinite(z) ? z : 0, -500), 11000);
+  return CONST.P_STD * Math.pow(1 - 2.25577e-5 * h, 5.2559);
+}
+
 /** Vapour pressure (kPa) from dry-bulb T (°C) and relative humidity %. */
 export function pwFromRH(T, rh) { return rh / 100 * pws(T); }
 

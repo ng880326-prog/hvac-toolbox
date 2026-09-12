@@ -23,6 +23,13 @@ export const vectors = [
       { name: 'Air2 h (Excel 28.3545)', fn: (E) => E.enthalpy(10, E.WfromTTwb(10, 9.6)), expect: 28.3545, tol: 0.01 },
       // Air2 RH input (40%) conflicts with Tdb/Twb pair: computed RH ≈ 95.2%. Workbook echoes the input — flagged UX issue.
       { name: 'Air2 computed RH from T/Twb (workbook echoes 40)', fn: (E) => E.RHfromPw(10, E.pwFromW(E.WfromTTwb(10, 9.6), 101.325)), expect: 95.23, tol: 0.05 },
+      { name: 'Air2 v (Excel 0.81166 m³/kg)', fn: (E) => E.specificVolume(10, E.WfromTTwb(10, 9.6), 101.325), expect: 0.811661, tol: 2e-4 },
+      { name: 'Air2 ρ Excel-parity (1/v = 1.2320)', fn: (E) => 1 / E.specificVolume(10, E.WfromTTwb(10, 9.6), 101.325), expect: 1.232041, tol: 2e-4 },
+      // ISA standard atmosphere (ASHRAE Fundamentals ch.1 eq. 3). Both workbook sheets carry an
+      // Altitude input but pin the pressure at 101.325 kPa, so this is new behaviour, not parity.
+      { name: 'p(alt 0 m) = 101.325 kPa', fn: (E) => E.pressureAtAltitude(0), expect: 101.325, tol: 1e-6 },
+      { name: 'p(alt 1000 m) = 89.875 kPa', fn: (E) => E.pressureAtAltitude(1000), expect: 89.875, tol: 0.002 },
+      { name: 'p(alt 3000 m) = 70.108 kPa', fn: (E) => E.pressureAtAltitude(3000), expect: 70.108, tol: 0.002 },
       // State solver round-trips
       { name: 'state(T,RH) -> Tdb', fn: (E) => E.state({ t: 24, rh: 50 }).t, expect: 24, tol: 1e-9 },
       { name: 'state(T,RH) -> W', fn: (E) => E.state({ t: 24, rh: 50 }).w, expect: 0.009299, tol: 1e-4 },

@@ -174,10 +174,11 @@ with sync_playwright() as p:
     lang_after = pg.locator("#navGroups .nav-group-title").first.inner_text()
     pg.click("#langToggle"); pg.wait_for_timeout(150)
     toc = pg.locator(".toc-btn").count()
-    # reset works?
-    pg.locator("#f-t").fill("99"); pg.wait_for_timeout(150)
-    pg.click("#resetBtn"); pg.wait_for_timeout(250)
-    reset_val = pg.locator("#f-t").input_value()
+    # reset works? The rebuilt pages namespace their input ids (preset-, quick-, coil-, size-…), so
+    # target the module's first number input instead of a hard-coded id.
+    pg.locator("#moduleBody input[type=number]").first.fill("99"); pg.wait_for_timeout(150)
+    pg.click("#resetBtn"); pg.wait_for_timeout(300)
+    reset_val = pg.locator("#moduleBody input[type=number]").first.input_value()
     # CSV download
     csv_ok, csv_name = False, ""
     try:
@@ -195,7 +196,7 @@ with sync_playwright() as p:
       f"- 主題切換：{theme_before} → {theme_after} {'✅' if theme_before != theme_after else '❌'}",
       f"- 語言切換：'{lang_before}' → '{lang_after}' {'✅' if lang_before != lang_after else '❌'}",
       f"- 手機目錄 chips：{toc} ✅" if toc else "- 手機目錄 chips：0（桌面寬度下隱藏，正常）",
-      f"- 重置按鈕：t 由 99 → {reset_val} {'✅' if reset_val != '99' else '❌'}",
+      f"- 重置按鈕：第一個輸入格 99 → {reset_val} {'✅' if reset_val != '99' else '❌'}",
       f"- CSV 匯出：{csv_name} {'✅' if csv_ok else '❌'}",
       f"- 複製結果 toast：'{toast}' {'✅' if toast else '❌'}")
 

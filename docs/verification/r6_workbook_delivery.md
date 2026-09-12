@@ -69,10 +69,38 @@ python tools/verify_r6.py                                # 修正點結構＋獨
 | `tools/verify_r6.py`（agent 驗證器） | **PASS**（公式結構、獨立數值、`vbaProject.bin` 保留、VML 28 個、R5 未改動） |
 | openpyxl 可讀取 | 34 張表全部載入成功，無 XML 錯誤 |
 
-## 五、尚未完成（需你在 Excel 內做）
+## 五、Excel 實機重算（已完成，2026-02）
 
-- 沙盒無法執行 Excel COM／LibreOffice，**R6 未曾在 Excel 內實機重算**。已設 `fullCalcOnLoad="1"`，
-  開啟時會自動重算（數秒）。請在 Excel 開啟確認無「修復」提示後再發布。
-- **Coil／Coil Support 兩張表仍有相同嘅 <0 ℃ pws 問題**（屬 fluids_thermal 範疇），本次未動。
-  要一併修：把兩個表名加入 `tools/fix_r6.py` 嘅 `TARGET_SHEETS`，重跑上列四步即可。
-- App 端（`app/js/engine`）嘅同一批修正已同步，並由 `node tests/run_tests.mjs` 102 條向量把關。
+用 Excel COM（Excel 16.0）開檔 + `CalculateFullRebuild()`，結果：
+
+- **開啟無任何「修復」提示**，34 張表全部載入；存檔後部件仍與 R5 完全一致（圖表 8／繪圖 57／媒體 5
+  含 `hdphoto1.wdp`／列印設定 22／控制項 173／VBA 1，0 遺失）。
+- 重算後數值（直接由 Excel 讀回）：
+
+| 位置 | Excel 重算值 | 期望 | 判定 |
+|---|---|---|---|
+| `Wheel!BM11` pws(−39.5 ℃) | 0.0135912794986964 | 0.013591 | ✅ 冰面 |
+| `Wheel!BM12` pws(−39.0 ℃) | 0.0143771779944869 | 0.014377 | ✅ 冰面 |
+| `Wheel!BM40` pws(−25.0 ℃) | 0.0632891383776681 | 0.063289 | ✅ 冰面 |
+| `Wheel!BM130` pws(0.0 ℃) | 0.611153572251632 | 0.6112 | ✅ 冰面 |
+| `Wheel!BS11` 露點 | −39.5 | −39.5 | ✅ |
+| `Air-side!AS5` 37 ℃ 黏度 | 1.894E−05 | 1.894E−05 | ✅ |
+| `Supporting 6!A10` | `n/a (RH>0 required)` | 護衛生效 | ✅（Air1 RH 為空） |
+| `Supporting 6!C10`（Air2 乾球推算） | **31.5619 ℃** | 未驗證 | ⚠️ 見下 |
+
+重算後已存檔（2.3 MB），快取值隨檔交付，任何檢視器打開即見數值。腳本：`tools/open_and_recalc_r6.ps1`。
+
+## 六、仍未驗證／未處理
+
+1. **`Supporting 6!C10` 嘅乾球推算值不可信（31.5619 ℃）**。
+   R5 本身 A10／C10 都回 `FALSE`（挑選鏈全落空），R6 放寬容差後改為回鏈尾值，但睇迭代序列
+   （`Supporting 6.1` H/I：r61 爆炸至 1.236e25，之後回落並固定於 −0.2683）可知鏈係「停低」而非
+   找到物理根；因為 r63 起 `H == I`，第一個檢查行 r64 就命中，返回該行候選 J64 = 31.5619 ℃。
+   agent 驗證嘅係另一組輸入（露點 0 ℃／RH 40 % → 13.3042 ℃），與工作簿實際輸入
+   （Air2：乾球 10／濕球 9.6／RH 40 %，露點留空）唔同。
+   **建議**：此欄暫時當未驗證，需要 Air2 乾球時請直接輸入；若要徹底修，需先還原
+   `Supporting 6.1` 迭代欄（H／I／J）嘅原意並改用真正的收斂判據，再決定容差。
+2. **Coil／Coil Support 兩張表仍有相同嘅 <0 ℃ pws 問題**（本次未動）。要一併修：把兩個表名加入
+   `tools/fix_r6.py` 嘅 `TARGET_SHEETS`，重跑文件第二節嘅四步。
+3. App 端（`app/js/engine`）嘅同一批修正已同步，並由 `node tests/run_tests.mjs` **102 條向量**把關。
+

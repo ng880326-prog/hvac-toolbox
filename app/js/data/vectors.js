@@ -83,6 +83,12 @@ export const vectors = [
       { name: 'DN250 @121.864 L/s → 2.3166 m/s (Excel E25)', fn: (F) => F.velocityFromFlow(121.86379928315414, 258.8), expect: 2.316628, tol: 5e-5 },
       { name: 'DN250 @121.864 L/s → 163 Pa/m (Excel E26)', fn: (F) => F.hazenWilliams(F.velocityFromFlow(121.86379928315414, 258.8), 258.8, 140), expect: 163, tol: 0.6 },
       { name: '4080 kW, ΔT 10 → 97.491 L/s (Excel E27, cp = 4.185)', fn: (F) => 4080 / (4.185 * 10), expect: 97.49104, tol: 5e-4 },
+      // Chiller sheet: overall density rows and the IPLV schedule.
+      { name: 'plant density 2180 RT / 39500 m² = 194.1 W/m² (Chiller Y6, 194)', fn: (F) => F.plantDensityWm2(2180, 39500), expect: 194.09, tol: 0.1 },
+      { name: 'plant density 2100 RT / 52763 m² = 139.98 W/m² (Chiller Y11)', fn: (F) => F.plantDensityWm2(2100, 52763), expect: 139.979, tol: 0.05 },
+      { name: 'plant density 1244 RT / 32969 m² = 132.70 W/m² (Chiller Y12)', fn: (F) => F.plantDensityWm2(1244, 32969), expect: 132.705, tol: 0.05 },
+      { name: 'AHRI 550/590 IPLV weights sum to 1.00 (Chiller AB14:AB17)', fn: (F) => 0.01 + 0.42 + 0.45 + 0.12, expect: 1.0, tol: 1e-12 },
+      { name: 'COP = 3.516 / (kW/RT): 0.60 kW/RT → 5.86', fn: (F) => 3.516 / 0.6, expect: 5.86, tol: 5e-3 },
     ],
   },
   {

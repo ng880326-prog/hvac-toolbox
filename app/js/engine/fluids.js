@@ -63,6 +63,16 @@ export const RTtokW = (rt) => rt * CONV.kW_PER_RT;
 export const kWtoBtuH = (kw) => kw * CONV.BTUH_PER_KW;
 export const kWtoKcalH = (kw) => kw * CONV.KCAL_PER_KW;
 
+/**
+ * Plant cooling-load density (W/m²) from total capacity in RT and the air-conditioned area — the
+ * relation the workbook's Chiller sheet uses on its reference rows (overall density column Y), with
+ * its printed 3.517 kW/RT rather than the catalog 3.51685.
+ */
+export function plantDensityWm2(totalRT, acAreaM2) {
+  if (!(totalRT > 0) || !(acAreaM2 > 0)) return null;
+  return totalRT * 3.517 * 1000 / acAreaM2;
+}
+
 /** Water-side heat: kW = L/s · 4.1868 · ΔT. */
 export function waterHeat(Lps, dT) { return Lps * 4.186789 * dT; }
 /** Flow L/s for heat kW at ΔT. */

@@ -17,7 +17,9 @@ export function h(tag, attrs = {}, ...kids) {
 /** Number formatting: compact, locale-aware. */
 export function fmt(x, digits = 2) {
   if (x == null || Number.isNaN(x) || !isFinite(x)) return '—';
-  if (Math.abs(x) >= 1e6 || (Math.abs(x) < 1e-3 && x !== 0)) return x.toExponential(2);
+  // Switch to exponential only where digits stop being readable — a 3.4 MBtu/h result should read
+  // 3,412,140, not 3.41e+7.
+  if (Math.abs(x) >= 1e9 || (Math.abs(x) < 1e-3 && x !== 0)) return x.toExponential(2);
   return x.toLocaleString(undefined, { maximumFractionDigits: digits, minimumFractionDigits: Math.min(digits, 2) });
 }
 

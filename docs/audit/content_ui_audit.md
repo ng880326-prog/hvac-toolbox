@@ -37,18 +37,19 @@
 - 🔽 **百葉選型** — in 2, sel 0, chk 0, seg [], res 1, notes 1
     - src: ASHRAE Fundamentals 2025 Ch.21 (workbook ref)
 
-## coil — 盤管 · AHU／PAU 選型  (cards 6 · inputs 55 · results 34 · tables 0/0 rows)
--    **系統與空氣設計** — in 11, sel 0, chk 0, seg [2], res 6, notes 2
-    - src: Coil sheet (workbook): mixing point & ventilation load
--    **冷卻盤管（AHU／PAU）** — in 11, sel 0, chk 0, seg [], res 8, notes 1, formula
-    - src: Coil sheet (workbook); psychrometrics per ASHRAE
+## coil — 盤管 · AHU／PAU 選型  (cards 7 · inputs 38 · results 25 · tables 0/0 rows)
+-    **設計條件** — in 8, sel 0, chk 0, seg [], res 0, notes 2
+    - src: Coil sheet (workbook) — design conditions
+-    **情境預設** — in 0, sel 0, chk 0, seg [3], res 0, notes 1
 -    **情境並排（AHU｜PAU）** — in 12, sel 0, chk 0, seg [], res 8, notes 0
-- 🔽 **水溫與風管設計** — in 7, sel 0, chk 0, seg [], res 5, notes 1
-    - src: Coil sheet (workbook): water temperatures & duct design blocks
-- 🔽 **預熱／再熱／蒸汽／加濕** — in 10, sel 0, chk 0, seg [], res 4, notes 2
-    - src: Steam tables; sensible-heat relations (workbook Coil sheet)
+-    **冷卻盤管（AHU／PAU）** — in 4, sel 0, chk 0, seg [], res 7, notes 1, formula
+    - src: Coil sheet (workbook); psychrometrics per ASHRAE
+- 🔽 **水溫與風管設計** — in 6, sel 0, chk 0, seg [], res 3, notes 1
+    - src: Coil sheet (workbook): water temperature & duct design blocks
 - 🔽 **冷媒水管選徑** — in 4, sel 0, chk 0, seg [], res 3, notes 1, formula
-    - src: ASHRAE F. Ch.22; CIBSE limits 2.5 m/s / 400 Pa/m
+    - src: ASHRAE F. Ch.22 · CIBSE 2.5 m/s / 400 Pa/m
+- 🔽 **預熱／再熱／蒸汽／加濕** — in 4, sel 0, chk 0, seg [], res 4, notes 1
+    - src: Coil sheet (workbook) — preheat / reheat / steam / humidification
 
 ## wheel — 轉輪熱回收  (cards 1 · inputs 8 · results 7 · tables 0/0 rows)
 -    **轉輪熱回收** — in 8, sel 0, chk 0, seg [2], res 7, notes 2, formula
@@ -162,7 +163,7 @@
 - 摺疊卡（本頁 0）
 
 ## 匯總
-- 欄位總數 171｜結果瓦片 182｜表格 15（200 列）
+- 欄位總數 154｜結果瓦片 173｜表格 15（200 列）
 
 ## 潛在 UI 待改進：1
 - (1×) 結果「DN25」預設為空

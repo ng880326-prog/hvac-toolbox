@@ -219,7 +219,9 @@ function render(root, { L }) {
         const s = states[i];
         for (const [key, get, , digits] of OUT_ROWS) {
           const el = outCells[key][i];
-          el.textContent = s ? (key === 'rh' ? s.rh.toFixed(1) : Number(get(s)).toFixed(digits)) : '—';
+          // tdp is null for perfectly dry air (pw = 0); format defensively instead of Number(null) = 0
+          const v = s ? get(s) : null;
+          el.textContent = Number.isFinite(v) ? v.toFixed(digits) : '—';
         }
         if (!s) flags.append(flag('Air ' + (i + 1) + '：' + T('needTwo'), 'info'));
         if (resolved[i].wbGtDb) flags.append(flag('Air ' + (i + 1) + '：' + T('wbGtDb'), 'bad'));

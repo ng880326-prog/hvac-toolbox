@@ -5,6 +5,8 @@ android/local.properties
 android/app/build/
 android/build/
 tools/ocr_out/
+# intermediate openpyxl output kept only as the formula-intent source (see tools/fix_r6.py)
+tools/R6_openpyxl_intent.xlsm
 __pycache__/
 *.pyc
 .DS_Store

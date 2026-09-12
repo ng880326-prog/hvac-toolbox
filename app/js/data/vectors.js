@@ -35,6 +35,14 @@ export const vectors = [
       { name: 'state(T,RH) -> W', fn: (E) => E.state({ t: 24, rh: 50 }).w, expect: 0.009299, tol: 1e-4 },
       { name: 'state(T,Twb) -> RH', fn: (E) => E.state({ t: 24.6, twb: 19.2 }).rh, expect: 60.566, tol: 0.05 },
       { name: 'state(T,Tdp) -> RH', fn: (E) => E.state({ t: 24.6, tdp: 16.4974 }).rh, expect: 60.566, tol: 0.1 },
+      // Regression guards for the R5 errors found in verification (docs/verification/psychro_air.md §D):
+      // rh<=0 (R5: #NUM!/diverging secant), twb>tdb (R5 shows "ERROR"), tdp+rh solved via ice-based pws(0).
+      { name: 'state(rh=0) rejected -> null', fn: (E) => (E.state({ t: 10, rh: 0 }) == null ? 1 : 0), expect: 1, tol: 0 },
+      { name: 'state(rh=101) rejected -> null', fn: (E) => (E.state({ t: 10, rh: 101 }) == null ? 1 : 0), expect: 1, tol: 0 },
+      { name: 'state(twb>tdb) rejected -> null', fn: (E) => (E.state({ t: 24.6, twb: 25 }) == null ? 1 : 0), expect: 1, tol: 0 },
+      { name: 'state(tdp>tdb) rejected -> null', fn: (E) => (E.state({ t: 10, tdp: 11 }) == null ? 1 : 0), expect: 1, tol: 0 },
+      { name: 'state(tdp=0, rh=40) -> tdb ≈ 13.3045 (R5 wrongly returned 0)', fn: (E) => E.state({ tdp: 0, rh: 40 }).t, expect: 13.3045, tol: 0.02 },
+      { name: 'state(t, w=0) -> tdp = null (no LN(0))', fn: (E) => (E.state({ t: 24, w: 0 })?.tdp == null ? 1 : 0), expect: 1, tol: 0 },
       { name: 'pws(100) = 101.325 kPa', fn: (E) => E.pws(100), expect: 101.325, tol: 0.15 },
       { name: 'pws(0.01) ≈ 0.6117 kPa (triple pt)', fn: (E) => E.pws(0.01), expect: 0.6117, tol: 1e-3 },
       // Ice branch (T < 0.01 °C), ASHRAE over-ice saturation table. These lock coefficient C6:
@@ -113,6 +121,7 @@ export const vectors = [
       { name: 'duct friction 1 m³/s 300mm std air ≈ 6.8 Pa/m', fn: (D) => D.ductFriction(1, 300, 1.1811, 18.312e-6, 0.1).pd, expect: 6.8, tol: 0.5 },
       { name: 'Sutherland μ(24 °C) ≈ 18.37e-6 (Excel 18.312e-6)', fn: (D) => D.sutherland(24), expect: 18.37e-6, tol: 0.3e-6 },
       { name: 'Sutherland μ(37 °C) ≈ 18.94e-6 (Excel wrongly used 18.474e-6)', fn: (D) => D.sutherland(37), expect: 18.94e-6, tol: 0.3e-6 },
+      { name: 'AIR_MU[37] = 18.94e-6 (R5 reused the 28 °C value)', fn: (D) => D.AIR_MU[37], expect: 18.94e-6, tol: 0.3e-6 },
       { name: 'rectDimsForDe(0.7615, ratio 1) → a≈0.6966', fn: (D) => D.rectDimsForDe(0.7615, 1).a, expect: 0.6966, tol: 2e-3 },
       { name: 'rectDimsForDe round-trip huebscher = De', fn: (D) => { const d = D.rectDimsForDe(0.7615, 1); return D.huebscher(d.a, d.b); }, expect: 0.7615, tol: 1e-4 },
       { name: 'ovalDimsForDe(0.5, ratio 2) → a≈0.3249', fn: (D) => D.ovalDimsForDe(0.5, 2).a, expect: 0.3249, tol: 3e-3 },

@@ -312,7 +312,7 @@ function render(root, { L }) {
         set(out.wb, s.twb.toFixed(1));
         set(out.w, s.w.toFixed(5));
         set(out.h, s.h.toFixed(2));
-        set(out.tdp, s.tdp.toFixed(1));
+        set(out.tdp, Number.isFinite(s.tdp) ? s.tdp.toFixed(1) : '—');
         set(out.rh, s.rh.toFixed(1));
         // The workbook happily stores a RH that contradicts the DB/WB pair (its Air2 row does):
         // surface it instead of echoing the wrong number.

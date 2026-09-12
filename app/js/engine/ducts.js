@@ -8,10 +8,10 @@
 //  - Workbook legacy variant De = 1.453·A^0.6/P^0.2 (kept for parity; ≈Huebscher within ~1%).
 
 export const AIR_MU = {
-  13: 17.78e-6,   // Pa·s (workbook values)
-  24: 18.312e-6,
-  28: 18.474e-6,
-  37: 18.474e-6,
+  13: 17.78e-6,   // Pa·s (workbook values; Sutherland 17.797e-6)
+  24: 18.312e-6,  // Sutherland 18.325e-6
+  28: 18.474e-6,  // Sutherland 18.514e-6
+  37: 18.94e-6,   // Sutherland 18.936e-6 — fixed: R5 wrongly reused the 28 °C value (18.474e-6)
 };
 export const ROUGHNESS_DUCT = 0.1; // mm galvanised steel (workbook default)
 
@@ -19,7 +19,8 @@ export const ROUGHNESS_DUCT = 0.1; // mm galvanised steel (workbook default)
 export function reynolds(rho, v, D, mu) { return rho * v * D / mu; }
 
 /** Air dynamic viscosity via Sutherland's law (Pa·s). μ0 = 1.716e-5 at 273.15 K, S = 110.4 K.
- *  Workbook used tabulated 17.78e-6 (13 °C) / 18.312e-6 (24 °C) / 18.474e-6 (28 & 37 °C — 37 °C is wrong there). */
+ *  Workbook R5 used tabulated 17.78e-6 (13 °C) / 18.312e-6 (24 °C) / 18.474e-6 (28 & 37 °C —
+ *  the 37 °C entry was wrong there; fixed to 18.94e-6 in R6 and in AIR_MU above). */
 export function sutherland(Tc) {
   const T = Tc + 273.15;
   return 1.716e-5 * Math.pow(T / 273.15, 1.5) * (273.15 + 110.4) / (T + 110.4);

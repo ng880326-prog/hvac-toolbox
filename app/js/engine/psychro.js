@@ -145,6 +145,14 @@ export function WfromTTwb(T, Twb, p = CONST.P_STD) {
  */
 export function state(inp) {
   const p = inp.p ?? CONST.P_STD;
+  // Domain guards (mirrors the workbook's error handling: RH must be in (0,100],
+  // wet-bulb/dew-point must not exceed dry-bulb, and temperatures must be in range).
+  if (inp.rh != null && !(inp.rh > 0 && inp.rh <= 100)) return null;
+  for (const k of ['t', 'twb', 'tdp']) {
+    if (inp[k] != null && (inp[k] < -100 || inp[k] > 200)) return null;
+  }
+  if (inp.t != null && inp.twb != null && inp.twb > inp.t + 1e-6) return null;
+  if (inp.t != null && inp.tdp != null && inp.tdp > inp.t + 1e-6) return null;
   let t = inp.t, w = inp.w, pw = null;
 
   if (inp.t != null && inp.twb != null) {
@@ -160,12 +168,14 @@ export function state(inp) {
     pw = pwFromRH(inp.t, inp.rh);
     w = WfromPw(pw, p);
   } else if (inp.t != null && inp.w != null) {
+    if (inp.w < 0) return null;
     t = inp.t;
     w = inp.w;
     pw = pwFromW(w, p);
   } else if (inp.t != null && inp.h != null) {
     t = inp.t;
     w = (inp.h - CONST.CP_AIR * t) / (CONST.H_FG0 + CONST.CP_VAP * t);
+    if (w < 0) return null;
     pw = pwFromW(w, p);
   } else if (inp.twb != null && inp.rh != null) {
     // solve t such that twb(t, WfromRH(t,rh)) == twb
@@ -201,7 +211,7 @@ export function state(inp) {
   }
 
   const twb = twbFromTW(t, w, p);
-  const tdp = tdpFromPw(pw);
+  const tdp = pw > 0 ? tdpFromPw(pw) : null;
   const rh = RHfromPw(t, pw);
   const h = enthalpy(t, w);
   const v = specificVolume(t, w, p);

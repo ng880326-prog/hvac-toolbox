@@ -1,5 +1,7 @@
 # 濕空氣（Psychrometrics）＋空氣側（Air-side / 風管）公式驗證報告
 
+> **狀態更新**：本報告 §D 所列 5 項 ❌ 錯誤已全數修正於 **`00_HVAC Toolbox_R6.xlsm`**（R5 原檔保留），app 引擎與測試同步修正，詳見 [`psychro_air_fixes.md`](psychro_air_fixes.md)。
+
 - 驗證範圍：`Air-side`、`Psychrometric Chart`、`Supporting 1`～`Supporting 6.1`、`Wheel`、`Wheel Support`（來源：`analysis/unique_formulas.md` 與 `analysis/sheets/*.txt` 之公式快照）
 - 判定符號：**✅ 標準一致** / **⚠️ 近似式或需注意** / **❌ 有誤**
 - 全表基礎出處（工作表自身標註）：**1997 ASHRAE Handbook Fundamentals — Chapter 6（Psychrometrics）**（見 `Psychrometric Chart!B24`）；風管側標註 **CIBSE Guide C / CIBSE Guide B2 Table 3.1 / CIBSE Guide B3 Table 3.4 / ASHRAE Fundamentals 2009 Chapter 21 — Duct Design**。

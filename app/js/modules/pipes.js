@@ -100,7 +100,7 @@ function render(root, { L }) {
       { key: 'm', label: L({ en: 'Steam flow', zh: '蒸汽流量' }), unit: 'kg/h', def: 500 },
       { key: 'p', label: L({ en: 'Pressure', zh: '壓力' }), unit: 'bar', def: 5 },
       { key: 'vMax', label: L({ en: 'Velocity limit', zh: '流速限值' }), unit: 'm/s', def: 30 },
-    ], (st) => draw(st), 'grid3');
+    ], (st) => draw(st), 'grid3', 'steam-');
     const box = h('div');
     body.append(f.grid, box);
     function draw(st) {

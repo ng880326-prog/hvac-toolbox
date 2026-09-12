@@ -59,9 +59,11 @@ export function psychroChartSVG(states, lines, opts = {}) {
     s += `<path d="${hPath(hh)}" fill="none" stroke="var(--line)" stroke-width="0.7" opacity="0.8"/>`;
   }
 
-  // process lines
+  // process lines — a non-finite endpoint would emit NaN into the SVG attributes, which browsers
+  // report as parse errors and draws nothing, so those lines are skipped outright.
   const colors = { cool: 'var(--brand)', heat: 'var(--bad)', mix: 'var(--ok)', default: 'var(--accent)' };
   for (const ln of lines || []) {
+    if (!(ln.points || []).every((v) => Number.isFinite(v))) continue;
     const c = colors[ln.color] || colors.default;
     const [x1, y1, x2, y2] = ln.points;
     s += `<line x1="${sx(x1)}" y1="${sy(y1)}" x2="${sx(x2)}" y2="${sy(y2)}" stroke="${c}" stroke-width="2.5" stroke-dasharray="${ln.dash ? '6 5' : ''}"/>`;
@@ -72,7 +74,8 @@ export function psychroChartSVG(states, lines, opts = {}) {
 
   // state points
   const ptColors = { S: 'var(--brand)', O: 'var(--accent)', P: 'var(--bad)', M: 'var(--ok)', H: 'var(--ink-soft)' };
-  for (const st of states || []) {
+  const pts = (states || []).filter((st) => Number.isFinite(st?.t) && Number.isFinite(st?.w));
+  for (const st of pts) {
     const x = sx(st.t), y = sy(st.w);
     const c = ptColors[st.id] || 'var(--accent)';
     s += `<circle cx="${x}" cy="${y}" r="5" fill="${c}" stroke="var(--card)" stroke-width="2"/>`;
@@ -81,9 +84,9 @@ export function psychroChartSVG(states, lines, opts = {}) {
   }
 
   // legend (top-right) using the states actually plotted
-  if ((states || []).length) {
+  if (pts.length) {
     s += `<g class="legend">`;
-    states.forEach((st, i) => {
+    pts.forEach((st, i) => {
       const c = ptColors[st.id] || 'var(--accent)';
       const lx = width - 130, ly = 14 + i * 16;
       s += `<circle cx="${lx}" cy="${ly - 4}" r="4" fill="${c}"/>`;

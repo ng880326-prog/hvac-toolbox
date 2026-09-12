@@ -7,21 +7,31 @@ import { h, res, flag, card, form, results, seg, fold } from '../ui.js';
 import * as P from '../engine/psychro.js';
 import { psychroChartSVG } from '../charts.js';
 import { STEEL_PIPES } from '../data/pipes.js';
+import { loadPresets } from '../data/presets.js';
+import { presetCard } from '../presets_ui.js';
 
 const I18N = {
   title: { en: 'Coil — AHU / PAU Sizing', zh: '盤管 · AHU／PAU 選型' },
   desc: { en: 'Shared design conditions → cooling coil, AHU|PAU scenarios, chart; advanced folded.', zh: '共用設計條件 → 冷卻盤管、AHU｜PAU 情境、圖表；進階摺疊。' },
 };
 
-const PRESETS = {
-  AHU: { oaSt: 35, oaSwb: 28, oaWt: 7, oaWrh: 60, rat: 24, rarh: 55, vs: 2.5, fra: 0.25, ts: 13, rhs: 95, dtW: 5, bf: 0.1 },
-  PAU: { oaSt: 35, oaSwb: 28, oaWt: 7, oaWrh: 60, rat: 24, rarh: 55, vs: 1.2, fra: 1.0, ts: 17, rhs: 95, dtW: 5, bf: 0.1 },
-  WINTER: { oaSt: 35, oaSwb: 28, oaWt: 5, oaWrh: 70, rat: 22, rarh: 50, vs: 2.0, fra: 1.0, ts: 16, rhs: 60, dtW: 5, bf: 0.1 },
-};
+/**
+ * Map a stored preset onto the module's shared design source. CHW/HW supply-return pairs are kept as
+ * pairs and the working ΔT is derived, so a preset can never hold a ΔT that contradicts its pair.
+ */
+function presetToState(values) {
+  return {
+    oaSt: values.oaSt, oaSwb: values.oaSwb, oaWt: values.oaWt, oaWrh: values.oaWrh,
+    rat: values.rat, rarh: values.rarh, vs: values.vs, fra: values.fra,
+    ts: values.ts, rhs: values.rhs, bf: values.bf,
+    chws: values.chws, chwr: values.chwr, hws: values.hws, hwr: values.hwr,
+    dtW: Math.max(0.1, values.chwr - values.chws),
+  };
+}
 
 function render(root, { L }) {
   const T = (k) => L(I18N[k]);
-  const S = Object.assign({ rho: 1.2 }, PRESETS.AHU);   // shared single source of truth
+  const S = Object.assign({ rho: 1.2 }, presetToState(loadPresets()[0].values));  // shared source of truth
   const redraws = [];
   const notify = () => redraws.forEach((f) => { try { f(); } catch (e) { /* keep UI alive */ } });
 
@@ -42,19 +52,24 @@ function render(root, { L }) {
     body.append(h('div', { class: 'note' }, L({ en: 'Shared source for every block below.', zh: '下方所有區塊的共用來源。' })));
   }, { src: 'Coil sheet (workbook) — design conditions' }));
 
-  // 2) Scenario presets
-  root.append(card(L({ en: 'Scenario Presets', zh: '情境預設' }), '', (body) => {
-    const apply = (name) => {
-      Object.assign(S, PRESETS[name]);
-      if (designForm) for (const k of Object.keys(PRESETS[name])) designForm.set(k, PRESETS[name][k]);
+  // 2) Scenario presets — user-editable and saved in this browser (was three hard-coded objects)
+  let coilForm = null;
+  let waterForm = null;
+  root.append(presetCard({
+    L,
+    readCurrent: () => ({ ...S }),
+    onApply: (values) => {
+      Object.assign(S, presetToState(values));
+      if (designForm) for (const k of ['oaSt', 'oaSwb', 'oaWt', 'oaWrh', 'rat', 'rarh', 'vs', 'fra']) designForm.set(k, S[k]);
+      if (coilForm) for (const k of ['ts', 'rhs', 'dtW', 'bf']) coilForm.set(k, S[k]);
+      if (waterForm) for (const k of ['tws', 'twr', 'hws', 'hwr']) waterForm.set(k, k === 'tws' ? S.chws : k === 'twr' ? S.chwr : k === 'hws' ? S.hws : S.hwr);
       notify();
-    };
-    body.append(seg([
-      { v: 'AHU', label: L({ en: 'AHU standard', zh: 'AHU 標準' }) },
-      { v: 'PAU', label: L({ en: 'PAU standard (100% OA)', zh: 'PAU 標準（全新風）' }) },
-      { v: 'WINTER', label: L({ en: 'Winter preheat', zh: '冬季預熱' }) },
-    ], 'AHU', apply));
-    body.append(h('div', { class: 'note' }, L({ en: 'One click fills the shared design conditions (OA/RA/flow/fresh-air/supply).', zh: '一鍵填入共用設計條件（室外／回風／風量／新風比／送風）。' })));
+    },
+    formula: L({
+      en: 'A preset carries the design conditions (outdoor summer/winter, return air, supply flow and off-coil state, CHW and HWS pairs). ΔT values are derived, never stored separately.',
+      zh: '一個預設包含整組設計條件（室外夏／冬、回風、送風量與出盤狀態、冷媒水與熱媒水供回水對）。溫差一律由供回水推算，不會另存而互相矛盾。',
+    }),
+    src: 'company standard conditions (editable) · stored in localStorage',
   }));
 
   // 3) Scenarios side-by-side (moved up, per audit)
@@ -94,15 +109,20 @@ function render(root, { L }) {
   // 4) Cooling coil — only 4 coil-specific inputs; design comes from above
   const chartBox = h('div', { class: 'chart-box' });
   root.append(card(L({ en: 'Cooling Coil (AHU / PAU)', zh: '冷卻盤管（AHU／PAU）' }), '', (body) => {
-    const f = form([
+    coilForm = form([
       { key: 'ts', label: L({ en: 'Supply off-coil T', zh: '送風出盤 T' }), unit: '°C', def: S.ts },
       { key: 'rhs', label: L({ en: 'Supply off-coil RH', zh: '送風出盤 RH' }), unit: '%', def: S.rhs },
       { key: 'dtW', label: L({ en: 'CHW ΔT', zh: '冷媒水溫差' }), unit: '°C', def: S.dtW },
       { key: 'bf', label: L({ en: 'Bypass factor BF', zh: '旁通係數 BF' }), unit: '—', def: S.bf },
     ], (st) => { Object.assign(S, st); draw(); }, 'grid4');
+    const f = coilForm;
     const box = h('div');
     body.append(f.grid, box, chartBox);
     function draw() {
+      // Guard the mixing maths: a zero flow (or a preset whose values were all zeroed) makes the
+      // mass-weighted mix divide by zero, and the resulting NaN then leaks into the chart's SVG
+      // coordinates. Fall back to an empty card instead of drawing nonsense.
+      if (!(S.vs > 0) || !(S.fra >= 0) || S.fra > 1) { results(box, []); chartBox.innerHTML = ''; return; }
       const sO = P.state({ t: S.oaSt, twb: S.oaSwb });
       const sR = P.state({ t: S.rat, rh: S.rarh });
       const sOff = P.state({ t: S.ts, rh: S.rhs });
@@ -141,16 +161,26 @@ function render(root, { L }) {
   // 5) Advanced (folded)
   const wBox = h('div');
   const wtCard = card(L({ en: 'Water Temperature & Duct Design', zh: '水溫與風管設計' }), '', (body) => {
-    const f = form([
-      { key: 'tws', label: L({ en: 'CHW supply', zh: '冷媒水供水' }), unit: '°C', def: 7 },
-      { key: 'twr', label: L({ en: 'CHW return', zh: '冷媒水回水' }), unit: '°C', def: 12 },
-      { key: 'hws', label: L({ en: 'HWS supply', zh: '熱媒水供水' }), unit: '°C', def: 60 },
-      { key: 'hwr', label: L({ en: 'HWS return', zh: '熱媒水回水' }), unit: '°C', def: 50 },
+    waterForm = form([
+      { key: 'tws', label: L({ en: 'CHW supply', zh: '冷媒水供水' }), unit: '°C', def: S.chws },
+      { key: 'twr', label: L({ en: 'CHW return', zh: '冷媒水回水' }), unit: '°C', def: S.chwr },
+      { key: 'hws', label: L({ en: 'HWS supply', zh: '熱媒水供水' }), unit: '°C', def: S.hws },
+      { key: 'hwr', label: L({ en: 'HWS return', zh: '熱媒水回水' }), unit: '°C', def: S.hwr },
       { key: 'kw', label: L({ en: 'Duty', zh: '負荷' }), unit: 'kW', def: 100 },
       { key: 'vMax', label: L({ en: 'Duct max velocity', zh: '風管最大流速' }), unit: 'm/s', def: 2.5 },
     ], drawW, 'grid3');
+    const f = waterForm;
     body.append(f.grid, wBox);
     function drawW(st) {
+      // The supply/return pairs are the single source: editing them here also moves the coil card's
+      // CHW ΔT, so the two can never disagree (the workbook leaves them independent and they drift).
+      if (Number.isFinite(st.tws) && Number.isFinite(st.twr)) {
+        S.chws = st.tws; S.chwr = st.twr;
+        const dt = Math.max(0.1, st.twr - st.tws);
+        if (Math.abs(dt - S.dtW) > 1e-9) { S.dtW = dt; coilForm?.set('dtW', +dt.toFixed(2)); }
+      }
+      if (Number.isFinite(st.hws)) S.hws = st.hws;
+      if (Number.isFinite(st.hwr)) S.hwr = st.hwr;
       if ([st.tws, st.twr, st.hws, st.hwr, st.kw, st.vMax].some((x) => x == null)) { results(wBox, []); return; }
       results(wBox, [
         res(L({ en: 'CHW ΔT', zh: '冷媒水溫差' }), st.twr - st.tws, '°C', { digits: 1 }),
@@ -171,7 +201,7 @@ function render(root, { L }) {
       { key: 'vMax', label: L({ en: 'Velocity limit', zh: '流速限值' }), unit: 'm/s', def: 2.5 },
       { key: 'pdMax', label: L({ en: 'PD limit', zh: '比摩阻限值' }), unit: 'Pa/m', def: 400 },
       { key: 'c', label: L({ en: 'Roughness C', zh: '粗糙係數 C' }), unit: '—', def: 140 },
-    ], drawP, 'grid4');
+    ], drawP, 'grid4', 'pipe-');
     body.append(f.grid, pBox);
     function drawP(st) {
       if ([st.q, st.vMax, st.pdMax, st.c].some((x) => x == null || x <= 0)) { results(pBox, []); return; }

@@ -1,5 +1,5 @@
 // HVAC Toolbox Pro — service worker (offline-first, app-shell cache)
-const CACHE = 'hvac-pro-v2';
+const CACHE = 'hvac-pro-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -10,6 +10,7 @@ const ASSETS = [
   './js/ui.js',
   './js/registry.js',
   './js/charts.js',
+  './js/presets_ui.js',
   './js/engine/psychro.js',
   './js/engine/fluids.js',
   './js/engine/ducts.js',
@@ -21,6 +22,7 @@ const ASSETS = [
   './js/data/hk_catalogs.js',
   './js/data/vrf_data.js',
   './js/data/vectors.js',
+  './js/data/presets.js',
   './js/modules/index.js',
   './js/modules/psychro.js',
   './js/modules/ducts.js',

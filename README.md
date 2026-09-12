@@ -6,8 +6,8 @@
 
 ```powershell
 npm start              # http://localhost:8080  (零依賴，Node 內建伺服器，serve app/)
-npm test               # 引擎測試 74 條（與 Excel 快取值 + ASHRAE 2025 對照）
-npm run smoke          # DOM 行為測試（22 模組渲染 + 107 次輸入交互模擬）
+npm test               # 引擎測試 76 條（與 Excel 快取值 + ASHRAE 2025 對照）
+npm run smoke          # DOM 行為測試（22 模組渲染 + 155 次輸入交互 + 重複 id／NaN 守衛）
 npm run check          # 上列兩項 + dist/ 打包副本防漂移檢查
 npm run package:site   # 重建 dist/hvac-toolbox-site/（+ .zip），上架用
 ```
@@ -29,6 +29,8 @@ app/                    PWA 應用（無建置步驟，純 ES Modules）— 唯�
   js/modules/           22 個計算模組 UI（雙語 繁中/EN）
   js/data/pipes.js      鋼管尺寸表（原檔 Pipe Sizing 表）
   js/data/vectors.js    引擎測試向量（74 條，Node 與 App 自檢共用同一份）
+  js/data/presets.js    設計預設（可編輯、存於瀏覽器；出廠含公司標準 CHW 7/12.5、HWS 60/50）
+  js/presets_ui.js      共用的預設編輯卡（選擇／改名／編輯／套用／新增／刪除／還原出廠）
   manifest.webmanifest  PWA manifest（可安裝、捷徑）
   sw.js                 Service worker（離線快取）
   icons/                SVG + PNG 圖示

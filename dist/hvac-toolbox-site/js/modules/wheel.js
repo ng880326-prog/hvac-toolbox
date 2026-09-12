@@ -212,16 +212,38 @@ function render(root, { L }) {
     const modeRow = h('div', { class: 'field' }, h('label', {}, T('mode')),
       seg([{ v: 'summer', label: T('summer') }, { v: 'winter', label: T('winter') }], S.mode,
         (v) => { S.mode = v; notify(); }));
+    // Altitude is the source of the pressure used for every state; typing a pressure by hand
+    // overrides it until the altitude is edited again. (The workbook's altitude cell does nothing at
+    // all — the pressure is pinned at 101.325 — and a dead-zone comparison here once swallowed small
+    // altitude changes entirely, so moving the altitude by 1 m left the pressure reading unchanged.)
+    let pOverride = false;
     const f = form([
       { key: 'alt', label: T('alt'), unit: 'm', def: S.alt, step: '1' },
       { key: 'p', label: T('press'), unit: 'kPa', def: S.p, step: '0.001' },
-    ], (a) => { S.alt = a.alt; S.p = a.p; notify(); }, 'grid2');
+    ], (a) => {
+      const altEdited = a.alt !== S.alt;
+      const pEdited = a.p !== S.p;
+      S.alt = a.alt;
+      S.p = a.p;
+      if (altEdited) pOverride = false;
+      else if (pEdited) pOverride = true;
+      notify();
+    }, 'grid2');
     const rhoBox = h('div');
-    body.append(modeRow, f.grid, rhoBox, h('div', { class: 'note' }, T('minFlow')));
+    const pNote = h('div', { class: 'note' });
+    body.append(modeRow, f.grid, rhoBox, pNote, h('div', { class: 'note' }, T('minFlow')));
     redraws.push(() => {
-      // Altitude drives pressure unless the user overrides it by hand.
-      const pa = pressureAt(S.alt);
-      if (Math.abs(pa - S.p) > 0.05) f.set('p', +pa.toFixed(3));
+      if (!pOverride) {
+        const pa = +pressureAt(S.alt).toFixed(3);
+        if (pa !== S.p) { S.p = pa; f.set('p', pa); return; }  // set() re-enters with the new value
+      }
+      pNote.textContent = pOverride ? L({
+        en: 'Pressure overridden by hand; edit the altitude to go back to the ISA value.',
+        zh: '壓力已手動覆寫；改動高度即回復由 ISA 公式推算。',
+      }) : L({
+        en: 'Pressure derived from altitude (ISA): p = 101.325·(1 − 2.25577e-5·z)^5.2559 kPa.',
+        zh: '壓力由高度以 ISA 公式推算：p = 101.325·(1 − 2.25577e-5·z)^5.2559 kPa。',
+      });
       const sup = resolveRow(S.sup[S.mode], S.p);
       const exh = resolveRow(S.exh[S.mode], S.p);
       const rho = sup && exh ? (sup.rho + exh.rho) / 2 : sup ? sup.rho : null;

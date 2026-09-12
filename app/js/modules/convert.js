@@ -30,14 +30,19 @@ function render(root, { L }) {
   const T = (k) => L(I18N[k]);
   const INWG = 249.089; // Pa per in.wg
 
+  // Every conversion card reuses the key 'x', so each one gets its own DOM id namespace — otherwise
+  // several cards would emit the same id and their labels would all point at the first input.
+  let convSeq = 0;
+
   function convCard(title, srcKey, unit, outs) {
+    convSeq += 1;
     return card(title, '', (body) => {
       let box = null;
       const f = form([{ key: 'x', label: T(srcKey), unit, def: 1 }], (st) => {
         if (!box) return;
         if (st.x == null) { results(box, []); return; }
         results(box, outs(st.x).map((o) => res(o.label, o.val, o.unit, { digits: o.digits ?? 3 })));
-      }, 'grid1');
+      }, 'grid1', 'conv' + convSeq + '-');
       box = h('div');
       body.append(f.grid, box);
       results(box, outs(1).map((o) => res(o.label, o.val, o.unit, { digits: o.digits ?? 3 })));

@@ -68,7 +68,12 @@ const document = {
   addEventListener() {},
   querySelectorAll: () => [],
 };
-const localStorage = { _s: {}, getItem(k) { return this._s[k] ?? null; }, setItem(k, v) { this._s[k] = v; } };
+const localStorage = {
+  _s: {},
+  getItem(k) { return this._s[k] ?? null; },
+  setItem(k, v) { this._s[k] = v; },
+  removeItem(k) { delete this._s[k]; },
+};
 const window = { addEventListener() {}, scrollTo() {} };
 let location = { hash: '#/' };
 let hashchange = null;
@@ -91,6 +96,32 @@ function countClass(node, cls) {
   };
   walk(node);
   return n;
+}
+
+/** Every id attribute inside a rendered module — used to catch duplicate DOM ids. */
+function collectIds(node) {
+  const ids = [];
+  const walk = (el) => {
+    if (el instanceof El) {
+      if (el.attrs && el.attrs.id) ids.push(el.attrs.id);
+      for (const k of el.children) walk(k);
+    }
+  };
+  walk(node);
+  return ids;
+}
+
+/** Concatenated innerHTML of a rendered module — used to catch NaN leaking into SVG markup. */
+function rawMarkup(node) {
+  const out = [];
+  const walk = (el) => {
+    if (el instanceof El) {
+      if (el.innerHTML) out.push(el.innerHTML);
+      for (const k of el.children) walk(k);
+    }
+  };
+  walk(node);
+  return out.join('\n');
 }
 
 async function main() {
@@ -131,6 +162,25 @@ async function main() {
         failures++;
       }
       console.log(`  ✔ render+interact ${m.id} (cards ${root.children.length}, inputs fired ${Object.keys(IDS).length - beforeIds}, results ${resCount})`);
+
+      // ---- regression guards (each one earned by a real bug) -------------------------------
+      // Duplicate ids: the shared IDS map is keyed by id and silently overwrites, so two cards using
+      // the same field key produced duplicate ids in the DOM with nothing noticing. Labels then point
+      // at the wrong input and document-wide lookups pick the wrong element.
+      const ids = collectIds(root);
+      const dupes = [...new Set(ids.filter((v, i) => ids.indexOf(v) !== i))];
+      if (dupes.length) {
+        failures++;
+        console.error(`  ✘ ${m.id} duplicate DOM ids: ${dupes.slice(0, 6).join(', ')}`);
+      }
+      // NaN in markup: a zero-flow mix divides by zero, and the NaN travelled into SVG coordinates,
+      // which browsers report as parse errors and draw as nothing.
+      const markup = rawMarkup(root);
+      const bad = markup.match(/.{0,50}NaN.{0,50}/);
+      if (bad) {
+        failures++;
+        console.error(`  ✘ ${m.id} non-finite value in markup: ...${bad[0].replace(/\s+/g, ' ')}...`);
+      }
     } catch (e) {
       failures++;
       console.error(`  ✘ render ${m.id} THREW: ${e.message}\n${e.stack}`);

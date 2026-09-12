@@ -47,7 +47,7 @@ function render(root, { L }) {
       { key: 'spl', label: T('spl'), unit: 'dB(A)', def: 58 },
       { key: 'r', label: T('r'), unit: 'm', def: 5 },
       { key: 'q', label: T('q'), unit: '—', def: 2, type: 'select', options: QOPTS },
-    ], draw, 'grid3');
+    ], draw, 'grid3', 'swl-');
     const box = h('div');
     body.append(f.grid, box);
     function draw(st) {

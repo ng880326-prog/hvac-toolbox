@@ -178,7 +178,7 @@ function render(root, { L }) {
       { key: 't2', label: T('outState') + ' T', unit: '°C', def: 13 },
       { key: 'rh2', label: T('outState') + ' RH', unit: '%', def: 95 },
       { key: 'v', label: T('flow'), unit: 'm³/s', def: 1 },
-    ], draw, 'grid3');
+    ], draw, 'grid3', 'coil-');
     const box = h('div');
     body.append(f.grid, box);
     function draw(st) {

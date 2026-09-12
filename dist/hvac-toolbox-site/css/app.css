@@ -243,6 +243,18 @@ body {
 .check { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--ink-soft); cursor: pointer; }
 .check input { accent-color: var(--brand); width: 16px; height: 16px; }
 
+/* ---------- preset editor (shared) ---------- */
+.preset-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
+.btn {
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  padding: 8px 14px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.btn:hover:not([disabled]) { border-color: var(--brand-2); color: var(--brand); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.btn-primary { background: linear-gradient(100deg, var(--brand), var(--brand-2)); color: #fff; border-color: transparent; }
+.btn-primary:hover:not([disabled]) { color: #fff; filter: brightness(1.06); }
+.note.warn { color: var(--warn, #b45309); }
+
 /* ---------- results ---------- */
 .results { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 4px; }
 .res {

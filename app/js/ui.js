@@ -28,10 +28,12 @@ export function parseNum(v) {
 
 /**
  * Input field builder.
- * spec: { key, label, unit, def, type='number', step, min, max, options:[{v,label}], onchange }
+ * spec: { key, label, unit, def, type='number', step, min, max, options:[{v,label}], onchange, id }
+ * `id` overrides the default 'f-<key>' so two cards may hold the same key without emitting duplicate
+ * DOM ids (duplicate ids break label association and document-wide queries).
  */
 export function field(spec, onChange) {
-  const id = 'f-' + spec.key;
+  const id = spec.id ?? 'f-' + spec.key;
   const ctl = [];
   let input;
   if (spec.type === 'select' || spec.options) {
@@ -96,14 +98,21 @@ export function card(title, sub, buildBody, extra = {}) {
   return c;
 }
 
-/** Bind a set of field specs into a grid container; returns { get, set, onChange, grid }. */
-export function form(specs, onChange, gridClass = 'grid2') {
+/**
+ * Bind a set of field specs into a grid container; returns { get, set, onChange, grid }.
+ * `idPrefix` namespaces the DOM ids of this form (e.g. 'preset-'), which is required whenever two
+ * cards on the same screen use the same field keys.
+ */
+export function form(specs, onChange, gridClass = 'grid2', idPrefix = '') {
   const grid = h('div', { class: gridClass });
   const state = {};
+  const domIds = {};
   const fire = () => onChange(state);
   for (const s of specs) {
     state[s.key] = parseNum(s.def) ?? (s.def ?? null);
-    grid.append(field(s, (n, raw) => {
+    const spec = idPrefix ? { ...s, id: idPrefix + s.key } : s;
+    if (spec.id) domIds[s.key] = spec.id;
+    grid.append(field(spec, (n, raw) => {
       state[s.key] = s.type === 'select' || s.options ? raw : n;
       fire();
     }));
@@ -113,7 +122,12 @@ export function form(specs, onChange, gridClass = 'grid2') {
     grid,
     get: (k) => state[k],
     all: () => state,
-    set: (k, v) => { state[k] = v; const inp = grid.querySelector('#f-' + k); if (inp && inp.tagName === 'INPUT') inp.value = v ?? ''; fire(); },
+    set: (k, v) => {
+      state[k] = v;
+      const inp = grid.querySelector('#' + (domIds[k] ?? 'f-' + k));
+      if (inp && inp.tagName === 'INPUT') inp.value = v ?? '';
+      fire();
+    },
   };
 }
 

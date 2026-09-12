@@ -80,7 +80,7 @@ function render(root, { L }) {
       { key: 'rh', label: T('rhAir'), unit: '%', def: 50 },
       { key: 'vMax', label: T('vMax'), unit: 'm/s', def: 7 },
       { key: 'pdMax', label: T('pdMax'), unit: 'Pa/m', def: 1.2 },
-    ], (st) => draw(st), 'grid3');
+    ], (st) => draw(st), 'grid3', 'size-');
     const box = h('div');
     body.append(f.grid, box);
 
@@ -145,7 +145,7 @@ function render(root, { L }) {
       { key: 'rh', label: T('rhAir'), unit: '%', def: 50 },
       { key: 'vMax', label: T('vMax'), unit: 'm/s', def: 7 },
       { key: 'pdMax', label: T('pdMax'), unit: 'Pa/m', def: 1.2 },
-    ], (st) => draw(st), 'grid3');
+    ], (st) => draw(st), 'grid3', 'table-');
     const box = h('div');
     body.append(f.grid, box);
     const SIZES = [100, 120, 140, 160, 180, 200, 225, 250, 280, 300, 350, 400, 450, 500, 560, 630, 700, 800, 900, 1000, 1120, 1250, 1400, 1600];
@@ -180,7 +180,7 @@ function render(root, { L }) {
       { key: 'q', label: T('flow'), unit: 'm³/s', def: 0.5 },
       { key: 'v', label: T('neckV'), unit: 'm/s', def: 2.5 },
       { key: 'eff', label: T('eff'), unit: '—', def: 0.85 },
-    ], draw, 'grid3');
+    ], draw, 'grid3', 'dif-');
     const box = h('div');
     body.append(f.grid, box);
     function draw(st) {
@@ -196,7 +196,7 @@ function render(root, { L }) {
     const f = form([
       { key: 'q', label: T('flow'), unit: 'm³/s', def: 1 },
       { key: 'v', label: T('faceV'), unit: 'm/s', def: 2.5 },
-    ], draw, 'grid2');
+    ], draw, 'grid2', 'lou-');
     const box = h('div');
     body.append(f.grid, box);
     function draw(st) {

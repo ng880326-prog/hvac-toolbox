@@ -91,6 +91,13 @@ export const vectors = [
       { name: 'DN250 @121.864 L/s → 2.3166 m/s (Excel E25)', fn: (F) => F.velocityFromFlow(121.86379928315414, 258.8), expect: 2.316628, tol: 5e-5 },
       { name: 'DN250 @121.864 L/s → 163 Pa/m (Excel E26)', fn: (F) => F.hazenWilliams(F.velocityFromFlow(121.86379928315414, 258.8), 258.8, 140), expect: 163, tol: 0.6 },
       { name: '4080 kW, ΔT 10 → 97.491 L/s (Excel E27, cp = 4.185)', fn: (F) => 4080 / (4.185 * 10), expect: 97.49104, tol: 5e-4 },
+      // Boiler sheet: the feed-pump rule (Boiler!N16) and the hot-water pump relation (S21 = kW/4.185/ΔT).
+      { name: 'boiler feed pump 1 Ton/hr → 1.243 m³/hr (N16)', fn: (F) => F.feedPumpFlowM3h(1), expect: 1.243, tol: 1e-3 },
+      { name: 'boiler feed pump 2 Ton/hr → 2.486 m³/hr', fn: (F) => F.feedPumpFlowM3h(2), expect: 2.486, tol: 1e-3 },
+      { name: 'boiler feed pump 6 Ton/hr → 7.458 m³/hr', fn: (F) => F.feedPumpFlowM3h(6), expect: 7.458, tol: 1e-3 },
+      { name: 'boiler feed pump without margins = the raw steam rate', fn: (F) => F.feedPumpFlowM3h(3, 0, 1), expect: 3, tol: 1e-9 },
+      { name: 'hot-water boiler 1.744 MW at ΔT 20 → 20.830 L/s', fn: (F) => F.waterFlow(1744.1860465, 20), expect: 20.8296, tol: 1e-3 },
+      { name: 'workbook parity kW/4.185/ΔT → 20.839 L/s', fn: (F) => 1744.1860465 / (4.185 * 20), expect: 20.8388, tol: 1e-3 },
       // Chiller sheet: overall density rows and the IPLV schedule.
       { name: 'plant density 2180 RT / 39500 m² = 194.1 W/m² (Chiller Y6, 194)', fn: (F) => F.plantDensityWm2(2180, 39500), expect: 194.09, tol: 0.1 },
       { name: 'plant density 2100 RT / 52763 m² = 139.98 W/m² (Chiller Y11)', fn: (F) => F.plantDensityWm2(2100, 52763), expect: 139.979, tol: 0.05 },

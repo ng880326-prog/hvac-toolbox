@@ -78,6 +78,16 @@ export function waterHeat(Lps, dT) { return Lps * 4.186789 * dT; }
 /** Flow L/s for heat kW at ΔT. */
 export function waterFlow(kW, dT) { return kW / (4.186789 * dT); }
 
+/**
+ * Boiler feed-pump duty per the workbook's rule (Boiler!N16): the steam rate in ton/hr raised by a
+ * 13 % blowdown allowance and a 10 % margin, returned in m³/h. One ton of steam is counted as one m³ of
+ * feedwater, which is the workbook's own simplification (real feedwater at 105 °C is ≈1.05 m³/t).
+ */
+export function feedPumpFlowM3h(tonPerHour, margin = 0.13, factor = 1.1) {
+  if (!(tonPerHour > 0)) return NaN;
+  return tonPerHour * (1 + margin) * factor;
+}
+
 /** Sensible heat of air: kW = V(m³/s) · ρ · cp · ΔT. */
 export function sensibleAir(Vm3s, dT, rho = 1.2) { return Vm3s * rho * 1.006 * dT; }
 /** Total heat of air: kW = V(m³/s) · ρ · Δh. */

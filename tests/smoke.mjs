@@ -39,6 +39,8 @@ class El {
       else this.children.push(k);
     }
   }
+  /** Real DOM API used by modules that rebuild a container in place. */
+  replaceChildren(...kids) { this.children = []; this.appendChildList = kids; this.append(...kids); }
   addEventListener(type, fn) { (this.listeners[type] ||= []).push(fn); }
   dispatch(type, ev = {}) { for (const fn of this.listeners[type] || []) fn({ target: this, ...ev }); }
   querySelector(sel) {

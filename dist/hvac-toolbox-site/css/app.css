@@ -492,3 +492,34 @@ html { scroll-padding-top: calc(var(--topbar-h) + 12px); }
 [data-theme="dark"] #moduleBody a:hover,
 [data-theme="dark"] .note a:hover,
 [data-theme="dark"] .sidebar-foot a:hover { color: #a5f3fc; }
+
+/* ---- Insulation page (BEC 2024 / 2012 minimum thickness tables) ---- */
+.ins-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; margin: 16px 0 2px; }
+.ins-head strong { font-size: 13.5px; }
+.ins-src { font-family: var(--mono); font-size: 11.5px; color: var(--brand); }
+.ins-pick { margin-top: 10px; }
+.ins-any { font-size: 13px; color: var(--ink-soft); min-height: 44px; display: flex; align-items: center; }
+.ins-actions { margin-top: 12px; }
+.ins-flags { display: grid; gap: 8px; }
+.ins-flags .flag { margin-top: 4px; }
+.ins-basis { border-top: 1px solid var(--line); padding-top: 8px; }
+.ins-table { font-size: 12.5px; }
+.ins-table td:first-child { white-space: nowrap; }
+
+/* ---- Heat exchanger page (24_Hx) ---- */
+.hx-sch { margin-top: 14px; }
+.hx-sch svg { max-width: 720px; }
+.hx-box { fill: color-mix(in srgb, var(--brand) 7%, var(--card)); stroke: var(--line); stroke-width: 1.2; }
+.hx-plate { stroke: color-mix(in srgb, var(--brand) 45%, var(--line)); stroke-width: 1; }
+.hx-flow { stroke-width: 2.4; fill: none; }
+.hx-hot { stroke: #e0603a; }
+.hx-cold { stroke: var(--brand); }
+path.hx-hot { fill: #e0603a; stroke: none; }
+path.hx-cold { fill: var(--brand); stroke: none; }
+.hx-lab { font-size: 11.5px; font-weight: 600; }
+text.hx-hot { fill: #c0492a; }
+text.hx-cold { fill: var(--brand); }
+.hx-title { fill: var(--ink-soft); font-size: 12px; }
+.hx-temp { font-size: 11px; fill: var(--ink-soft); }
+.hx-u td { font-size: 12.5px; }
+[data-theme="dark"] text.hx-hot { fill: #f0956f; }

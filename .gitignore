@@ -9,4 +9,6 @@ tools/ocr_out/
 tools/R6_openpyxl_intent.xlsm
 __pycache__/
 *.pyc
-.DS_Store
+.DS_Store# downloaded standards PDFs (re-download via analysis/refs/README.md)
+analysis/refs/*.pdf
+

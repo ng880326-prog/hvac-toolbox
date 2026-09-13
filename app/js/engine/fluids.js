@@ -135,5 +135,43 @@ export function antiCondensationThickness(lambda, alpha, Ta, Td, Ts) {
   return lambda / alpha * (Td - Ts) / (Ta - Td);
 }
 
+/** BEC 2012 / TG §6.11.1(b) Equation (a) — provisional insulation thickness (mm).
+ *  c = 1000·(λ/h)·{(θd − θl)/(θm − θd)}: λ W/(m·K), h W/(m²·K), θd dew point °C,
+ *  θl cold-surface (line) temperature °C, θm ambient still-air temperature °C.
+ *  Flat duct/AHU casing: the required thickness *is* c. */
+export function provisionalThicknessMm(lambda, h, dewPoint, lineTemp, ambientTemp) {
+  if (!(lambda > 0) || !(h > 0)) return NaN;
+  const den = ambientTemp - dewPoint;
+  if (!(den > 0)) return NaN;
+  return 1000 * (lambda / h) * ((dewPoint - lineTemp) / den);
+}
+
+/** BEC 2012 Equation (b) — equivalent thickness (mm) of a cylindrical insulation layer of thickness
+ *  La (mm) around a pipe of outer diameter do (mm):  c = 0.5·(do + 2·La)·ln(1 + 2·La/do). */
+export function cylindricalEquivalentMm(doMm, laMm) {
+  if (!(doMm > 0) || laMm < 0) return NaN;
+  return 0.5 * (doMm + 2 * laMm) * Math.log(1 + 2 * laMm / doMm);
+}
+
+/** Invert Equation (b): the pipe insulation thickness La (mm) whose equivalent thickness equals c (mm).
+ *  c(La) is monotonic and c(0) = 0, so a bracket-and-bisect solve is exact to machine precision.
+ *  The workbook attempted this with a 5000-row trial table (AP4:AS5003) that returned #VALUE! for
+ *  every row, so the sheet's La,min was never computed. */
+export function pipeThicknessFromEquivalentMm(doMm, cMm) {
+  if (!(doMm > 0) || !(cMm > 0)) return NaN;
+  let hi = Math.max(cMm, 1e-3);
+  let guard = 0;
+  while (cylindricalEquivalentMm(doMm, hi) < cMm) {
+    hi *= 2;
+    if (++guard > 200) return NaN;
+  }
+  let lo = 0;
+  for (let i = 0; i < 120; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (cylindricalEquivalentMm(doMm, mid) < cMm) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
 // ---------------- Water saturation (for NPSH / boiler steam) ----------------
 // Reuses the ASHRAE Hyland–Wexler pws from the psychro module; imported by callers.

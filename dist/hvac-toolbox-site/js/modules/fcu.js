@@ -22,39 +22,74 @@ const MODELS = [
 
 function render(root, { L }) {
   const T = (k) => L(I18N[k]);
-  let speed = 'Mid';
+  // Workbook C15 shows 'Mid', but its table prints the nominal catalogue ratings; the module therefore
+  // starts at High so the displayed numbers match the sheet, and Mid/Low apply the documented factors.
+  let speed = 'High';
+  // Workbook selection block (B9:B15): system, brand, fan static, fan speed.
+  const cond = { system: '2-pipe', brand: 'Trane', staticPa: 50, chws: 12, chwr: 7, hwS: 60, hwR: 50 };
   root.append(card(T('title'), T('desc'), (body) => {
-    const speedRow = h('div', { class: 'field' }, h('label', {}, L({ en: 'Fan speed', zh: '風速' })),
-      seg(Object.keys(SPEED_F).map((s) => ({ v: s, label: L({ en: s, zh: s === 'High' ? '高' : s === 'Mid' ? '中' : '低' }) })), speed, (v) => { speed = v; draw(); }));
+    const selRow = h('div', { class: 'grid3' },
+      h('div', { class: 'field' }, h('label', {}, L({ en: 'Select system', zh: '系統' })),
+        seg([{ v: '2-pipe', label: L({ en: '2-pipe', zh: '2 管' }) },
+          { v: '4-pipe', label: L({ en: '4-pipe', zh: '4 管' }) }], cond.system,
+          (v) => { cond.system = v; draw(); })),
+      h('div', { class: 'field' }, h('label', {}, L({ en: 'Select brand', zh: '廠牌' })),
+        seg([{ v: 'Trane', label: 'Trane' }], cond.brand, () => {})),
+      h('div', { class: 'field' }, h('label', {}, L({ en: 'Fan speed', zh: '風速' })),
+        seg(Object.keys(SPEED_F).map((s) => ({ v: s, label: L({ en: s, zh: s === 'High' ? '高' : s === 'Mid' ? '中' : '低' }) })), speed, (v) => { speed = v; draw(); })));
+    const condForm = form([
+      { key: 'staticPa', label: L({ en: 'Fan static', zh: '風機靜壓' }), unit: 'Pa', def: cond.staticPa },
+      { key: 'chws', label: L({ en: 'CHW supply', zh: '冷媒水供水' }), unit: '°C', def: cond.chws },
+      { key: 'chwr', label: L({ en: 'CHW return', zh: '冷媒水回水' }), unit: '°C', def: cond.chwr },
+      { key: 'hwS', label: L({ en: 'HWS supply', zh: '熱媒水供水' }), unit: '°C', def: cond.hwS },
+      { key: 'hwR', label: L({ en: 'HWS return', zh: '熱媒水回水' }), unit: '°C', def: cond.hwR },
+    ], (a) => { Object.assign(cond, a); draw(); }, 'grid4', 'fcuc-');
     const wrap = h('div', { id: 'fcu' });
     const selBox = h('div', { id: 'fcuSel' });
-    body.append(speedRow, wrap, selBox);
+    const noteBox = h('div');
+    body.append(selRow, condForm.grid, wrap, selBox, noteBox);
     function draw() {
       wrap.innerHTML = '';
-      const f = form([{ key: 'm', label: L({ en: 'Model', zh: '型號' }), def: '4', type: 'select', options: MODELS.map((m) => ({ v: m.id, label: m.id + ' — ' + m.cfm + ' CFM' })) }], () => drawSel(), 'grid2');
+      const f = form([{ key: 'm', label: L({ en: 'Model', zh: '型號' }), def: '4', type: 'select', options: MODELS.map((m) => ({ v: m.id, label: m.id + ' — ' + m.cfm + ' CFM' })) }], () => drawSel(), 'grid2', 'fcum-');
       wrap.append(f.grid);
       drawSel();
     }
     function drawSel() {
-      const sel = wrap.querySelector('#f-m');
+      const sel = wrap.querySelector('#fcum-m');
       const m = MODELS.find((x) => x.id === (sel ? sel.value : '4')) || MODELS[0];
       const k = SPEED_F[speed];
       const tot = m.tot * k, sens = m.sens * k, heat = m.heat * k;
+      const chwDt = cond.chws - cond.chwr;      // workbook L6 = J6/(4.2×(12−7))
+      const hwDt = cond.hwS - cond.hwR;         // workbook M6 = K6/(4.2×(60−50))
       results(selBox, [
-        res(L({ en: 'Air flow', zh: '風量' }), (m.cfm * k).toFixed(0), 'CFM · ' + (m.cfm * 0.472 * k).toFixed(0) + ' L/s', { digits: 0 }),
+        res(L({ en: 'Air flow', zh: '風量' }), (m.cfm * k).toFixed(0), 'CFM', { digits: 0 }),
+        res(L({ en: 'Air flow', zh: '風量' }), (m.cfm * 0.472 * k).toFixed(1), 'L/s', { digits: 1 }),
         res(L({ en: 'Sensible coil', zh: '顯熱盤管' }), sens, 'kW', { digits: 2 }),
         res(L({ en: 'Total coil', zh: '全熱盤管' }), tot, 'kW', { digits: 2, big: true }),
+        // The workbook prints a heating capacity for every model regardless of system; only the coil
+        // note changes with 2-pipe / 4-pipe, so the figure is always shown.
         res(L({ en: 'Heating coil', zh: '加熱盤管' }), heat, 'kW', { digits: 2 }),
-        res(L({ en: 'CHW flow', zh: '冷水量' }), tot / (4.2 * 5), 'L/s (ΔT 5)', { digits: 3 }),
-        res(L({ en: 'HWS flow', zh: '熱水量' }), heat / (4.2 * 10), 'L/s (ΔT 10)', { digits: 3 }),
+        res(L({ en: 'CHW flow', zh: '冷水量' }), chwDt > 0 ? tot / (4.2 * chwDt) : NaN, 'L/s (ΔT ' + chwDt + ')', { digits: 3 }),
+        res(L({ en: 'HWS flow', zh: '熱水量' }), hwDt > 0 ? heat / (4.2 * hwDt) : NaN, 'L/s (ΔT ' + hwDt + ')', { digits: 3 }),
         res(L({ en: 'Dimensions', zh: '尺寸' }), m.dim.join(' × '), 'mm', { digits: 0 }),
         res(L({ en: 'Ducts SA / RA', zh: '風管 SA／RA' }), m.duct[0] + ' / ' + m.duct[1], '', { digits: 0 }),
+        res(L({ en: 'Fan static', zh: '風機靜壓' }), cond.staticPa, 'Pa', { digits: 0 }),
       ]);
+      noteBox.innerHTML = '';
+      noteBox.append(h('div', { class: 'note' }, cond.system === '4-pipe'
+        ? L({ en: '*3-row cooling coil + 1-row heating coil is selected (4-pipe).', zh: '＊4 管系統：已選 3 排冷卻盤管 ＋ 1 排加熱盤管。' })
+        : L({ en: '*3-row cooling coil is selected (2-pipe).', zh: '＊2 管系統：已選 3 排冷卻盤管。' })));
+      if (cond.system === '4-pipe' && !(hwDt > 0)) noteBox.append(flag(L({ en: 'HWS supply must exceed return.', zh: '熱媒水供水必須高於回水。' }), 'bad'));
+      if (!(chwDt > 0)) noteBox.append(flag(L({ en: 'CHW supply must exceed return.', zh: '冷媒水供水必須高於回水。' }), 'bad'));
     }
     draw();
     body.append(h('div', { class: 'note' },
       L({ en: 'Speed multipliers are model-specific in the workbook; approximate High 1.00 / Mid 0.85 / Low 0.65 shown — verify with factory data.', zh: '風速折減因數於原檔隨型號而異；此處以近似 High 1.00 / Mid 0.85 / Low 0.65 顯示 — 請以廠家資料覆核。' })));
-  }, { src: 'FCU sheet (workbook) — data rows; CHW = kW/(4.2×(12−7)); HWS = kW/(4.2×(60−50))' }));
+    body.append(h('div', { class: 'note' }, L({
+      en: 'Workbook notes — 1) chilled water 12/7 °C  2) heating water 60/50 °C  3) entering air: cooling DB 24 °C / RH 50 %, heating DB 21 °C / RH 40 %.',
+      zh: '原檔註記 —— 1) 冷媒水 12／7 °C  2) 熱媒水 60／50 °C  3) 進風條件：冷卻 乾球 24 °C／RH 50%，加熱 乾球 21 °C／RH 40%。',
+    })));
+  }, { src: 'FCU!B9:B15 (selectors) · F4:R19 (catalogue) · CHW = kW/(4.2×(12−7)); HWS = kW/(4.2×(60−50))' }));
 
   root.append(card(L({ en: 'Quick Pipe Sizing (2.5 m/s, 300 Pa/m)', zh: '水管速算（2.5 m/s、300 Pa/m）' }), '', (body) => {
     const f = form([

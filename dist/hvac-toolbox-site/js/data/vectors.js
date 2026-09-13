@@ -172,4 +172,36 @@ export const vectors = [
       { name: 'GB51251 total = design×0.75 single door: A h=40 → 34207', fn: (X) => X.stairFlowGB('A', 40, 'single').total, expect: 34207.2, tol: 1 },
     ],
   },
+  {
+    group: 'insulation — BEC 2012/2024 §6.11 Equations (a) & (b)',
+    tests: [
+      // Equation (a): c = 1000·(λ/h)·{(θd−θl)/(θm−θd)} with the codes' outdoor basis
+      // (27 °C dew point at 90% RH ≈ 28.8 °C dry bulb) and chilled-water line temperature 5 °C.
+      { name: 'Eq (a) λ0.024 h9 θd27 θl5 θm28.8 → 32.593 mm', fn: (F) => F.provisionalThicknessMm(0.024, 9, 27, 5, 28.8), expect: 32.5926, tol: 1e-3 },
+      { name: 'Eq (a) λ0.024 h13.5 θd27 θl5 θm28.8 → 21.728 mm', fn: (F) => F.provisionalThicknessMm(0.024, 13.5, 27, 5, 28.8), expect: 21.7284, tol: 1e-3 },
+      { name: 'Eq (a) λ0.038 h9 θd27 θl5 θm28.8 → 51.605 mm', fn: (F) => F.provisionalThicknessMm(0.038, 9, 27, 5, 28.8), expect: 51.6049, tol: 1e-3 },
+      // Equation (b): c = 0.5·(do+2La)·ln[1+2La/do] — the workbook's Q21 formula, inverted.
+      // Inverting c = 32.5930 mm for do = 21.3 mm gives La = 20.09 mm, i.e. BEC Table 6.11a's
+      // tabulated 20 mm for DN15 outdoor λ0.024 h9 (the table is rounded to whole millimetres).
+      { name: 'Eq (b) inverse do21.3 c32.59 → La 20.09 (BEC 6.11a = 20)', fn: (F) => F.pipeThicknessFromEquivalentMm(21.3, 32.5926), expect: 20.093, tol: 0.02 },
+      { name: 'Eq (b) forward do21.3 La20.093 → c 32.59', fn: (F) => F.cylindricalEquivalentMm(21.3, 20.093), expect: 32.5926, tol: 0.01 },
+      { name: 'Eq (b) inverse do406.4 c32.59 → La 30.42 (BEC 6.11a = 31)', fn: (F) => F.pipeThicknessFromEquivalentMm(406.4, 32.5926), expect: 30.421, tol: 0.01 },
+      { name: 'Eq (b) forward do406.4 La30.421 → c 32.59', fn: (F) => F.cylindricalEquivalentMm(406.4, 30.421), expect: 32.5926, tol: 0.01 },
+      // Refrigerant suction pipe, line −20 °C, OD 6 mm: La 27.2 mm vs BEC 6.11b tabulated 28 mm.
+      { name: 'Eq (b) refrigerant −20 °C OD6 λ0.024 h9 → La 27.2 (BEC 6.11b = 28)', fn: (F) => F.pipeThicknessFromEquivalentMm(6, F.provisionalThicknessMm(0.024, 9, 27, -20, 28.8)), expect: 27.2, tol: 0.3 },
+      // Ductwork / casing: no circular surface, so c is the thickness. These four cells lock the
+      // 2024 column pairings (λ 0.024/0.038) and the ceiling-void basis (26 °C dew point, 85% RH).
+      { name: 'BEC 6.11c 20 °C outdoor λ0.024 h9 → ceil 27', fn: (F) => Math.ceil(F.provisionalThicknessMm(0.024, 9, 27, 28.8 - 20, 28.8) - 1e-9), expect: 27, tol: 1e-9 },
+      { name: 'BEC 6.11c 15 °C outdoor λ0.024 h9 → ceil 20', fn: (F) => Math.ceil(F.provisionalThicknessMm(0.024, 9, 27, 28.8 - 15, 28.8) - 1e-9), expect: 20, tol: 1e-9 },
+      { name: 'TG 6.11.1(a) 10 °C outdoor λ0.024 h9 → ceil 13', fn: (F) => Math.ceil(F.provisionalThicknessMm(0.024, 9, 27, 28.8 - 10, 28.8) - 1e-9), expect: 13, tol: 1e-9 },
+      { name: 'BEC 2024 6.11c 15 °C outdoor λ0.038 h9 → ceil 31', fn: (F) => Math.ceil(F.provisionalThicknessMm(0.038, 9, 27, 28.8 - 15, 28.8) - 1e-9), expect: 31, tol: 1e-9 },
+      { name: 'BEC 2024 6.11c 15 °C outdoor λ0.038 h13.5 → ceil 21', fn: (F) => Math.ceil(F.provisionalThicknessMm(0.038, 13.5, 27, 28.8 - 15, 28.8) - 1e-9), expect: 21, tol: 1e-9 },
+      { name: 'BEC 2024 6.11c 15 °C void λ0.024 h5.7 → ceil 19 (θd 26)', fn: (F) => Math.ceil(F.provisionalThicknessMm(0.024, 5.7, 26, 28.8 - 15, 28.8) - 1e-9), expect: 19, tol: 1e-9 },
+      { name: 'BEC 2024 6.11c 15 °C void λ0.038 h5.7 → ceil 30 (θd 26)', fn: (F) => Math.ceil(F.provisionalThicknessMm(0.038, 5.7, 26, 28.8 - 15, 28.8) - 1e-9), expect: 30, tol: 1e-9 },
+      // Domain guards: no NaN escapes into the UI.
+      { name: 'Eq (a) h=0 rejected → NaN', fn: (F) => (Number.isNaN(F.provisionalThicknessMm(0.024, 0, 27, 5, 28.8)) ? 1 : 0), expect: 1, tol: 0 },
+      { name: 'Eq (a) θm = θd rejected → NaN', fn: (F) => (Number.isNaN(F.provisionalThicknessMm(0.024, 9, 27, 5, 27)) ? 1 : 0), expect: 1, tol: 0 },
+      { name: 'Eq (b) c=0 rejected → NaN', fn: (F) => (Number.isNaN(F.pipeThicknessFromEquivalentMm(21.3, 0)) ? 1 : 0), expect: 1, tol: 0 },
+    ],
+  },
 ];

@@ -36,7 +36,7 @@ JS = """() => {
       const cs = getComputedStyle(n);
       const img = cs.backgroundImage || '';
       const stops = img.includes('gradient')
-        ? [...img.matchAll(/rgba?\([^)]+\)|#[0-9a-f]{3,8}/gi)].map(m => parse(m[0])).filter(Boolean)
+        ? [...img.matchAll(/rgba?\\([^)]+\\)|#[0-9a-f]{3,8}/gi)].map(m => parse(m[0])).filter(Boolean)
         : [];
       const bg = parse(cs.backgroundColor);
       const opaque = bg && bg.a > 0.95;

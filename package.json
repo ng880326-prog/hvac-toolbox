@@ -5,10 +5,10 @@
   "type": "module",
   "description": "HVAC Toolbox Pro — cross-platform upgrade of 00_HVAC Toolbox_R5.xlsm",
   "scripts": {
-    "test": "node tests/run_tests.mjs",
+    "test": "node tests/run_tests.mjs && node tests/insulation_tables.mjs",
     "smoke": "node tests/smoke.mjs",
     "start": "node tools/serve.js 8080",
-    "check": "node tests/run_tests.mjs && node tests/smoke.mjs && node tools/package_site.mjs --check",
+    "check": "node tests/run_tests.mjs && node tests/insulation_tables.mjs && node tests/smoke.mjs && node tools/package_site.mjs --check",
     "package:site": "node tools/package_site.mjs",
     "check:dist": "node tools/package_site.mjs --check",
     "sync:android": "cap sync android"

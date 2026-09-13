@@ -59,8 +59,8 @@ function showHome() {
   });
   document.getElementById('aboutTitle').textContent = L({ en: 'Sheets & sources', zh: '工作表與出處' });
   document.getElementById('aboutText').textContent = L({
-    en: 'All 30+ workbook sheets are represented: Home · Air-side · Coil (AHU/PAU) · Wheel · Psychrometric Chart · Pipe Sizing · Motor · Acoustics · Chiller · Boiler · Hx · AHU · Fan · FCU · SAC · Insulations · PN · NPSH · Pressurisation · Web tools. Sources: ASHRAE F Ch.1/6/21/22, CIBSE B2/B3/C, Haaland 1983, Hyland & Wexler 1983, ISO 12241/GB 50264, GB 51251-2017. Per-formula audit: docs/verification/.',
-    zh: '原檔 30+ 張工作表全部有對應頁面：Home · Air-side · Coil (AHU/PAU) · Wheel · Psychrometric Chart · Pipe Sizing · Motor · Acoustics · Chiller · Boiler · Hx · AHU · Fan · FCU · SAC · Insulations · PN · NPSH · 梯間加壓 · 選型網站。出處：ASHRAE F 第 1/6/21/22 章、CIBSE B2/B3/C、Haaland 1983、Hyland & Wexler 1983、ISO 12241／GB 50264、GB 51251-2017。逐條檢驗：docs/verification/。',
+    en: 'All 30+ workbook sheets are represented: Home · Air-side · Coil (AHU/PAU) · Wheel · Psychrometric Chart · Pipe Sizing · Motor · Acoustics · Chiller · Boiler · Hx · AHU · Fan · FCU · SAC · Insulations · PN · NPSH · Pressurisation · Web tools. Sources: ASHRAE F Ch.1/6/21/22, CIBSE B2/B3/C, Haaland 1983, Hyland & Wexler 1983, ISO 12241/GB 50264, GB 51251-2017, BEC 2024 / BEC 2012 §6.11 with TG-BEC §6.11.1. Per-formula audit: docs/verification/.',
+    zh: '原檔 30+ 張工作表全部有對應頁面：Home · Air-side · Coil (AHU/PAU) · Wheel · Psychrometric Chart · Pipe Sizing · Motor · Acoustics · Chiller · Boiler · Hx · AHU · Fan · FCU · SAC · Insulations · PN · NPSH · 梯間加壓 · 選型網站。出處：ASHRAE F 第 1/6/21/22 章、CIBSE B2/B3/C、Haaland 1983、Hyland & Wexler 1983、ISO 12241／GB 50264、GB 51251-2017、BEC 2024／BEC 2012 第 6.11 節及 TG-BEC 第 6.11.1 節。逐條檢驗：docs/verification/。',
   });
   document.getElementById('disclaimer').textContent = L({
     en: '⚠️ For engineering reference only. Final design must be checked by a registered professional engineer against the applicable codes.',

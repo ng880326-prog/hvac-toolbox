@@ -98,6 +98,10 @@ export const vectors = [
       { name: 'boiler feed pump without margins = the raw steam rate', fn: (F) => F.feedPumpFlowM3h(3, 0, 1), expect: 3, tol: 1e-9 },
       { name: 'hot-water boiler 1.744 MW at ΔT 20 → 20.830 L/s', fn: (F) => F.waterFlow(1744.1860465, 20), expect: 20.8296, tol: 1e-3 },
       { name: 'workbook parity kW/4.185/ΔT → 20.839 L/s', fn: (F) => 1744.1860465 / (4.185 * 20), expect: 20.8388, tol: 1e-3 },
+      // AHU sheet: the supply-flow rule E27, with the workbook's own ρ·cp = 1.23 and the engine's 1.213.
+      { name: 'AHU supply flow 9 kW / ΔT 12 → 609.8 L/s (E27, ρcp 1.23)', fn: (F) => F.supplyFlowLps(9, 12, 1.23), expect: 609.76, tol: 0.02 },
+      { name: 'AHU supply flow with the engine ρcp 1.213 → 618.3 L/s', fn: (F) => F.supplyFlowLps(9, 12, 1.213), expect: 618.30, tol: 0.02 },
+      { name: 'AHU supply flow is linear in the load', fn: (F) => F.supplyFlowLps(18, 12, 1.23) / F.supplyFlowLps(9, 12, 1.23), expect: 2, tol: 1e-9 },
       // Chiller sheet: overall density rows and the IPLV schedule.
       { name: 'plant density 2180 RT / 39500 m² = 194.1 W/m² (Chiller Y6, 194)', fn: (F) => F.plantDensityWm2(2180, 39500), expect: 194.09, tol: 0.1 },
       { name: 'plant density 2100 RT / 52763 m² = 139.98 W/m² (Chiller Y11)', fn: (F) => F.plantDensityWm2(2100, 52763), expect: 139.979, tol: 0.05 },

@@ -34,25 +34,25 @@
  ### 運作細節 - 主題切換：light → dark ✅ - 語言切換：'通用' → 'GENERAL' ✅ - 手機目錄 chips：6 ✅ - 重置按鈕：第一個輸入格 99 → 0 ✅ - CSV 匯出：psychro_summary.csv ✅ - 複製結果 toast：'⚠ 複製失敗 手動選取' ✅
 - 離線重載：✅ tiles=22
  ## 5. 效能  | 頁面 | 載入(ms) | DOM 節點 | JS heap(MB) | |---|---|---|---|
-| home | 671 | 242 | 10 |
-| convert | 4 | 354 | 10 |
-| webtools | 4 | 441 | 10 |
-| psychro | 4 | 630 | 10 |
-| ducts | 4 | 573 | 10 |
+| home | 682 | 242 | 10 |
+| convert | 3 | 354 | 10 |
+| webtools | 3 | 441 | 10 |
+| psychro | 3 | 630 | 10 |
+| ducts | 3 | 573 | 10 |
 | coil | 4 | 803 | 10 |
 | wheel | 4 | 641 | 10 |
 | vrf | 4 | 308 | 10 |
 | pipes | 4 | 993 | 10 |
 | npsh | 4 | 313 | 10 |
-| insulation | 4 | 324 | 10 |
+| insulation | 3 | 324 | 10 |
 | pn | 3 | 300 | 10 |
 | hx | 3 | 324 | 10 |
 | chiller | 4 | 1075 | 10 |
 | boiler | 4 | 775 | 10 |
 | motor | 3 | 363 | 10 |
-| ahu | 4 | 516 | 10 |
+| ahu | 5 | 861 | 10 |
 | fcu | 4 | 441 | 10 |
-| sac | 6 | 363 | 10 |
+| sac | 4 | 363 | 10 |
 | fan | 4 | 566 | 10 |
 | acoustics | 3 | 347 | 10 |
 | stairwell | 3 | 316 | 10 |

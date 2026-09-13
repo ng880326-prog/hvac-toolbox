@@ -88,6 +88,16 @@ export function feedPumpFlowM3h(tonPerHour, margin = 0.13, factor = 1.1) {
   return tonPerHour * (1 + margin) * factor;
 }
 
+/**
+ * Supply air flow (L/s) from a sensible cooling load — the workbook's AHU rule (AHU!E27):
+ * L/s = kW / ρcp / ΔT × 1000, with the sheet's own ρ·cp = 1.23 kJ/(m³·K). The physical value at 24 °C
+ * is ≈1.21, so the workbook constant is the default and callers can show both (≈1.5 % apart).
+ */
+export function supplyFlowLps(kwSensible, dT, rhoCp = 1.23) {
+  if (!(kwSensible > 0) || !(dT > 0)) return NaN;
+  return kwSensible / rhoCp / dT * 1000;
+}
+
 /** Sensible heat of air: kW = V(m³/s) · ρ · cp · ΔT. */
 export function sensibleAir(Vm3s, dT, rho = 1.2) { return Vm3s * rho * 1.006 * dT; }
 /** Total heat of air: kW = V(m³/s) · ρ · Δh. */

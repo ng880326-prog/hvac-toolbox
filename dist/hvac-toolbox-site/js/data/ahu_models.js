@@ -1,4 +1,15 @@
-// AHU/PAU catalog extracted from the workbook 'AHU' sheet (Trane CLCP series)
+// AHU/PAU catalogue extracted from the workbook 'AHU' sheet (print area B2:AG39).
+//
+//   AHU_MODELS      L7:U28   Trane CLCP — model, AHU supply flow at 2.5 m/s (CMH, L/s), PAU primary air
+//                            at 2.3 m/s (CMH, L/s) and the mm length of each component for the schematic
+//   SAVIER_MODELS   W7:AF28  Savier A1 series — model, the same two flow ratings, casing L/W/H in mm
+//   FRAME_ALLOWANCE L29/W29  '*150mm is added to the overall unit length for the frame of the equipment'
+//   WORKBOOK_RHOCP  E27      the workbook's air constant ρ·cp = 1.23 kJ/(m³·K) in its supply-flow rule
+export const FRAME_ALLOWANCE_MM = 150;
+
+/** The workbook's air constant in its estimation rule (E24/1.23/(E25−E26)); the app's engine uses ρ·cp ≈ 1.21. */
+export const WORKBOOK_RHOCP = 1.23;
+
 export const AHU_MODELS = [
   { id: '003', ahuCMH: 2070, ahuLs: 575, pauCMH: 1863, pauLs: 517.5, L: 150, W: 700, H: 850, comps: [310,155,620,310,310,465,620,310,700,775,300] },
   { id: '004', ahuCMH: 3600, ahuLs: 1000, pauCMH: 3240, pauLs: 900, L: 150, W: 1100, H: 850, comps: [310,155,620,310,310,465,620,310,700,930,300] },
@@ -22,4 +33,35 @@ export const AHU_MODELS = [
   { id: '085', ahuCMH: 75960, ahuLs: 21100, pauCMH: 68364, pauLs: 18990, L: 150, W: 4500, H: 2450, comps: [1240,155,620,310,465,465,620,310,700,2015,300] },
   { id: '090', ahuCMH: 81630, ahuLs: 22675, pauCMH: 73467, pauLs: 20407.5, L: 150, W: 4800, H: 2450, comps: [1240,155,620,310,465,465,620,310,700,2015,300] },
   { id: '095', ahuCMH: 87300, ahuLs: 24250, pauCMH: 78570, pauLs: 21825, L: 150, W: 5100, H: 2450, comps: [,,,,,,,,,,] },
+];
+
+/**
+ * Savier A1 series (workbook W7:AF28). Same flow ratings as the Trane block — AHU at 2.5 m/s and PAU
+ * primary air at 2.3 m/s — plus the casing L/W/H in mm. `L` is the frame allowance printed on the sheet,
+ * not the unit length. The model name carries its own H/W (e.g. A1-690H-1050W) which is close to but not
+ * identical to the printed W/H columns, so both are shipped as printed.
+ */
+export const SAVIER_MODELS = [
+  { id: 'A1-690H-1050W', ahuCMH: 2556, ahuLs: 710, pauCMH: 2300, pauLs: 638.8889, L: 150, W: 985, H: 680 },
+  { id: 'A1-1010H-1050W', ahuCMH: 4428, ahuLs: 1230, pauCMH: 3985, pauLs: 1106.9444, L: 150, W: 985, H: 985 },
+  { id: 'A1-1010H-1350W', ahuCMH: 6480, ahuLs: 1800, pauCMH: 5832, pauLs: 1620, L: 150, W: 1290, H: 985 },
+  { id: 'A1-1010H-1650W', ahuCMH: 8532, ahuLs: 2370, pauCMH: 7678, pauLs: 2132.7778, L: 150, W: 1595, H: 985 },
+  { id: 'A1-1330H-1650W', ahuCMH: 12132, ahuLs: 3370, pauCMH: 10919, pauLs: 3033.0556, L: 150, W: 1595, H: 1290 },
+  { id: 'A1-1610H-1650W', ahuCMH: 15300, ahuLs: 4250, pauCMH: 13770, pauLs: 3825, L: 150, W: 1595, H: 1595 },
+  { id: 'A1-1610H-1950W', ahuCMH: 18360, ahuLs: 5100, pauCMH: 16524, pauLs: 4590, L: 150, W: 1900, H: 1595 },
+  { id: 'A1-1610H-2250W', ahuCMH: 22032, ahuLs: 6120, pauCMH: 19829, pauLs: 5508.0556, L: 150, W: 2205, H: 1595 },
+  { id: 'A1-1930H-2250W', ahuCMH: 27216, ahuLs: 7560, pauCMH: 24494, pauLs: 6803.8889, L: 150, W: 2205, H: 1900 },
+  { id: 'A1-2250H-2250W', ahuCMH: 32400, ahuLs: 9000, pauCMH: 29160, pauLs: 8100, L: 150, W: 2205, H: 2205 },
+  { id: 'A1-2250H-2550W', ahuCMH: 37800, ahuLs: 10500, pauCMH: 34020, pauLs: 9450, L: 150, W: 2510, H: 2205 },
+  { id: 'A1-2250H-2900W', ahuCMH: 43920, ahuLs: 12200, pauCMH: 39528, pauLs: 10980, L: 150, W: 2815, H: 2205 },
+  { id: 'A1-2250H-3500W', ahuCMH: 54720, ahuLs: 15200, pauCMH: 49248, pauLs: 13680, L: 150, W: 3425, H: 2205 },
+  { id: 'A1-2250H-4100W', ahuCMH: 65700, ahuLs: 18250, pauCMH: 63441, pauLs: 17622.5, L: 150, W: 4035, H: 2205 },
+  { id: 'A1-2530H-4100W', ahuCMH: 74800, ahuLs: 20777.7778, pauCMH: 67320, pauLs: 18700, L: 150, W: 4035, H: 2510 },
+  { id: 'A1-3200H-4100W', ahuCMH: 89200, ahuLs: 24777.7778, pauCMH: 80280, pauLs: 22300, L: 150, W: 4035, H: 3120 },
+  { id: 'A1-3200H-4700W', ahuCMH: 104040, ahuLs: 28900, pauCMH: 93636, pauLs: 26010, L: 150, W: 4645, H: 3120 },
+  { id: 'A1-3200H-5900W', ahuCMH: 124560, ahuLs: 34600, pauCMH: 112104, pauLs: 31140, L: 150, W: 5865, H: 3120 },
+  { id: 'A1-3200H-6500W', ahuCMH: 139320, ahuLs: 38700, pauCMH: 125388, pauLs: 34830, L: 150, W: 6475, H: 3120 },
+  { id: 'A1-3440H-6500W', ahuCMH: 151740, ahuLs: 42150, pauCMH: 136566, pauLs: 37935, L: 150, W: 6475, H: 3425 },
+  { id: 'A1-3860H-6500W', ahuCMH: 172080, ahuLs: 47800, pauCMH: 154800, pauLs: 43000, L: 150, W: 6475, H: 3800 },
+  { id: 'A1-4500H-6500W', ahuCMH: 205200, ahuLs: 57000, pauCMH: 183600, pauLs: 51000, L: 150, W: 6475, H: 4410 },
 ];
